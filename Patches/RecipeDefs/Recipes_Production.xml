@@ -1,0 +1,17 @@
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/RecipeDef[defName="SmeltWeapon" or defName="DestroyWeapon"]/ingredients/li/filter/categories</xpath>
+        <value>
+            <li>SurvivalTools</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/RecipeDef[defName="SmeltWeapon" or defName="DestroyWeapon"]/fixedIngredientFilter/categories</xpath>
+        <value>
+            <li>SurvivalTools</li>
+        </value>
+    </Operation>
+
+</Patch>

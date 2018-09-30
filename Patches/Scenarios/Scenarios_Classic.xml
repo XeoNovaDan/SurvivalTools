@@ -1,0 +1,72 @@
+<Patch>
+
+    <!-- Crashlanded -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/ScenarioDef[defName="Crashlanded"]/scenario/parts</xpath>
+        <value>
+
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Axe</thingDef>
+                <stuff>Steel</stuff>
+            </li>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Hammer</thingDef>
+                <stuff>Steel</stuff>
+            </li>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Pickaxe</thingDef>
+                <stuff>Steel</stuff>
+            </li>
+
+        </value>
+    </Operation>
+
+    <!-- Lost Tribe -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/ScenarioDef[defName="LostTribe"]/scenario/parts</xpath>
+        <value>
+
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Axe</thingDef>
+                <stuff>WoodLog</stuff>
+                <count>2</count>
+            </li>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Hammer</thingDef>
+                <stuff>WoodLog</stuff>
+                <count>2</count>
+            </li>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Sickle</thingDef>
+                <stuff>WoodLog</stuff>
+                <count>2</count>
+            </li>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Pickaxe</thingDef>
+                <stuff>Steel</stuff>
+            </li>
+
+        </value>
+    </Operation>
+
+    <!-- Rich Explorer -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/ScenarioDef[defName="TheRichExplorer"]/scenario/parts</xpath>
+        <value>
+
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>SurvivalTools_Multitool</thingDef>
+            </li>
+
+        </value>
+    </Operation>
+
+</Patch>

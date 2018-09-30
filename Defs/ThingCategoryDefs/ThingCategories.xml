@@ -1,0 +1,9 @@
+<Defs>
+
+    <ThingCategoryDef>
+        <defName>SurvivalTools</defName>
+        <label>tools</label>
+        <parent>Root</parent>
+    </ThingCategoryDef>
+
+</Defs>

@@ -1,0 +1,91 @@
+<Defs>
+
+    <ThingDef Name="BaseSurvivalTool" Abstract="True">
+        <!-- Inherits from ThingWithComps; properties are defined through the DefModExtension SurvivalToolProperties -->
+        <thingClass>SurvivalTools.SurvivalTool</thingClass>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <DeteriorationRate>2</DeteriorationRate>
+            <Mass>2</Mass>
+            <Flammability>1</Flammability>
+            <Beauty>-7</Beauty>
+            <ToolEffectivenessFactor>1</ToolEffectivenessFactor>
+        </statBases>
+        <graphicData>
+            <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+        </graphicData>
+        <equippedAngleOffset>-65</equippedAngleOffset>
+        <thingCategories>
+            <li>SurvivalTools</li>
+        </thingCategories>
+        <tradeTags>
+            <li>SurvivalToolCommon</li>
+        </tradeTags>
+        <comps>
+            <li Class="CompProperties_Forbiddable"/>
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <li>
+                <compClass>CompQuality</compClass>
+            </li>
+        </comps>
+        <tickerType>Never</tickerType>
+        <category>Item</category>
+        <drawGUIOverlay>true</drawGUIOverlay>
+        <equipmentType>Primary</equipmentType>
+        <techLevel>Neolithic</techLevel>
+        <resourceReadoutPriority>Middle</resourceReadoutPriority>
+        <selectable>true</selectable>
+        <altitudeLayer>Item</altitudeLayer>
+        <useHitPoints>true</useHitPoints>
+        <alwaysHaulable>true</alwaysHaulable>
+        <pathCost>15</pathCost>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseSurvivalTool" Name="BaseSurvivalToolStuffed" Abstract="True">
+        <stuffCategories>
+            <li>Woody</li>
+            <li>Stony</li>
+            <li>Metallic</li>
+        </stuffCategories>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseSurvivalTool" Name="BaseMakeableSurvivalTool" Abstract="True">
+        <statBases>
+            <WorkToMake>1800</WorkToMake>
+        </statBases>
+        <recipeMaker>
+            <workSpeedStat>SmithingSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+                <li>CraftingSpot</li>
+                <li>ElectricSmithy</li>
+                <li>FueledSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+        </recipeMaker>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseMakeableSurvivalTool" Name="BaseMakeableSurvivalToolStuffed" Abstract="True">
+        <stuffCategories>
+            <li>Woody</li>
+            <li>Stony</li>
+            <li>Metallic</li>
+        </stuffCategories>
+        <recipeMaker>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Silver</li>
+                    <li>Gold</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+        </recipeMaker>
+    </ThingDef>
+
+</Defs>

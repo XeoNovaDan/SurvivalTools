@@ -1,0 +1,23 @@
+<Patch>
+
+    <!-- Mine -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[defName="Mine"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStat>DiggingSpeed</requiredStat>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Construct -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[workType="Construction"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStat>ConstructionSpeed</requiredStat>
+            </li>
+        </value>
+    </Operation>
+
+</Patch>
