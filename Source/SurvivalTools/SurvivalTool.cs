@@ -12,6 +12,9 @@ namespace SurvivalTools
     {
 
         #region Properties
+        //public bool InUse =>
+        //    SurvivalToolUtility.BestSurvivalToolsFor(holdingOwner.Owner).Contains(this);
+
         public float WearChancePerTick =>
             // Yo dawg, i heard you like GenDate.TicksPerDay
             (GenDate.TicksPerDay / (this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay)) / StatWorker_EstimatedLifespan.WearInterval;
@@ -53,6 +56,17 @@ namespace SurvivalTools
                     modifier.value.ToStringByStyle(ToStringStyle.PercentZero, ToStringNumberSense.Factor),
                     overrideReportText: SurvivalToolUtility.GetSurvivalToolOverrideReportText(this, modifier.stat));
         }
+
+        //public override string LabelNoCount
+        //{
+        //    get
+        //    {
+        //        string label = base.LabelNoCount;
+        //        if (InUse)
+        //            label += $", {"ToolInUse".Translate()}";
+        //        return label;
+        //    }
+        //}
 
     }
 }

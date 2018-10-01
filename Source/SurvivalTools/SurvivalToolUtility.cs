@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using RimWorld;
+using RimWorld.Planet;
 
 namespace SurvivalTools
 {
@@ -13,6 +14,25 @@ namespace SurvivalTools
 
         public static readonly FloatRange AncientToolHitPointsRange = new FloatRange(0.3f, 0.7f);
         public const int MaxToolsCarriedAtOnce = 3;
+
+        //public static List<StatDef> SurvivalToolStats =>
+        //    DefDatabase<StatDef>.AllDefsListForReading?.Where(s => s.GetStatPart<T>() != null)?.ToList();
+
+        //public static IEnumerable<SurvivalTool> BestSurvivalToolsFor(IThingHolder holder)
+        //{
+        //    Pawn pawn = (holder is Pawn_EquipmentTracker eq) ? eq.pawn : ((holder is Pawn_InventoryTracker inv) ? inv.pawn : null);
+        //    if (pawn == null)
+        //        yield break;
+
+        //    if (!SurvivalToolStats.NullOrEmpty())
+        //        foreach (StatDef stat in SurvivalToolStats)
+        //        {
+        //            SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
+        //            if (tool != null)
+        //                yield return tool;
+        //        }
+        //    yield break;
+        //}
 
         public static bool HasSurvivalTool(this Pawn pawn, StatDef stat, out SurvivalTool tool, out float statFactor)
         {
@@ -90,14 +110,24 @@ namespace SurvivalTools
             return def.IsSurvivalTool();
         }
 
-        public static float HeldSurvivalToolCount(this Pawn pawn) =>
-            pawn.inventory?.innerContainer?.Where(t => t.def.IsSurvivalTool()).Count() ?? 0f;
-
-        public static bool CanCarryAnyMoreSurvivalTools(this Pawn pawn) =>
-            pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount() < MaxToolsCarriedAtOnce;
-
         public static bool IsSurvivalTool(this BuildableDef def) =>
             def is ThingDef tDef && tDef.thingClass == typeof(SurvivalTool) && tDef.HasModExtension<SurvivalToolProperties>();
+
+        public static IEnumerable<Thing> GetHeldSurvivalTools(this Pawn pawn) =>
+            pawn.inventory?.innerContainer.GetHeldSurvivalTools();
+
+        public static IEnumerable<Thing> GetHeldSurvivalTools(this ThingOwner container) =>
+            container?.Where(t => t.def.IsSurvivalTool());
+
+        // This only exists for ease of transpiling
+        public static IEnumerable<Thing> GetAllThingsNotSurvivalTools(this ThingOwner container) =>
+            container?.Where(t => !t.def.IsSurvivalTool());
+
+        public static float HeldSurvivalToolCount(this Pawn pawn) =>
+            pawn.GetHeldSurvivalTools()?.Count() ?? 0f;
+
+        public static bool CanCarryAnyMoreSurvivalTools(this Pawn pawn) =>
+            !SurvivalToolsSettings.hardcoreMode || (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount() < MaxToolsCarriedAtOnce) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
 
         public static bool MeetsWorkGiverStatRequirement(this Pawn pawn, StatDef requiredStat) =>
             pawn.GetStatValue(requiredStat) > 0f;

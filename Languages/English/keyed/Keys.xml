@@ -1,11 +1,12 @@
 <LanguageData>
 
     <NoTool>No tool</NoTool>
+    <ToolInUse>in use</ToolInUse>
 
     <!-- Settings -->
     <SurvivalToolsSettingsCategory>Survival Tools</SurvivalToolsSettingsCategory>
 
     <Settings_HardcoreMode>Hardcore mode</Settings_HardcoreMode>
-    <Settings_HardcoreMode_Tooltip>Tools wear 50% quicker and most tasks that require tools in order to be done effectively will no longer be doable without their required tools. You're going to be in for a rough earlygame.</Settings_HardcoreMode_Tooltip>
+    <Settings_HardcoreMode_Tooltip>Tools wear 50% quicker and most tasks that require tools in order to be done effectively will no longer be doable without their required tools. Colonists will also only be able to carry up to 3 tools at a time in their inventories unless they're in a caravan.</Settings_HardcoreMode_Tooltip>
 
 </LanguageData>

@@ -48,4 +48,27 @@
         </value>
     </Operation>
 
+    <!-- Mining Speed -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>*/StatDef[defName="MiningSpeed"]/description</xpath>
+        <value>
+            <description>The speed at which this person drills for deep resources or performs mining tasks other than digging at walls.</description>
+        </value>
+    </Operation>
+
+    <!-- Mining Yield -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>*/StatDef[defName="MiningYield"]/label</xpath>
+        <value>
+            <label>mining yield (other)</label>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>*/StatDef[defName="MiningYield"]/description</xpath>
+        <value>
+            <description>The percentage of mined resources a miner will produce. This applies to deep drill mining. This doesn't affect the production rate of rock chunks.</description>
+        </value>
+    </Operation>
+
 </Patch>

@@ -59,6 +59,7 @@
             <li Class="SurvivalTools.SurvivalToolProperties">
                 <baseWorkStatFactors>
                     <DiggingSpeed>1</DiggingSpeed>
+                    <MiningYieldDigging>1</MiningYieldDigging>
                 </baseWorkStatFactors>
             </li>
         </modExtensions>
@@ -177,9 +178,10 @@
             <ToolEffectivenessFactor>1.2</ToolEffectivenessFactor>
         </statBases>
         <tradeTags Inherit="False"/>
+        <equippedAngleOffset>-20</equippedAngleOffset>
         <techLevel>Ultra</techLevel>
         <graphicData>
-            <texPath>Things/Item/Equipment/WeaponMelee/Knife</texPath>
+            <texPath>Things/Item/Equipment/Tool/GlitterworldMultitool</texPath>
             <graphicClass>Graphic_Single</graphicClass>
         </graphicData>
         <modExtensions>
@@ -187,6 +189,7 @@
                 <baseWorkStatFactors>
                     <TreeFellingSpeed>1.3</TreeFellingSpeed>
                     <DiggingSpeed>1.3</DiggingSpeed>
+                    <MiningYieldDigging>1.1</MiningYieldDigging>
                     <ConstructionSpeed>1.3</ConstructionSpeed>
                     <PlantHarvestingSpeed>1.3</PlantHarvestingSpeed>
                 </baseWorkStatFactors>

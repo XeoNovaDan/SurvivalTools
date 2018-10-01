@@ -38,6 +38,10 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(MassUtility), nameof(MassUtility.CountToPickUpUntilOverEncumbered)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_CountToPickUpUntilOverEncumbered)));
 
+            h.Patch(AccessTools.Property(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.FirstUnloadableThing)).GetGetMethod(),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_FirstUnloadableThing)),
+                transpiler: new HarmonyMethod(patchType, nameof(Transpile_FirstUnloadableThing)));
+
             h.Patch(AccessTools.Method(typeof(ThingDef), nameof(ThingDef.SpecialDisplayStats)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_SpecialDisplayStats)));
 
@@ -45,6 +49,10 @@ namespace SurvivalTools
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_JobOnThing)));
 
             h.Patch(AccessTools.Method(typeof(JobDriver_Mine), "ResetTicksToPickHit"),
+                transpiler: new HarmonyMethod(patchType, nameof(Transpile_ResetTicksToPickHit)));
+
+            // Doing the same stuff as the above patch, therefore the same transpiler can be used
+            h.Patch(AccessTools.Method(typeof(Mineable), nameof(Mineable.Notify_TookMiningDamage)),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_ResetTicksToPickHit)));
 
             // erdelf never fails to impress :)
@@ -113,8 +121,7 @@ namespace SurvivalTools
         // Another janky hack
         public static void Postfix_WillBeOverEncumberedAfterPickingUp(ref bool __result, Pawn pawn, Thing thing)
         {
-            if (pawn.RaceProps.Humanlike && thing as SurvivalTool != null // If the pawn is humanlike (can use tools) and the thing is a tool
-                && pawn.inventory.innerContainer.Where(t => t.def.IsSurvivalTool()).Count() >= SurvivalToolUtility.MaxToolsCarriedAtOnce) // and if the pawn is carrying 3 or more tools
+            if (pawn.RaceProps.Humanlike && thing as SurvivalTool != null && !pawn.CanCarryAnyMoreSurvivalTools())
                 __result = true;
         }
         #endregion
@@ -124,6 +131,37 @@ namespace SurvivalTools
         {
             if (__result > 0 && pawn.RaceProps.Humanlike && thing as SurvivalTool != null && !pawn.CanCarryAnyMoreSurvivalTools())
                 __result = 0;
+        }
+        #endregion
+
+        #region Patch_FirstUnloadableThing
+        public static IEnumerable<CodeInstruction> Transpile_FirstUnloadableThing(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+
+                if (instruction.opcode == OpCodes.Ldfld && instruction.operand == AccessTools.Field(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.innerContainer)) &&
+                    instructionList[(i + 1)].opcode == OpCodes.Ldc_I4_0)
+                {
+                    yield return instruction;
+                    instruction = new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(SurvivalToolUtility), nameof(SurvivalToolUtility.GetAllThingsNotSurvivalTools)));
+                }
+
+                yield return instruction;
+            }
+        }
+
+        public static void Postfix_FirstUnloadableThing(Pawn_InventoryTracker __instance, ref ThingCount __result)
+        {
+            if (__result == default(ThingCount) && __instance.pawn.HeldSurvivalToolCount() > 0 && !__instance.pawn.CanCarryAnyMoreSurvivalTools())
+            {
+                List<Thing> allTools = __instance.innerContainer.GetHeldSurvivalTools().ToList();
+                int lastToolIndex = allTools.Count - 1;
+                __result = new ThingCount(allTools[lastToolIndex], allTools[lastToolIndex].stackCount);
+            }
         }
         #endregion
 
