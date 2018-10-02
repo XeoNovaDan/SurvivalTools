@@ -48,6 +48,15 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(WorkGiver_PlantsCut), nameof(WorkGiver_PlantsCut.JobOnThing)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_JobOnThing)));
 
+            h.Patch(AccessTools.Method(typeof(WorkGiver_GrowerSow), nameof(WorkGiver_GrowerSow.JobOnCell)),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_JobOnCell)));
+
+            h.Patch(AccessTools.Method(typeof(GenConstruct), nameof(GenConstruct.HandleBlockingThingJob)),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_HandleBlockingThingJob)));
+
+            h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.CanHandleBlockingThing)),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_CanHandleBlockingThing)));
+
             h.Patch(AccessTools.Method(typeof(JobDriver_Mine), "ResetTicksToPickHit"),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_ResetTicksToPickHit)));
 
@@ -78,10 +87,6 @@ namespace SurvivalTools
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Repair_MakeNewToils)));
             #endregion
 
-            // Add validator
-            ST_ThingSetMakerDefOf.MapGen_AncientRuinsSurvivalTools.root.fixedParams.validator = (ThingDef t) =>
-            t.techLevel == TechLevel.Neolithic;
-
         }
 
         #region Prefix_Resolve
@@ -98,21 +103,42 @@ namespace SurvivalTools
                     qualityComp.SetQuality(newQuality, ArtGenerationContext.Outsider);
                 }
 
+                // Set stuff
+                if (thing.def.MadeFromStuff)
+                {
+                    // All stuff which the tool can be made from and has a market value of less than or equal to 3, excluding small-volume
+                    List<ThingDef> validStuff = DefDatabase<ThingDef>.AllDefsListForReading.Where(
+                        t => !t.smallVolume && t.IsStuff && 
+                        GenStuff.AllowedStuffsFor(thing.def).Contains(t) &&
+                        t.BaseMarketValue <= SurvivalToolUtility.MapGenToolMaxStuffMarketValue).ToList();
+
+                    // Set random stuff based on stuff's market value and commonality
+                    thing.SetStuffDirect(validStuff.RandomElementByWeight(
+                        t => StuffMarketValueRemainderToCommonalityCurve.Evaluate(SurvivalToolUtility.MapGenToolMaxStuffMarketValue - t.BaseMarketValue) *
+                        t.stuffProps?.commonality ?? 1f));
+                }
+
                 // Set hit points
                 if (thing.def.useHitPoints)
-                    thing.HitPoints = Mathf.RoundToInt(thing.MaxHitPoints * SurvivalToolUtility.AncientToolHitPointsRange.RandomInRange);
+                    thing.HitPoints = Mathf.RoundToInt(thing.MaxHitPoints * SurvivalToolUtility.MapGenToolHitPointsRange.RandomInRange);
 
                 rp.singleThingToSpawn = thing;
                 BaseGen.symbolStack.Push("thing", rp);
             }
         }
+
+        private static SimpleCurve StuffMarketValueRemainderToCommonalityCurve = new SimpleCurve
+        {
+            new CurvePoint(0f, SurvivalToolUtility.MapGenToolMaxStuffMarketValue * 0.1f),
+            new CurvePoint(SurvivalToolUtility.MapGenToolMaxStuffMarketValue, SurvivalToolUtility.MapGenToolMaxStuffMarketValue)
+        };
         #endregion
 
         #region Postfix_MissingRequiredCapacity
         public static void Postfix_MissingRequiredCapacity(WorkGiver __instance, ref PawnCapacityDef __result, Pawn pawn)
         {
             // Bit of a weird hack for now, but I hope to make this a bit more elegant in the future
-            if (__result == null && __instance.def.GetModExtension<WorkGiverExtension>() is WorkGiverExtension extension && !pawn.MeetsWorkGiverStatRequirement(extension.requiredStat))
+            if (__result == null && __instance.def.GetModExtension<WorkGiverExtension>() is WorkGiverExtension extension && !pawn.MeetsWorkGiverStatRequirements(extension.requiredStats))
                 __result = PawnCapacityDefOf.Manipulation;
         }
         #endregion
@@ -195,6 +221,41 @@ namespace SurvivalTools
         {
             if (t.def.plant?.IsTree == true)
                 __result = null;
+        }
+        #endregion
+
+        #region Postfix_JobOnCell
+        public static void Postfix_JobOnCell(ref Job __result, Pawn pawn)
+        {
+            if (__result?.def == JobDefOf.CutPlant && __result.targetA.Thing.def.plant.IsTree)
+            {
+                if (pawn.MeetsWorkGiverStatRequirements(ST_WorkGiverDefOf.FellTrees.GetModExtension<WorkGiverExtension>().requiredStats))
+                    __result = new Job(ST_JobDefOf.FellTree, __result.targetA);
+                else
+                    __result = null;
+            }
+        }
+        #endregion
+
+        #region Postfix_HandleBlockingThingJob
+        // Identical to above but with different params :(
+        public static void Postfix_HandleBlockingThingJob(ref Job __result, Pawn worker)
+        {
+            if (__result?.def == JobDefOf.CutPlant && __result.targetA.Thing.def.plant.IsTree)
+            {
+                if (worker.MeetsWorkGiverStatRequirements(ST_WorkGiverDefOf.FellTrees.GetModExtension<WorkGiverExtension>().requiredStats))
+                    __result = new Job(ST_JobDefOf.FellTree, __result.targetA);
+                else
+                    __result = null;
+            }
+        }
+        #endregion
+
+        #region Postfix_CanHandleBlockingThing
+        public static void Postfix_CanHandleBlockingThing(ref bool __result, Thing blocker, Pawn worker)
+        {
+            if (blocker?.def.plant?.IsTree == true && !worker.MeetsWorkGiverStatRequirements(ST_WorkGiverDefOf.FellTrees.GetModExtension<WorkGiverExtension>().requiredStats))
+                __result = false;
         }
         #endregion
 

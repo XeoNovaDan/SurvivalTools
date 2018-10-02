@@ -13,7 +13,9 @@
         </requiredCapacities>
         <modExtensions>
             <li Class="SurvivalTools.WorkGiverExtension">
-                <requiredStat>TreeFellingSpeed</requiredStat>
+                <requiredStats>
+                    <li>TreeFellingSpeed</li>
+                </requiredStats>
             </li>
         </modExtensions>
     </WorkGiverDef>

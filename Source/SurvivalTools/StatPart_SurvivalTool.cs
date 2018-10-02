@@ -16,7 +16,7 @@ namespace SurvivalTools
             // The AI will cheat this system for now until tool generation gets figured out
             if (req.Thing is Pawn pawn && pawn.RaceProps.Humanlike && pawn.Faction == Faction.OfPlayer)
             {
-                if (pawn.HasSurvivalTool(parentStat, out SurvivalTool tool, out float statFactor))
+                if (pawn.HasSurvivalToolFor(parentStat, out SurvivalTool tool, out float statFactor))
                     return tool.LabelCapNoCount + ": x" + statFactor.ToStringPercent();
                 return "NoTool".Translate() + ": x" + NoToolStatFactor.ToStringPercent();
             }
@@ -27,7 +27,7 @@ namespace SurvivalTools
         {
             if (req.Thing is Pawn pawn && pawn.RaceProps.Humanlike && pawn.Faction == Faction.OfPlayer)
             {
-                if (pawn.HasSurvivalTool(parentStat, out SurvivalTool tool, out float statFactor))
+                if (pawn.HasSurvivalToolFor(parentStat, out SurvivalTool tool, out float statFactor))
                     val *= statFactor;
                 else
                     val *= NoToolStatFactor;

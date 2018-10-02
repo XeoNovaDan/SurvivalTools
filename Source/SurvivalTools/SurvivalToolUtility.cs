@@ -9,38 +9,61 @@ using RimWorld.Planet;
 
 namespace SurvivalTools
 {
+    [StaticConstructorOnStartup]
     public static class SurvivalToolUtility
     {
 
-        public static readonly FloatRange AncientToolHitPointsRange = new FloatRange(0.3f, 0.7f);
+        static SurvivalToolUtility()
+        {
+            // Add validator
+            ST_ThingSetMakerDefOf.MapGen_AncientRuinsSurvivalTools.root.fixedParams.validator = (ThingDef t) =>
+            t.techLevel == TechLevel.Neolithic;
+        }
+
+        public static readonly FloatRange MapGenToolHitPointsRange = new FloatRange(0.3f, 0.7f);
+        public const float MapGenToolMaxStuffMarketValue = 3f;
         public const int MaxToolsCarriedAtOnce = 3;
 
-        //public static List<StatDef> SurvivalToolStats =>
-        //    DefDatabase<StatDef>.AllDefsListForReading?.Where(s => s.GetStatPart<T>() != null)?.ToList();
+        public static List<StatDef> SurvivalToolStats { get; } =
+            DefDatabase<StatDef>.AllDefsListForReading.Where(s => s.RequiresSurvivalTool()).ToList();
 
-        //public static IEnumerable<SurvivalTool> BestSurvivalToolsFor(IThingHolder holder)
-        //{
-        //    Pawn pawn = (holder is Pawn_EquipmentTracker eq) ? eq.pawn : ((holder is Pawn_InventoryTracker inv) ? inv.pawn : null);
-        //    if (pawn == null)
-        //        yield break;
+        public static List<WorkGiverDef> SurvivalToolWorkGivers { get; } =
+            DefDatabase<WorkGiverDef>.AllDefsListForReading.Where(w => w.HasModExtension<WorkGiverExtension>()).ToList();
 
-        //    if (!SurvivalToolStats.NullOrEmpty())
-        //        foreach (StatDef stat in SurvivalToolStats)
-        //        {
-        //            SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
-        //            if (tool != null)
-        //                yield return tool;
-        //        }
-        //    yield break;
-        //}
+        // This only exists to prevent null exceptions with the above property
+        public static bool RequiresSurvivalTool(this StatDef stat)
+        {
+            if (!stat.parts.NullOrEmpty())
+                foreach (StatPart part in stat.parts)
+                    if (part?.GetType() == typeof(StatPart_SurvivalTool))
+                        return true;
+            return false;
+        }
 
-        public static bool HasSurvivalTool(this Pawn pawn, StatDef stat, out SurvivalTool tool, out float statFactor)
+        public static IEnumerable<SurvivalTool> BestSurvivalToolsFor(IThingHolder holder)
+        {
+            Pawn pawn = (holder is Pawn_EquipmentTracker eq) ? eq.pawn : ((holder is Pawn_InventoryTracker inv) ? inv.pawn : null);
+            if (pawn == null)
+                yield break;
+
+            foreach (StatDef stat in SurvivalToolStats)
+            {
+                SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
+                if (tool != null)
+                    yield return tool;
+            }
+        }
+
+        public static bool HasSurvivalToolFor(this Pawn pawn, StatDef stat, out SurvivalTool tool, out float statFactor)
         {
             tool = pawn.GetBestSurvivalTool(stat);
             statFactor = tool?.WorkStatFactors.ToList().GetStatFactorFromList(stat) ?? -1f;
 
             return tool != null;
         }
+
+        public static bool HasSurvivalToolFor(this Pawn pawn, StatDef stat) =>
+            pawn.GetBestSurvivalTool(stat) != null;
 
         public static SurvivalTool GetBestSurvivalTool(this Pawn pawn, StatDef stat)
         {
@@ -127,10 +150,15 @@ namespace SurvivalTools
             pawn.GetHeldSurvivalTools()?.Count() ?? 0f;
 
         public static bool CanCarryAnyMoreSurvivalTools(this Pawn pawn) =>
-            !SurvivalToolsSettings.hardcoreMode || (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount() < MaxToolsCarriedAtOnce) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
+            !SurvivalToolsSettings.toolLimit || (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount() < MaxToolsCarriedAtOnce) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
 
-        public static bool MeetsWorkGiverStatRequirement(this Pawn pawn, StatDef requiredStat) =>
-            pawn.GetStatValue(requiredStat) > 0f;
+        public static bool MeetsWorkGiverStatRequirements(this Pawn pawn, List<StatDef> requiredStats)
+        {
+            foreach (StatDef stat in requiredStats)
+                if (pawn.GetStatValue(stat) <= 0f)
+                    return false;
+            return true;
+        }
 
     }
 }

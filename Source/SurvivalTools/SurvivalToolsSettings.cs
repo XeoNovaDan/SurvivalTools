@@ -13,6 +13,7 @@ namespace SurvivalTools
     {
 
         public static bool hardcoreMode = false;
+        public static bool toolLimit = true;
 
         public void DoWindowContents(Rect wrect)
         {
@@ -28,6 +29,8 @@ namespace SurvivalTools
             GUI.color = new Color(1f, 0.2f, 0.2f);
             options.CheckboxLabeled("Settings_HardcoreMode".Translate(), ref hardcoreMode, "Settings_HardcoreMode_Tooltip".Translate());
             GUI.color = defaultColor;
+            options.Gap();
+            options.CheckboxLabeled("Settings_ToolLimit".Translate(), ref toolLimit, "Settings_ToolLimit_Tooltip".Translate());
 
             options.End();
 
@@ -38,6 +41,7 @@ namespace SurvivalTools
         public override void ExposeData()
         {
             Scribe_Values.Look(ref hardcoreMode, "hardcoreMode", false);
+            Scribe_Values.Look(ref toolLimit, "toolLimit", true);
         }
 
     }

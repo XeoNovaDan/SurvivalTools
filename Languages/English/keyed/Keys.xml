@@ -7,6 +7,14 @@
     <SurvivalToolsSettingsCategory>Survival Tools</SurvivalToolsSettingsCategory>
 
     <Settings_HardcoreMode>Hardcore mode</Settings_HardcoreMode>
-    <Settings_HardcoreMode_Tooltip>Tools wear 50% quicker and most tasks that require tools in order to be done effectively will no longer be doable without their required tools. Colonists will also only be able to carry up to 3 tools at a time in their inventories unless they're in a caravan.</Settings_HardcoreMode_Tooltip>
+    <Settings_HardcoreMode_Tooltip>Tools wear 50% quicker and most tasks that require tools in order to be done effectively will no longer be doable without their required tools.</Settings_HardcoreMode_Tooltip>
+
+    <Settings_ToolLimit>Tool limit</Settings_ToolLimit>
+    <Settings_ToolLimit_Tooltip>Whether or not colonists are limited to only being able to carry 3 tools at a time in their inventories (other than when caravanning).</Settings_ToolLimit_Tooltip>
+
+    <!-- Alerts -->
+    <ColonistNeedsSurvivalTool>Colonist lacks tools</ColonistNeedsSurvivalTool>
+    <ColonistsNeedSurvivalTool>Colonists lack tools</ColonistsNeedSurvivalTool>
+    <ColonistNeedsSurvivalToolDesc>The following colonists are assigned to work tasks that require tools in order to be performed effectively but lack the tools to do so</ColonistNeedsSurvivalToolDesc>
 
 </LanguageData>

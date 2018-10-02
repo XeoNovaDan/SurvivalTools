@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert_ColonistNeedsSurvivalTool.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="JobDriver_HarvestTree_Designated.cs" />
     <Compile Include="JobDriver_HarvestTree.cs" />
@@ -70,11 +71,12 @@
     <Compile Include="ST_StatDefOf.cs" />
     <Compile Include="ST_ThingDefOf.cs" />
     <Compile Include="ST_ThingSetMakerDefOf.cs" />
+    <Compile Include="ST_WorkGiverDefOf.cs" />
     <Compile Include="SurvivalTool.cs" />
     <Compile Include="SurvivalToolProperties.cs" />
     <Compile Include="SurvivalToolsSettings.cs" />
     <Compile Include="SurvivalToolUtility.cs" />
-    <Compile Include="WorkGiverRequiredStats.cs" />
+    <Compile Include="WorkGiverExtension.cs" />
     <Compile Include="WorkGiver_FellTrees.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

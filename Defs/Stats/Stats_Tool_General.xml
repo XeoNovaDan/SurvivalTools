@@ -3,7 +3,7 @@
     <StatDef>
         <defName>ToolEstimatedLifespan</defName>
         <workerClass>SurvivalTools.StatWorker_EstimatedLifespan</workerClass>
-        <label>estimated lifespan</label>
+        <label>estimated tool lifespan</label>
         <description>The estimated amount of continuous use this tool can withstand before breaking. This doesn't take the current condition of the tool into account.</description>
         <category>SurvivalTool</category>
         <displayPriorityInCategory>20</displayPriorityInCategory>

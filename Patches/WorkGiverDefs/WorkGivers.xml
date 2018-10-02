@@ -5,7 +5,9 @@
         <xpath>*/WorkGiverDef[defName="Mine"]</xpath>
         <value>
             <li Class="SurvivalTools.WorkGiverExtension">
-                <requiredStat>DiggingSpeed</requiredStat>
+                <requiredStats>
+                    <li>DiggingSpeed</li>
+                </requiredStats>
             </li>
         </value>
     </Operation>
@@ -15,7 +17,33 @@
         <xpath>*/WorkGiverDef[workType="Construction"]</xpath>
         <value>
             <li Class="SurvivalTools.WorkGiverExtension">
-                <requiredStat>ConstructionSpeed</requiredStat>
+                <requiredStats>
+                    <li>ConstructionSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Growing -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[defName="GrowerHarvest"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStats>
+                    <li>PlantHarvestingSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Plant Cutting -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[defName="PlantsCut"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStats>
+                    <li>PlantHarvestingSpeed</li>
+                </requiredStats>
             </li>
         </value>
     </Operation>
