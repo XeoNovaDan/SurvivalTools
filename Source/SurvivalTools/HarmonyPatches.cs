@@ -24,7 +24,7 @@ namespace SurvivalTools
 
             HarmonyInstance h = HarmonyInstance.Create("XeoNovaDan.SurvivalTools");
 
-            // HarmonyInstance.DEBUG = true;
+            //HarmonyInstance.DEBUG = true;
 
             h.Patch(AccessTools.Method(typeof(SymbolResolver_AncientRuins), nameof(SymbolResolver_AncientRuins.Resolve)),
                 new HarmonyMethod(patchType, nameof(Prefix_Resolve)));
@@ -39,8 +39,7 @@ namespace SurvivalTools
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_CountToPickUpUntilOverEncumbered)));
 
             h.Patch(AccessTools.Property(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.FirstUnloadableThing)).GetGetMethod(),
-                postfix: new HarmonyMethod(patchType, nameof(Postfix_FirstUnloadableThing)),
-                transpiler: new HarmonyMethod(patchType, nameof(Transpile_FirstUnloadableThing)));
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_FirstUnloadableThing)));
 
             h.Patch(AccessTools.Method(typeof(ThingDef), nameof(ThingDef.SpecialDisplayStats)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_SpecialDisplayStats)));
@@ -160,33 +159,25 @@ namespace SurvivalTools
         }
         #endregion
 
-        #region Patch_FirstUnloadableThing
-        public static IEnumerable<CodeInstruction> Transpile_FirstUnloadableThing(IEnumerable<CodeInstruction> instructions)
-        {
-            List<CodeInstruction> instructionList = instructions.ToList();
-
-            for (int i = 0; i < instructionList.Count; i++)
-            {
-                CodeInstruction instruction = instructionList[i];
-
-                if (instruction.opcode == OpCodes.Ldfld && instruction.operand == AccessTools.Field(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.innerContainer)) &&
-                    instructionList[(i + 1)].opcode == OpCodes.Ldc_I4_0)
-                {
-                    yield return instruction;
-                    instruction = new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(SurvivalToolUtility), nameof(SurvivalToolUtility.GetAllThingsNotSurvivalTools)));
-                }
-
-                yield return instruction;
-            }
-        }
-
+        #region Postfix_FirstUnloadableThing
         public static void Postfix_FirstUnloadableThing(Pawn_InventoryTracker __instance, ref ThingCount __result)
         {
-            if (__result == default(ThingCount) && __instance.pawn.HeldSurvivalToolCount() > 0 && !__instance.pawn.CanCarryAnyMoreSurvivalTools())
+            if (__result.Thing is SurvivalTool tool && tool.InUse)
             {
-                List<Thing> allTools = __instance.innerContainer.GetHeldSurvivalTools().ToList();
-                int lastToolIndex = allTools.Count - 1;
-                __result = new ThingCount(allTools[lastToolIndex], allTools[lastToolIndex].stackCount);
+                bool foundNewThing = false;
+                // Had to iterate through because a lambda expression in this case isn't possible
+                for (int i = 0; i < __instance.innerContainer.Count; i++)
+                {
+                    Thing newThing = __instance.innerContainer[i];
+                    if (newThing as SurvivalTool == null || !((SurvivalTool)newThing).InUse)
+                    {
+                        __result = new ThingCount(newThing, newThing.stackCount);
+                        foundNewThing = true;
+                        break;
+                    }
+                }
+                if (!foundNewThing)
+                    __result = default(ThingCount);
             }
         }
         #endregion

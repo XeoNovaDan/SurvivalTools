@@ -44,7 +44,7 @@
             <li Class="ScenPart_StartingThing_Defined">
                 <def>StartingThing_Defined</def>
                 <thingDef>SurvivalTools_Sickle</thingDef>
-                <stuff>WoodLog</stuff>
+                <stuff>BlocksSlate</stuff>
                 <count>2</count>
             </li>
             <li Class="ScenPart_StartingThing_Defined">

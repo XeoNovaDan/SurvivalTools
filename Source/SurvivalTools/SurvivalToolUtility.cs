@@ -22,7 +22,7 @@ namespace SurvivalTools
 
         public static readonly FloatRange MapGenToolHitPointsRange = new FloatRange(0.3f, 0.7f);
         public const float MapGenToolMaxStuffMarketValue = 3f;
-        public const int MaxToolsCarriedAtOnce = 3;
+        public const int SurvivalToolCarryLimit = 3;
 
         public static List<StatDef> SurvivalToolStats { get; } =
             DefDatabase<StatDef>.AllDefsListForReading.Where(s => s.RequiresSurvivalTool()).ToList();
@@ -30,7 +30,6 @@ namespace SurvivalTools
         public static List<WorkGiverDef> SurvivalToolWorkGivers { get; } =
             DefDatabase<WorkGiverDef>.AllDefsListForReading.Where(w => w.HasModExtension<WorkGiverExtension>()).ToList();
 
-        // This only exists to prevent null exceptions with the above property
         public static bool RequiresSurvivalTool(this StatDef stat)
         {
             if (!stat.parts.NullOrEmpty())
@@ -40,19 +39,66 @@ namespace SurvivalTools
             return false;
         }
 
-        public static IEnumerable<SurvivalTool> BestSurvivalToolsFor(IThingHolder holder)
+        public static bool IsSurvivalTool(this BuildableDef def, out SurvivalToolProperties toolProps)
         {
-            Pawn pawn = (holder is Pawn_EquipmentTracker eq) ? eq.pawn : ((holder is Pawn_InventoryTracker inv) ? inv.pawn : null);
-            if (pawn == null)
+            toolProps = def.GetModExtension<SurvivalToolProperties>();
+            return def.IsSurvivalTool();
+        }
+
+        public static bool IsSurvivalTool(this BuildableDef def) =>
+            def is ThingDef tDef && tDef.thingClass == typeof(SurvivalTool) && tDef.HasModExtension<SurvivalToolProperties>();
+
+        public static bool CanUseSurvivalTools(this Pawn pawn) =>
+            pawn.RaceProps.intelligence >= Intelligence.ToolUser && (pawn.equipment != null || pawn.inventory != null) && pawn.TraderKind == null;
+
+        public static bool IsUnderSurvivalToolCarryLimit(this int count) =>
+            !SurvivalToolsSettings.toolLimit || count < SurvivalToolCarryLimit;
+
+        public static IEnumerable<Thing> GetHeldSurvivalTools(this Pawn pawn) =>
+            pawn.inventory?.innerContainer.Where(t => t.def.IsSurvivalTool());
+
+        public static IEnumerable<Thing> GetUsableHeldSurvivalTools(this Pawn pawn)
+        {
+            List<Thing> heldSurvivalTools = pawn.GetHeldSurvivalTools().ToList();
+            if (heldSurvivalTools == null)
                 yield break;
 
+            int i = 0;
+            while (i.IsUnderSurvivalToolCarryLimit() && i < heldSurvivalTools.Count)
+            {
+                yield return heldSurvivalTools[i];
+                i++;
+            }
+        }
+
+        public static IEnumerable<Thing> GetAllUsableSurvivalTools(this Pawn pawn) =>
+            pawn.equipment?.GetDirectlyHeldThings().Where(t => t.def.IsSurvivalTool()).Concat(pawn.GetUsableHeldSurvivalTools());
+
+        public static Pawn GetPawnFromThingHolder(IThingHolder holder) =>
+            (holder is Pawn_EquipmentTracker eq) ? eq.pawn : ((holder is Pawn_InventoryTracker inv) ? inv.pawn : null);
+
+        public static bool CanUseSurvivalTool(this Pawn pawn, SurvivalTool tool)
+        {
+            foreach (StatModifier modifier in tool.WorkStatFactors)
+                if (modifier.stat?.Worker?.IsDisabledFor(pawn) == false)
+                    return true;
+            return false;
+        }
+
+        public static IEnumerable<SurvivalTool> BestSurvivalToolsFor(Pawn pawn)
+        {
             foreach (StatDef stat in SurvivalToolStats)
             {
                 SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
                 if (tool != null)
+                {
                     yield return tool;
+                }
             }
         }
+
+        public static bool HasSurvivalToolFor(this Pawn pawn, StatDef stat) =>
+            pawn.GetBestSurvivalTool(stat) != null;
 
         public static bool HasSurvivalToolFor(this Pawn pawn, StatDef stat, out SurvivalTool tool, out float statFactor)
         {
@@ -62,16 +108,13 @@ namespace SurvivalTools
             return tool != null;
         }
 
-        public static bool HasSurvivalToolFor(this Pawn pawn, StatDef stat) =>
-            pawn.GetBestSurvivalTool(stat) != null;
-
         public static SurvivalTool GetBestSurvivalTool(this Pawn pawn, StatDef stat)
         {
             SurvivalTool tool = null;
             float statFactor = stat.GetStatPart<StatPart_SurvivalTool>().NoToolStatFactor;
 
-            List<Thing> allTools = pawn.equipment?.GetDirectlyHeldThings().Concat(pawn.inventory?.GetDirectlyHeldThings()).Where(t => t is SurvivalTool).ToList();
-            foreach (SurvivalTool curTool in allTools)
+            List<Thing> usableTools = pawn.GetAllUsableSurvivalTools().ToList();
+            foreach (SurvivalTool curTool in usableTools)
                 foreach (StatModifier modifier in curTool.WorkStatFactors)
                     if (modifier.stat == stat && modifier.value > statFactor)
                     {
@@ -97,7 +140,7 @@ namespace SurvivalTools
             builder.AppendLine(ST_StatDefOf.ToolEffectivenessFactor.LabelCap + ": " +
                 tool.GetStatValue(ST_StatDefOf.ToolEffectivenessFactor).ToStringByStyle(ToStringStyle.Integer, ToStringNumberSense.Factor));
 
-            if (stuffPropsTool != null && stuffPropsTool.toolStatFactors.StatFactorsListContains(stat))
+            if (stuffPropsTool != null && stuffPropsTool.toolStatFactors.GetStatFactorFromList(stat) != 1f)
             {
                 builder.AppendLine();
                 builder.AppendLine("StatsReport_Material".Translate() + " (" + tool.Stuff.LabelCap + "): " +
@@ -108,15 +151,6 @@ namespace SurvivalTools
             builder.AppendLine("StatsReport_FinalValue".Translate() + ": " + statFactorList.GetStatFactorFromList(stat).ToStringByStyle(ToStringStyle.Integer, ToStringNumberSense.Factor));
             return builder.ToString();
         }
-
-        private static bool StatFactorsListContains(this List<StatModifier> list, StatDef stat)
-        {
-            foreach (StatModifier modifier in list)
-                if (modifier.stat == stat)
-                    return true;
-            return false;
-        }
-
         public static void TryApplyToolWear(SurvivalTool tool)
         {
             if (tool != null && Rand.Chance(tool.WearChancePerTick))
@@ -126,31 +160,16 @@ namespace SurvivalTools
         // A transpiler-friendly version of the above overload
         public static void TryApplyToolWear(Pawn pawn, StatDef stat) =>
             TryApplyToolWear(pawn.GetBestSurvivalTool(stat));
-
-        public static bool IsSurvivalTool(this BuildableDef def, out SurvivalToolProperties toolProps)
-        {
-            toolProps = def.GetModExtension<SurvivalToolProperties>();
-            return def.IsSurvivalTool();
-        }
-
-        public static bool IsSurvivalTool(this BuildableDef def) =>
-            def is ThingDef tDef && tDef.thingClass == typeof(SurvivalTool) && tDef.HasModExtension<SurvivalToolProperties>();
-
-        public static IEnumerable<Thing> GetHeldSurvivalTools(this Pawn pawn) =>
-            pawn.inventory?.innerContainer.GetHeldSurvivalTools();
+            
 
         public static IEnumerable<Thing> GetHeldSurvivalTools(this ThingOwner container) =>
             container?.Where(t => t.def.IsSurvivalTool());
 
-        // This only exists for ease of transpiling
-        public static IEnumerable<Thing> GetAllThingsNotSurvivalTools(this ThingOwner container) =>
-            container?.Where(t => !t.def.IsSurvivalTool());
-
-        public static float HeldSurvivalToolCount(this Pawn pawn) =>
-            pawn.GetHeldSurvivalTools()?.Count() ?? 0f;
+        public static int HeldSurvivalToolCount(this Pawn pawn) =>
+            pawn.inventory?.innerContainer?.GetHeldSurvivalTools()?.Count() ?? 0;
 
         public static bool CanCarryAnyMoreSurvivalTools(this Pawn pawn) =>
-            !SurvivalToolsSettings.toolLimit || (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount() < MaxToolsCarriedAtOnce) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
+            (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount().IsUnderSurvivalToolCarryLimit()) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
 
         public static bool MeetsWorkGiverStatRequirements(this Pawn pawn, List<StatDef> requiredStats)
         {

@@ -12,12 +12,28 @@ namespace SurvivalTools
     {
 
         #region Properties
+        //private Pawn HoldingPawn =>
+        //    SurvivalToolUtility.GetPawnFromThingHolder(holdingOwner?.Owner);
+
+        private Pawn HoldingPawn
+        {
+            get
+            {
+                if (ParentHolder is Pawn_EquipmentTracker eq)
+                    return eq.pawn;
+                if (ParentHolder is Pawn_InventoryTracker inv)
+                    return inv.pawn;
+                return null;
+            }
+        }
+
         public bool InUse =>
-            SurvivalToolUtility.BestSurvivalToolsFor(holdingOwner.Owner).Contains(this);
+            HoldingPawn != null && HoldingPawn.CanUseSurvivalTools() &&
+            SurvivalToolUtility.BestSurvivalToolsFor(HoldingPawn).Contains(this) &&
+            HoldingPawn.CanUseSurvivalTool(this);
 
         public float WearChancePerTick =>
-            // Yo dawg, i heard you like GenDate.TicksPerDay
-            (GenDate.TicksPerDay / (this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay)) / StatWorker_EstimatedLifespan.WearInterval;
+            1 / (this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay);
 
         public SurvivalToolProperties ToolProps =>
             def.GetModExtension<SurvivalToolProperties>();

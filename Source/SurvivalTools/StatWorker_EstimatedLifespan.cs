@@ -11,8 +11,8 @@ namespace SurvivalTools
     public class StatWorker_EstimatedLifespan : StatWorker
     {
 
-        public static float WearInterval =>
-            GenDate.TicksPerHour * ((SurvivalToolsSettings.hardcoreMode) ? 0.5f : 0.75f); // Once per 45 mins of continuous work, or 30 mins with hardcore
+        public static float BaseWearInterval =>
+            GenDate.TicksPerHour * ((SurvivalToolsSettings.hardcoreMode) ? 0.333f : 0.5f); // Once per 30 mins of continuous work, or 20 mins with hardcore
 
         public override bool ShouldShowFor(StatRequest req) =>
             req.Def.IsSurvivalTool();
@@ -20,26 +20,26 @@ namespace SurvivalTools
         public override float GetValueUnfinalized(StatRequest req, bool applyPostProcess = true)
         {
             SurvivalTool tool = req.Thing as SurvivalTool;
-            return GetEstimatedLifespan(tool, req.Def);
+            return GetBaseEstimatedLifespan(tool, req.Def);
         }
 
         public override string GetExplanationUnfinalized(StatRequest req, ToStringNumberSense numberSense)
         {
             SurvivalTool tool = req.Thing as SurvivalTool;
-            return $"{"StatsReport_BaseValue".Translate()}: {GetEstimatedLifespan(tool, req.Def).ToString("F1")}";
+            return $"{"StatsReport_BaseValue".Translate()}: {GetBaseEstimatedLifespan(tool, req.Def).ToString("F1")}";
         }
 
-        private float GetEstimatedLifespan(SurvivalTool tool, BuildableDef def)
+        private float GetBaseEstimatedLifespan(SurvivalTool tool, BuildableDef def)
         {
             SurvivalToolProperties props = def.GetModExtension<SurvivalToolProperties>();
 
             // For def
             if (tool == null)
-                return GenDate.TicksToDays(Mathf.RoundToInt((WearInterval * def.GetStatValueAbstract(StatDefOf.MaxHitPoints)) / props.toolWearFactor));
+                return GenDate.TicksToDays(Mathf.RoundToInt((BaseWearInterval * def.GetStatValueAbstract(StatDefOf.MaxHitPoints)) / props.toolWearFactor));
 
             // For thing
             float wearFactor = tool.ToolProps.toolWearFactor * (tool.StuffProps?.wearFactorMultiplier ?? 1f);
-            return GenDate.TicksToDays(Mathf.RoundToInt((WearInterval * tool.GetStatValue(StatDefOf.MaxHitPoints)) / wearFactor));
+            return GenDate.TicksToDays(Mathf.RoundToInt((BaseWearInterval * tool.GetStatValue(StatDefOf.MaxHitPoints)) / wearFactor));
         }
 
     }
