@@ -1,8 +1,48 @@
 <Defs>
 
+    <ThingDef Name="SurvivalToolBasic" ParentName="BaseSurvivalTool" Abstract="True">
+        <statBases>
+            <WorkToMake>1800</WorkToMake>
+        </statBases>
+        <stuffCategories>
+            <li>Woody</li>
+            <li>Stony</li>
+            <li>Metallic</li>
+        </stuffCategories>
+        <recipeMaker>
+            <workSpeedStat>SmithingSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+                <li>CraftingSpot</li>
+                <li>ElectricSmithy</li>
+                <li>FueledSmithy</li>
+            </recipeUsers>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Silver</li>
+                    <li>Gold</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+        </recipeMaker>
+        <tradeTags>
+            <li>SurvivalToolBasic</li>
+        </tradeTags>
+        <comps>
+            <li>
+                <compClass>CompQuality</compClass>
+            </li>
+        </comps>
+    </ThingDef>
+
     <!-- Tools -->
 
-    <ThingDef ParentName="BaseMakeableSurvivalToolStuffed">
+    <ThingDef ParentName="SurvivalToolBasic">
         <defName>SurvivalTools_Axe</defName>
         <label>axe</label>
         <description>Effective at chopping down trees thanks to the head that's attached to its handle. This can also be used as a melee weapon in a pinch.</description>
@@ -43,7 +83,7 @@
         </tools>
     </ThingDef>
 
-    <ThingDef ParentName="BaseMakeableSurvivalToolStuffed">
+    <ThingDef ParentName="SurvivalToolBasic">
         <defName>SurvivalTools_Pickaxe</defName>
         <label>pickaxe</label>
         <description>Comprising of a weighted head that's attached to a handle, pickaxes are effective at breaking solid rocks. This can also be used as a melee weapon in a pinch.</description>
@@ -84,7 +124,7 @@
         </tools>
     </ThingDef>
 
-    <ThingDef ParentName="BaseMakeableSurvivalToolStuffed">
+    <ThingDef ParentName="SurvivalToolBasic">
         <defName>SurvivalTools_Hammer</defName>
         <label>hammer</label>
         <description>A simple hammer that's a vital part of any constructor's arsenal of tools. This can also be used as a melee weapon in a pinch.</description>
@@ -124,7 +164,7 @@
         </tools>
     </ThingDef>
 
-    <ThingDef ParentName="BaseMakeableSurvivalToolStuffed">
+    <ThingDef ParentName="SurvivalToolBasic">
         <defName>SurvivalTools_Sickle</defName>
         <label>sickle</label>
         <description>A curved blade that's attached to a small handle which is typically used to cut plants. This can also be used as a melee weapon in a pinch.</description>
@@ -177,7 +217,7 @@
             <!-- Equivalent to excellent quality -->
             <ToolEffectivenessFactor>1.2</ToolEffectivenessFactor>
         </statBases>
-        <tradeTags Inherit="False"/>
+        <smeltable>false</smeltable>
         <equippedAngleOffset>-20</equippedAngleOffset>
         <techLevel>Ultra</techLevel>
         <graphicData>
@@ -196,13 +236,6 @@
                 <toolWearFactor>0.15</toolWearFactor>
             </li>
         </modExtensions>
-        <!-- no CompQuality -->
-        <comps Inherit="False">
-            <li Class="CompProperties_Forbiddable"/>
-            <li>
-                <compClass>CompEquippable</compClass>
-            </li>
-        </comps>
         <tools>
             <li>
                 <label>handle</label>

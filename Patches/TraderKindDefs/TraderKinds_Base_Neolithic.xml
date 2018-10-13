@@ -4,7 +4,7 @@
         <xpath>*/TraderKindDef[defName="Base_Neolithic_Standard"]/stockGenerators</xpath>
         <value>
             <li Class="StockGenerator_Tag">
-                <tradeTag>SurvivalToolCommon</tradeTag>
+                <tradeTag>SurvivalToolBasic</tradeTag>
                 <countRange>
                     <min>2</min>
                     <max>6</max>

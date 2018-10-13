@@ -14,7 +14,7 @@ namespace SurvivalTools
         public override string ExplanationPart(StatRequest req)
         {
             // The AI will cheat this system for now until tool generation gets figured out
-            if (req.Thing is Pawn pawn && pawn.CanUseSurvivalTools() && pawn.Faction == Faction.OfPlayer)
+            if (req.Thing is Pawn pawn && pawn.CanUseSurvivalTools())
             {
                 if (pawn.HasSurvivalToolFor(parentStat, out SurvivalTool tool, out float statFactor))
                     return tool.LabelCapNoCount + ": x" + statFactor.ToStringPercent();
@@ -25,7 +25,7 @@ namespace SurvivalTools
 
         public override void TransformValue(StatRequest req, ref float val)
         {
-            if (req.Thing is Pawn pawn && pawn.CanUseSurvivalTools() && pawn.Faction == Faction.OfPlayer)
+            if (req.Thing is Pawn pawn && pawn.CanUseSurvivalTools())
             {
                 if (pawn.HasSurvivalToolFor(parentStat, out SurvivalTool tool, out float statFactor))
                     val *= statFactor;

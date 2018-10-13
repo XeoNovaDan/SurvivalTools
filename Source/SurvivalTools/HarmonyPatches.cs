@@ -53,6 +53,9 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(GenConstruct), nameof(GenConstruct.HandleBlockingThingJob)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_HandleBlockingThingJob)));
 
+            h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.HandleBlockingThingJob)),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_HandleBlockingThingJob)));
+
             h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.CanHandleBlockingThing)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_CanHandleBlockingThing)));
 
@@ -84,6 +87,14 @@ namespace SurvivalTools
                 GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).
                 MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Repair_MakeNewToils)));
+
+            h.Patch(AccessTools.Method(typeof(JobDriver_Deconstruct), "TickAction"),
+                new HarmonyMethod(patchType, nameof(Prefix_JobDriver_Deconstruct_TickAction)));
+
+            h.Patch(typeof(JobDriver_AffectRoof).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().
+                GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).
+                MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
+                transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_AffectRoof_MakeNewToils)));
             #endregion
 
         }
@@ -229,7 +240,6 @@ namespace SurvivalTools
         #endregion
 
         #region Postfix_HandleBlockingThingJob
-        // Identical to above but with different params :(
         public static void Postfix_HandleBlockingThingJob(ref Job __result, Pawn worker)
         {
             if (__result?.def == JobDefOf.CutPlant && __result.targetA.Thing.def.plant.IsTree)
@@ -368,6 +378,36 @@ namespace SurvivalTools
                     yield return new CodeInstruction(OpCodes.Ldloc_0);
                     yield return new CodeInstruction(OpCodes.Ldsfld, ConstructionSpeed);
                     instruction = new CodeInstruction(OpCodes.Call, TryApplyToolWear);
+                }
+
+                yield return instruction;
+            }
+        }
+        #endregion
+        #region Prefix_JobDriver_Deconstruct_TickAction
+        public static void Prefix_JobDriver_Deconstruct_TickAction(JobDriver_Deconstruct __instance)
+        {
+            SurvivalToolUtility.TryApplyToolWear(__instance.pawn, StatDefOf.ConstructionSpeed);
+        }
+        #endregion
+        #region Transpile_JobDriver_AffectRoof_MakeNewToils
+        public static IEnumerable<CodeInstruction> Transpile_JobDriver_AffectRoof_MakeNewToils(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+            bool done = false;
+
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+
+                if (!done)
+                {
+                    yield return instruction;
+                    yield return new CodeInstruction(instructionList[(i + 1)].opcode, instructionList[(i + 1)].operand);
+                    yield return new CodeInstruction(instructionList[(i + 2)].opcode, instructionList[(i + 2)].operand);
+                    yield return new CodeInstruction(OpCodes.Ldsfld, ConstructionSpeed);
+                    yield return new CodeInstruction(OpCodes.Call, TryApplyToolWear);
+                    done = true;
                 }
 
                 yield return instruction;

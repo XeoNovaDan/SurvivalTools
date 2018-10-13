@@ -7,9 +7,6 @@
                 <toolStatFactors>
                     <TreeFellingSpeed>0.7</TreeFellingSpeed>
                     <PlantHarvestingSpeed>0.7</PlantHarvestingSpeed>
-                    <DiggingSpeed>0.9</DiggingSpeed>
-                    <MiningYieldDigging>0.8</MiningYieldDigging>
-                    <ConstructionSpeed>0.8</ConstructionSpeed>
                 </toolStatFactors>
             </li>
         </value>
@@ -22,9 +19,9 @@
                 <toolStatFactors>
                     <TreeFellingSpeed>0.6</TreeFellingSpeed>
                     <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
-                    <DiggingSpeed>0.8</DiggingSpeed>
-                    <MiningYieldDigging>0.8</MiningYieldDigging>
-                    <ConstructionSpeed>0.7</ConstructionSpeed>
+                    <DiggingSpeed>1.1</DiggingSpeed>
+                    <MiningYieldDigging>1.1</MiningYieldDigging>
+                    <ConstructionSpeed>1.1</ConstructionSpeed>
                 </toolStatFactors>
             </li>
         </value>
@@ -47,9 +44,9 @@
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
-                    <TreeFellingSpeed>0.7</TreeFellingSpeed>
+                    <TreeFellingSpeed>0.6</TreeFellingSpeed>
                     <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
-                    <DiggingSpeed>0.7</DiggingSpeed>
+                    <DiggingSpeed>0.6</DiggingSpeed>
                     <MiningYieldDigging>0.8</MiningYieldDigging>
                     <ConstructionSpeed>0.6</ConstructionSpeed>
                 </toolStatFactors>
@@ -82,24 +79,6 @@
                 </toolStatFactors>
             </li>
         </value>
-    </Operation>
-
-    <!-- Stone blocks -->
-
-    <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[@Name="StoneBlocksBase"]</xpath>
-        <value>
-            <li Class="SurvivalTools.StuffPropsTool">
-                <toolStatFactors>
-                    <TreeFellingSpeed>0.8</TreeFellingSpeed>
-                    <PlantHarvestingSpeed>0.8</PlantHarvestingSpeed>
-                    <DiggingSpeed>0.9</DiggingSpeed>
-                    <MiningYieldDigging>0.9</MiningYieldDigging>
-                    <ConstructionSpeed>0.9</ConstructionSpeed>
-                </toolStatFactors>
-                <wearFactorMultiplier>1.3</wearFactorMultiplier>
-            </li>
-        </value>
-    </Operation>
+    </Operation>    
 
 </Patch>

@@ -14,6 +14,7 @@ namespace SurvivalTools
 
         public static bool hardcoreMode = false;
         public static bool toolLimit = true;
+        public static bool toolDegradation = true;
 
         public void DoWindowContents(Rect wrect)
         {
@@ -31,6 +32,8 @@ namespace SurvivalTools
             GUI.color = defaultColor;
             options.Gap();
             options.CheckboxLabeled("Settings_ToolLimit".Translate(), ref toolLimit, "Settings_ToolLimit_Tooltip".Translate());
+            options.Gap();
+            options.CheckboxLabeled("Settings_ToolDegradation".Translate(), ref toolDegradation, "Settings_ToolDegradation_Tooltip".Translate());
 
             options.End();
 
@@ -42,6 +45,7 @@ namespace SurvivalTools
         {
             Scribe_Values.Look(ref hardcoreMode, "hardcoreMode", false);
             Scribe_Values.Look(ref toolLimit, "toolLimit", true);
+            Scribe_Values.Look(ref toolDegradation, "toolDegradation", true);
         }
 
     }

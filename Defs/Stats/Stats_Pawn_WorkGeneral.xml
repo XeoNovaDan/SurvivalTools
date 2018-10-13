@@ -4,7 +4,7 @@
     <StatDef>
         <defName>DiggingSpeed</defName>
         <label>digging speed</label>
-        <description>A speed at which this person digs at walls.</description>
+        <description>The speed at which this person digs at walls.</description>
         <category>PawnWork</category>
         <defaultBaseValue>1</defaultBaseValue>
         <minValue>0</minValue>
