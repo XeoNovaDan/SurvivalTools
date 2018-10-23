@@ -66,6 +66,10 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(Mineable), nameof(Mineable.Notify_TookMiningDamage)),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_ResetTicksToPickHit)));
 
+            // Thanks Mehni!
+            h.Patch(AccessTools.Method(typeof(FloatMenuMakerMap), "AddHumanlikeOrders"),
+                transpiler: new HarmonyMethod(typeof(HarmonyPatches), nameof(Transpile_FloatMenuMakerMad_AddHumanlikeOrders)));
+
             // erdelf never fails to impress :)
             #region JobDriver Boilerplate
             h.Patch(typeof(RimWorld.JobDriver_PlantWork).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().
@@ -279,11 +283,46 @@ namespace SurvivalTools
         }
         #endregion
 
+        // Credit to goes Mehni for letting me use this. Thanks!
+        #region Transpile_FloatMenuMakerMad_AddHumanlikeOrders
+        public static IEnumerable<CodeInstruction> Transpile_FloatMenuMakerMad_AddHumanlikeOrders(IEnumerable<CodeInstruction> instructions)
+        {
+
+            MethodInfo playerHome = AccessTools.Property(typeof(Map), nameof(Map.IsPlayerHome)).GetGetMethod();
+            List<CodeInstruction> instructionList = instructions.ToList();
+
+            //instructionList.RemoveRange(instructions.FirstIndexOf(ci => ci.operand == playerHome) - 3, 5);
+            //return instructionList;
+
+            bool patched = false;
+
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+                if (!patched && instruction.operand == playerHome && !ModCompatibilityCheck.OtherInventoryModsActive) // CE, Pick Up And Haul etc.
+                //if (instructionList[i + 3].opcode == OpCodes.Callvirt && instruction.operand == playerHome)
+                //if (instructionList[i + 3].operand == playerHome)
+                {
+                    {
+                        instruction.opcode = OpCodes.Ldc_I4_0;
+                        instruction.operand = null;
+                        yield return instruction;
+                        patched = true;
+                    }
+                    //    //{ instructionList[i + 5].labels = instruction.labels;}
+                    //    instructionList.RemoveRange(i, 5);
+                    //    patched = true;
+                }
+                yield return instruction;
+            }
+        }
+        #endregion
+
         #region JobDriver Boilerplate
 
         // Using the transpiler-friendly overload
-        private static MethodInfo TryApplyToolWear =>
-            AccessTools.Method(typeof(SurvivalToolUtility), nameof(SurvivalToolUtility.TryApplyToolWear), new[] { typeof(Pawn), typeof(StatDef) });
+        private static MethodInfo TryDegradeTool =>
+            AccessTools.Method(typeof(SurvivalToolUtility), nameof(SurvivalToolUtility.TryDegradeTool), new[] { typeof(Pawn), typeof(StatDef) });
 
         #region Transpile_JobDriver_PlantWork_MakeNewToils
         public static IEnumerable<CodeInstruction> Transpile_JobDriver_PlantWork_MakeNewToils(IEnumerable<CodeInstruction> instructions)
@@ -301,7 +340,7 @@ namespace SurvivalTools
                     yield return instruction;
                     yield return new CodeInstruction(OpCodes.Ldloc_0);
                     yield return new CodeInstruction(OpCodes.Ldsfld, plantHarvestingSpeed);
-                    instruction = new CodeInstruction(OpCodes.Call, TryApplyToolWear);
+                    instruction = new CodeInstruction(OpCodes.Call, TryDegradeTool);
                 }
 
                 if (instruction.opcode == OpCodes.Ldsfld && instruction.operand == AccessTools.Field(typeof(StatDefOf), nameof(StatDefOf.PlantWorkSpeed)))
@@ -329,7 +368,7 @@ namespace SurvivalTools
                     yield return instruction;
                     yield return new CodeInstruction(OpCodes.Ldloc_0);
                     yield return new CodeInstruction(OpCodes.Ldsfld, diggingSpeed);
-                    instruction = new CodeInstruction(OpCodes.Call, TryApplyToolWear);
+                    instruction = new CodeInstruction(OpCodes.Call, TryDegradeTool);
                 }
 
                 yield return instruction;
@@ -356,7 +395,7 @@ namespace SurvivalTools
                     yield return instruction;
                     yield return new CodeInstruction(OpCodes.Ldloc_0);
                     yield return new CodeInstruction(OpCodes.Ldsfld, ConstructionSpeed);
-                    instruction = new CodeInstruction(OpCodes.Call, TryApplyToolWear);
+                    instruction = new CodeInstruction(OpCodes.Call, TryDegradeTool);
                 }
 
                 yield return instruction;
@@ -377,7 +416,7 @@ namespace SurvivalTools
                     yield return instruction;
                     yield return new CodeInstruction(OpCodes.Ldloc_0);
                     yield return new CodeInstruction(OpCodes.Ldsfld, ConstructionSpeed);
-                    instruction = new CodeInstruction(OpCodes.Call, TryApplyToolWear);
+                    instruction = new CodeInstruction(OpCodes.Call, TryDegradeTool);
                 }
 
                 yield return instruction;
@@ -387,7 +426,7 @@ namespace SurvivalTools
         #region Prefix_JobDriver_Deconstruct_TickAction
         public static void Prefix_JobDriver_Deconstruct_TickAction(JobDriver_Deconstruct __instance)
         {
-            SurvivalToolUtility.TryApplyToolWear(__instance.pawn, StatDefOf.ConstructionSpeed);
+            SurvivalToolUtility.TryDegradeTool(__instance.pawn, StatDefOf.ConstructionSpeed);
         }
         #endregion
         #region Transpile_JobDriver_AffectRoof_MakeNewToils
@@ -406,7 +445,7 @@ namespace SurvivalTools
                     yield return new CodeInstruction(instructionList[(i + 1)].opcode, instructionList[(i + 1)].operand);
                     yield return new CodeInstruction(instructionList[(i + 2)].opcode, instructionList[(i + 2)].operand);
                     yield return new CodeInstruction(OpCodes.Ldsfld, ConstructionSpeed);
-                    yield return new CodeInstruction(OpCodes.Call, TryApplyToolWear);
+                    yield return new CodeInstruction(OpCodes.Call, TryDegradeTool);
                     done = true;
                 }
 

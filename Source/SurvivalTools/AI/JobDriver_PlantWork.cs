@@ -66,7 +66,7 @@ namespace SurvivalTools
             cut.tickAction = delegate ()
             {
                 Pawn actor = cut.actor;
-                SurvivalToolUtility.TryApplyToolWear(actor, ST_StatDefOf.TreeFellingSpeed);
+                SurvivalToolUtility.TryDegradeTool(actor, ST_StatDefOf.TreeFellingSpeed);
                 if (actor.skills != null)
                 {
                     actor.skills.Learn(SkillDefOf.Plants, this.xpPerTick, false);

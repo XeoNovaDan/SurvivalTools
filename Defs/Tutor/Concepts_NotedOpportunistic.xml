@@ -1,0 +1,11 @@
+<Defs>
+
+    <ConceptDef>
+        <defName>SurvivalToolDegradation</defName>
+        <label>Survival Tools: Tool degradation</label>
+        <priority>50</priority>
+        <helpText>As colonists use tools that are either in their inventory or main hand, those tools will degrade over use and eventually break.\n\nYou can see how much continous use a tool can take before breaking by viewing its info card, though the readout doesn't factor in the tool's current condition.</helpText>
+        <needsOpportunity>true</needsOpportunity>
+    </ConceptDef>
+
+</Defs>

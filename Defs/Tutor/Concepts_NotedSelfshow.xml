@@ -1,10 +1,24 @@
 <Defs>
 
-    <ConceptDef>
+    <!--<ConceptDef>
         <defName>PickingSurvivalTools</defName>
         <label>Survival Tools: Using tools</label>
         <priority>30</priority>
         <helpText>Your colonists need to have tools either equipped or in their inventory (recommended mod: Pick Up And Haul) in order for them to be able to perform certain tasks effectively.\n\nSelect a colonist, right-click a tool that you want them to use and either have them equip it or put it in their inventory. Colonists can only carry up to 3 tools at once in their inventory, so keep that in mind!</helpText>
+    </ConceptDef> -->
+
+    <ConceptDef>
+        <defName>EquippingSurvivalTools</defName>
+        <label>Survival Tools: Equipping tools</label>
+        <priority>30</priority>
+        <helpText>In order for colonists to be able to perform certain tasks (e.g. felling trees) efficiently, they need to have the appropriate tools (e.g. axes for felling trees).\n\nSelect a colonist, right-click a tool you want them to use, then either have them equip it in their main hand or put it in their inventory.\n\nColonists can only carry up to 3 tools at once in their inventory, so keep that in mind!</helpText>
+    </ConceptDef>
+
+    <ConceptDef>
+        <defName>UsingSurvivalTools</defName>
+        <label>Survival Tools: Using tools</label>
+        <priority>30</priority>
+        <helpText>Colonists will automatically use any tools that they're capable of using from their main hand and their inventory, and will only use the best tools that they have for certain work tasks. Any tools that a colonist is currently using will be marked as 'in use'.</helpText>
     </ConceptDef>
 
 </Defs>

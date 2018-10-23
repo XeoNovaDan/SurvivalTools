@@ -169,14 +169,15 @@ namespace SurvivalTools
             return builder.ToString();
         }
 
-        public static void TryApplyToolWear(Pawn pawn, StatDef stat)
+        public static void TryDegradeTool(Pawn pawn, StatDef stat)
         {
             SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
 
             if (tool != null && SurvivalToolsSettings.toolDegradation)
             {
+                LessonAutoActivator.TeachOpportunity(ST_ConceptDefOf.SurvivalToolDegradation, OpportunityType.GoodToKnow);
                 tool.workTicksDone++;
-                if (tool.workTicksDone >= tool.WorkTicksToWear)
+                if (tool.workTicksDone >= tool.WorkTicksToDegrade)
                 {
                     tool.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, 1));
                     tool.workTicksDone = 0;

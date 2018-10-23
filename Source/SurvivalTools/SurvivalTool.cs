@@ -34,7 +34,7 @@ namespace SurvivalTools
         //public float WearChancePerTick =>
         //    1 / (this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay);
 
-        public int WorkTicksToWear =>
+        public int WorkTicksToDegrade =>
             Mathf.FloorToInt((this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay) / MaxHitPoints);
         
         public IEnumerable<StatModifier> WorkStatFactors

@@ -57,12 +57,14 @@
   <ItemGroup>
     <Compile Include="Alert_SurvivalToolNeedsReplacing.cs" />
     <Compile Include="Alert_ColonistNeedsSurvivalTool.cs" />
+    <Compile Include="DefOfs\ST_ConceptDefOf.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="AI\JobDriver_HarvestTree_Designated.cs" />
     <Compile Include="AI\JobDriver_HarvestTree.cs" />
     <Compile Include="AI\JobDriver_FellTree_Designated.cs" />
     <Compile Include="AI\JobDriver_FellTree.cs" />
     <Compile Include="AI\JobDriver_PlantWork.cs" />
+    <Compile Include="ModCompatibilityCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatPart_SurvivalTool.cs" />
     <Compile Include="StatWorker_EstimatedLifespan.cs" />
