@@ -59,6 +59,9 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.CanHandleBlockingThing)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_CanHandleBlockingThing)));
 
+            h.Patch(AccessTools.Method(typeof(ThingFilter), nameof(ThingFilter.SetFromPreset)),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_SetFromPreset)));
+
             h.Patch(AccessTools.Method(typeof(JobDriver_Mine), "ResetTicksToPickHit"),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_ResetTicksToPickHit)));
 
@@ -261,6 +264,14 @@ namespace SurvivalTools
         {
             if (blocker?.def.plant?.IsTree == true && !worker.MeetsWorkGiverStatRequirements(ST_WorkGiverDefOf.FellTrees.GetModExtension<WorkGiverExtension>().requiredStats))
                 __result = false;
+        }
+        #endregion
+
+        #region Postfix_SetFromPreset
+        public static void Postfix_SetFromPreset(ThingFilter __instance, StorageSettingsPreset preset)
+        {
+            if (preset == StorageSettingsPreset.DefaultStockpile)
+                __instance.SetAllow(ST_ThingCategoryDefOf.SurvivalTools, true);
         }
         #endregion
 

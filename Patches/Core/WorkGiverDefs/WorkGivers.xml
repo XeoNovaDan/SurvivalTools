@@ -1,0 +1,51 @@
+<Patch>
+
+    <!-- Mine -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[defName="Mine"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStats>
+                    <li>DiggingSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Construct -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[workType="Construction"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStats>
+                    <li>ConstructionSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Growing -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[defName="GrowerHarvest"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStats>
+                    <li>PlantHarvestingSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Plant Cutting -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>*/WorkGiverDef[defName="PlantsCut"]</xpath>
+        <value>
+            <li Class="SurvivalTools.WorkGiverExtension">
+                <requiredStats>
+                    <li>PlantHarvestingSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+</Patch>

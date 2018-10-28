@@ -1,0 +1,125 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>MendAndRecycle</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAdd">
+                    <xpath>/Defs</xpath>
+                    <value>
+                        <RecipeDef>
+                            <workerClass>MendAndRecycle.Worker</workerClass>
+                            <defName>MendNeolithicSurvivalTool</defName>
+                            <label>repair basic tool</label>
+                            <description>Repair tool.</description>
+                            <jobString>Repairing.</jobString>
+                            <workAmount>50</workAmount>
+                            <workSkill>Crafting</workSkill>
+                            <effectWorking>Smith</effectWorking>
+                            <soundWorking>Recipe_Smith</soundWorking>
+                            <recipeUsers>
+                                <li>TableMending</li>
+                            </recipeUsers>
+                            <ingredients>
+                                <li>
+                                    <filter>
+                                        <categories>
+                                            <li>SurvivalToolsNeolithic</li>
+                                        </categories>
+                                    </filter>
+                                    <count>1</count>
+                                </li>
+                            </ingredients>
+                            <fixedIngredientFilter>
+                                <categories>
+                                    <li>SurvivalToolsNeolithic</li>
+                                </categories>
+                            </fixedIngredientFilter>
+                            <skillRequirements>
+                                <Crafting>4</Crafting>
+                            </skillRequirements>
+                        </RecipeDef>
+                    </value>
+                </li>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs</xpath>
+                    <value>
+                        <RecipeDef>
+                            <workerClass>MendAndRecycle.Worker</workerClass>
+                            <defName>MendIndustrialSurvivalTool</defName>
+                            <label>repair modern tool</label>
+                            <description>Repair tool.</description>
+                            <jobString>Repairing.</jobString>
+                            <workAmount>100</workAmount>
+                            <workSkill>Crafting</workSkill>
+                            <effectWorking>Smith</effectWorking>
+                            <soundWorking>Recipe_Smith</soundWorking>
+                            <recipeUsers>
+                                <li>TableMending</li>
+                            </recipeUsers>
+                            <ingredients>
+                                <li>
+                                    <filter>
+                                        <categories>
+                                            <li>SurvivalToolsIndustrial</li>
+                                        </categories>
+                                    </filter>
+                                    <count>1</count>
+                                </li>
+                            </ingredients>
+                            <fixedIngredientFilter>
+                                <categories>
+                                    <li>SurvivalToolsIndustrial</li>
+                                </categories>
+                            </fixedIngredientFilter>
+                            <skillRequirements>
+                                <Crafting>6</Crafting>
+                            </skillRequirements>
+                        </RecipeDef>
+                    </value>
+                </li>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs</xpath>
+                    <value>
+                        <RecipeDef>
+                            <workerClass>MendAndRecycle.Worker</workerClass>
+                            <defName>MendSpacerSurvivalTool</defName>
+                            <label>repair advanced tool</label>
+                            <description>Repair tool.</description>
+                            <jobString>Repairing.</jobString>
+                            <workAmount>200</workAmount>
+                            <workSkill>Crafting</workSkill>
+                            <effectWorking>Smith</effectWorking>
+                            <soundWorking>Recipe_Smith</soundWorking>
+                            <recipeUsers>
+                                <li>TableMending</li>
+                            </recipeUsers>
+                            <ingredients>
+                                <li>
+                                    <filter>
+                                        <categories>
+                                            <li>SurvivalToolsSpacer</li>
+                                        </categories>
+                                    </filter>
+                                    <count>1</count>
+                                </li>
+                            </ingredients>
+                            <fixedIngredientFilter>
+                                <categories>
+                                    <li>SurvivalToolsSpacer</li>
+                                </categories>
+                            </fixedIngredientFilter>
+                            <skillRequirements>
+                                <Crafting>8</Crafting>
+                            </skillRequirements>
+                        </RecipeDef>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

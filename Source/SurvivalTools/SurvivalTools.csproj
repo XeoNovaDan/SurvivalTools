@@ -58,6 +58,7 @@
     <Compile Include="Alert_SurvivalToolNeedsReplacing.cs" />
     <Compile Include="Alert_ColonistNeedsSurvivalTool.cs" />
     <Compile Include="DefOfs\ST_ConceptDefOf.cs" />
+    <Compile Include="DefOfs\ST_ThingCategoryDefOf.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="AI\JobDriver_HarvestTree_Designated.cs" />
     <Compile Include="AI\JobDriver_HarvestTree.cs" />

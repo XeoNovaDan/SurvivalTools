@@ -1,0 +1,74 @@
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/RecipeDef[defName="SmeltWeapon" or defName="DestroyWeapon"]/ingredients/li/filter/categories</xpath>
+        <value>
+            <li>SurvivalTools</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/RecipeDef[defName="SmeltWeapon" or defName="DestroyWeapon"]/fixedIngredientFilter/categories</xpath>
+        <value>
+            <li>SurvivalTools</li>
+        </value>
+    </Operation>
+
+    <!-- Destroy Weapon -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/RecipeDef[defName="DestroyWeapon"]/defaultIngredientFilter/categories</xpath>
+        <value>
+            <li>SurvivalTools</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/RecipeDef[defName="DestroyWeapon"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+        <value>
+            <li>SurvivalTools_Multitool</li>
+        </value>
+    </Operation>
+
+    <!-- Smelt Weapon -->
+
+    <Operation Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+            <li Class="PatchOperationTest">
+                <xpath>*/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter</xpath>
+                <success>Invert</success>
+            </li>
+            <li Class="PatchOperationAdd">
+                <xpath>*/RecipeDef[defName="SmeltWeapon"]</xpath>
+                <value>
+                    <defaultIngredientFilter/>
+                </value>
+            </li>
+        </operations>
+    </Operation>
+
+    <Operation Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+            <li Class="PatchOperationTest">
+                <xpath>*/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+                <success>Invert</success>
+            </li>
+            <li Class="PatchOperationAdd">
+                <xpath>*/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter</xpath>
+                <value>
+                    <disallowedThingDefs/>
+                </value>
+            </li>
+        </operations>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>*/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+        <value>
+            <li>SurvivalTools_Multitool</li>
+        </value>
+    </Operation>
+
+</Patch>

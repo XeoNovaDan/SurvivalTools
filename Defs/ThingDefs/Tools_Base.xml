@@ -15,9 +15,6 @@
             <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
         </graphicData>
         <equippedAngleOffset>-65</equippedAngleOffset>
-        <thingCategories>
-            <li>SurvivalTools</li>
-        </thingCategories>
         <comps>
             <li Class="CompProperties_Forbiddable"/>
             <li>

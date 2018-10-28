@@ -6,4 +6,22 @@
         <parent>Root</parent>
     </ThingCategoryDef>
 
+    <ThingCategoryDef>
+        <defName>SurvivalToolsNeolithic</defName>
+        <label>basic tools</label>
+        <parent>SurvivalTools</parent>
+    </ThingCategoryDef>
+
+    <ThingCategoryDef>
+        <defName>SurvivalToolsIndustrial</defName>
+        <label>modern tools</label>
+        <parent>SurvivalTools</parent>
+    </ThingCategoryDef>
+
+    <ThingCategoryDef>
+        <defName>SurvivalToolsSpacer</defName>
+        <label>advanced tools</label>
+        <parent>SurvivalTools</parent>
+    </ThingCategoryDef>
+
 </Defs>

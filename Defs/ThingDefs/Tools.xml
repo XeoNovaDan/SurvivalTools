@@ -30,9 +30,9 @@
             </defaultIngredientFilter>
             <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
         </recipeMaker>
-        <tradeTags>
-            <li>SurvivalToolBasic</li>
-        </tradeTags>
+        <thingCategories>
+            <li>SurvivalToolsNeolithic</li>
+        </thingCategories>
         <comps>
             <li>
                 <compClass>CompQuality</compClass>
@@ -220,6 +220,9 @@
         <smeltable>false</smeltable>
         <equippedAngleOffset>-20</equippedAngleOffset>
         <techLevel>Ultra</techLevel>
+        <thingCategories>
+            <li>SurvivalToolsSpacer</li>
+        </thingCategories>
         <graphicData>
             <texPath>Things/Item/Equipment/Tool/GlitterworldMultitool</texPath>
             <graphicClass>Graphic_Single</graphicClass>
