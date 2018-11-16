@@ -12,6 +12,7 @@ namespace SurvivalTools
     public static class ST_ConceptDefOf
     {
 
+        public static ConceptDef UsingSurvivalTools;
         public static ConceptDef SurvivalToolDegradation;
 
     }

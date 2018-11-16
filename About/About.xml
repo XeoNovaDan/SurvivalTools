@@ -4,5 +4,5 @@
 	<author>XeoNovaDan</author>
 	<url>https://ludeon.com/forums/index.php?topic=29503.0</url>
 	<targetVersion>1.0.2059</targetVersion>
-	<description>Current version: v0.6.1/RC3 (28th October 2018)\n\nAdds tools and the need to manage tools to RimWorld.\n* Colonists work much less efficiently in certain tasks without the relevant tools\n* Colonists can use tools from their inventory as well as their main hand\n* Acquire tools through production, purchase and plunder\n* Different materials affect tools in different ways\n* Tools will degrade over use</description>
+	<description>Current version: v1.0 (16th November 2018)\n\nAdds tools and the need to manage tools to RimWorld.\n* Colonists work much less efficiently in certain tasks without the relevant tools\n* Colonists can use tools from their inventory as well as their main hand\n* Acquire tools through production, purchase and plunder\n* Different materials affect tools in different ways\n* Tools will degrade over use</description>
 </ModMetaData>

@@ -15,9 +15,37 @@ namespace SurvivalTools
 
         static SurvivalToolUtility()
         {
-            // Add validator
+            // Add validator to ThingSetMakerDef
             ST_ThingSetMakerDefOf.MapGen_AncientRuinsSurvivalTools.root.fixedParams.validator = (ThingDef t) =>
-            t.techLevel == TechLevel.Neolithic;
+            t.IsWithinCategory(ST_ThingCategoryDefOf.SurvivalToolsNeolithic);
+
+            // Remove any unnecessary RecipeDefs when Mending is active
+            if (ModCompatibilityCheck.MendAndRecycle)
+            {
+                Log.Message("Culling redundant MendAndRecycle recipes for Survival Tools...");
+                int cullCount = 0;
+                bool categoryMatch = false;
+                foreach (RecipeDef recipe in DefDatabase<RecipeDef>.AllDefs.Where(r => r.defName.Contains("SurvivalTool") && r.workerClass != typeof(RecipeWorker)))
+                {
+                    categoryMatch = false;
+                    foreach (ThingDef thing in DefDatabase<ThingDef>.AllDefsListForReading.Where(t => t.thingClass == typeof(SurvivalTool)))
+                        if (recipe.IsIngredient(thing))
+                        {
+                            categoryMatch = true;
+                            break;
+                        }
+                    if (!categoryMatch)
+                    {
+                        recipe.recipeUsers.Clear();
+                        cullCount++;
+                        Log.Message($"Culled recipe: {recipe.defName}");
+                    }
+                        
+                }
+                Log.Message($"Recipe culling complete. Total recipes culled: {cullCount}");
+            }
+            
+                
         }
 
         public static readonly FloatRange MapGenToolHitPointsRange = new FloatRange(0.3f, 0.7f);
@@ -138,6 +166,9 @@ namespace SurvivalTools
                         tool = curTool;
                         statFactor = modifier.value;
                     }
+
+            if (tool != null)
+                LessonAutoActivator.TeachOpportunity(ST_ConceptDefOf.UsingSurvivalTools, OpportunityType.Important);
 
             return tool;
         }
