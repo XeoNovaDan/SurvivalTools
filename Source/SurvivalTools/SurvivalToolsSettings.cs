@@ -12,6 +12,7 @@ namespace SurvivalTools
     {
 
         public static bool hardcoreMode = false;
+        public static bool toolMapGen = true;
         public static bool toolLimit = true;
         public static bool toolDegradation = true;
 
@@ -30,6 +31,8 @@ namespace SurvivalTools
             options.CheckboxLabeled("Settings_HardcoreMode".Translate(), ref hardcoreMode, "Settings_HardcoreMode_Tooltip".Translate());
             GUI.color = defaultColor;
             options.Gap();
+            options.CheckboxLabeled("Settings_ToolMapGen".Translate(), ref toolMapGen, "Settings_ToolMapGen_Tooltip".Translate());
+            options.Gap();
             options.CheckboxLabeled("Settings_ToolLimit".Translate(), ref toolLimit, "Settings_ToolLimit_Tooltip".Translate());
             options.Gap();
             options.CheckboxLabeled("Settings_ToolDegradation".Translate(), ref toolDegradation, "Settings_ToolDegradation_Tooltip".Translate());
@@ -43,6 +46,7 @@ namespace SurvivalTools
         public override void ExposeData()
         {
             Scribe_Values.Look(ref hardcoreMode, "hardcoreMode", false);
+            Scribe_Values.Look(ref toolMapGen, "toolMapGen", true);
             Scribe_Values.Look(ref toolLimit, "toolLimit", true);
             Scribe_Values.Look(ref toolDegradation, "toolDegradation", true);
         }
