@@ -25,7 +25,6 @@
         <category>Item</category>
         <drawGUIOverlay>true</drawGUIOverlay>
         <equipmentType>Primary</equipmentType>
-        <techLevel>Neolithic</techLevel>
         <resourceReadoutPriority>Middle</resourceReadoutPriority>
         <selectable>true</selectable>
         <altitudeLayer>Item</altitudeLayer>

@@ -1,6 +1,7 @@
 <Defs>
 
     <ThingDef Name="SurvivalToolBasic" ParentName="BaseSurvivalTool" Abstract="True">
+        <techLevel>Neolithic</techLevel>
         <statBases>
             <WorkToMake>1800</WorkToMake>
         </statBases>
@@ -147,7 +148,7 @@
             <li>
                 <label>handle</label>
                 <capacities>
-                    <li>Poke</li>
+                    <li>Blunt</li>
                 </capacities>
                 <power>9</power>
                 <cooldownTime>2</cooldownTime>
@@ -187,7 +188,7 @@
             <li>
                 <label>handle</label>
                 <capacities>
-                    <li>Poke</li>
+                    <li>Blunt</li>
                 </capacities>
                 <power>9</power>
                 <cooldownTime>2</cooldownTime>
