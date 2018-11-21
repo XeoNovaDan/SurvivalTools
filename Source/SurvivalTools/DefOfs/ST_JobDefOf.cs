@@ -18,5 +18,7 @@ namespace SurvivalTools
         public static JobDef HarvestTree;
         public static JobDef HarvestTreeDesignated;
 
+        public static JobDef DropSurvivalTool;
+
     }
 }

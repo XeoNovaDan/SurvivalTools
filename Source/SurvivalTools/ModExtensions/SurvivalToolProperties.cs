@@ -15,6 +15,9 @@ namespace SurvivalTools
 
         public List<StatModifier> baseWorkStatFactors;
 
+        [NoTranslate]
+        public List<string> defaultSurvivalToolAssignmentTags;
+
         public float toolWearFactor = 1f;
 
     }

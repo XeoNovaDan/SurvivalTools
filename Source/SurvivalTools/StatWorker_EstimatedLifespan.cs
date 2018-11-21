@@ -33,6 +33,9 @@ namespace SurvivalTools
         {
             SurvivalToolProperties props = def.GetModExtension<SurvivalToolProperties>() ?? SurvivalToolProperties.defaultValues;
 
+            if (!((ThingDef)def).useHitPoints)
+                return float.PositiveInfinity;
+
             // For def
             if (tool == null)
                 return GenDate.TicksToDays(Mathf.RoundToInt((BaseWearInterval * def.GetStatValueAbstract(StatDefOf.MaxHitPoints)) / props.toolWearFactor));

@@ -26,4 +26,15 @@
     <SurvivalToolsNeedReplacing>Tools need replacing</SurvivalToolsNeedReplacing>
     <SurvivalToolNeedsReplacingDesc>The following colonists are using tools that will break within half a day of use</SurvivalToolNeedsReplacingDesc>
 
+    <!-- Tool assignment management -->
+    <SurvivalToolAssignment>Tool assignment</SurvivalToolAssignment>
+    <SurvivalToolAssignmentConstructor>Constructor</SurvivalToolAssignmentConstructor>
+    <SurvivalToolAssignmentMiner>Miner</SurvivalToolAssignmentMiner>
+    <SurvivalToolAssignmentPlantWorker>Plant worker</SurvivalToolAssignmentPlantWorker>
+    <SelectSurvivalToolAssignment>Select tool assignment...</SelectSurvivalToolAssignment>
+    <NewSurvivalToolAssignment>New tool assignment</NewSurvivalToolAssignment>
+    <DeleteSurvivalToolAssignment>Delete tool assignment...</DeleteSurvivalToolAssignment>
+    <SurvivalToolAssignmentInUse>Tool assignment is in use by {0}</SurvivalToolAssignmentInUse>
+    <NoSurvivalToolAssignmentSelected>No tool assignment selected</NoSurvivalToolAssignmentSelected>
+
 </LanguageData>

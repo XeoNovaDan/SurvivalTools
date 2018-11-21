@@ -31,9 +31,6 @@ namespace SurvivalTools
             SurvivalToolUtility.BestSurvivalToolsFor(HoldingPawn).Contains(this) &&
             HoldingPawn.CanUseSurvivalTool(def);
 
-        //public float WearChancePerTick =>
-        //    1 / (this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay);
-
         public int WorkTicksToDegrade =>
             Mathf.FloorToInt((this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay) / MaxHitPoints);
         

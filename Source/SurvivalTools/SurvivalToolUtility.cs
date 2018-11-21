@@ -45,6 +45,14 @@ namespace SurvivalTools
                 Log.Message($"Recipe culling complete. Total recipes culled: {cullCount}");
             }
             
+            // Add SurvivalToolAssignmentTracker to all appropriate pawns
+            foreach (ThingDef tDef in DefDatabase<ThingDef>.AllDefs.Where(t => t.race?.Humanlike == true))
+            {
+                Log.Message($"Attaching Pawn_SurvivalToolAssignmentTracker to {tDef}");
+                if (tDef.comps == null)
+                    tDef.comps = new List<CompProperties>();
+                tDef.comps.Add(new CompProperties(typeof(Pawn_SurvivalToolAssignmentTracker)));
+            }
                 
         }
 
@@ -204,7 +212,7 @@ namespace SurvivalTools
         {
             SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
 
-            if (tool != null && SurvivalToolsSettings.toolDegradation)
+            if (tool != null && tool.def.useHitPoints && SurvivalToolsSettings.toolDegradation)
             {
                 LessonAutoActivator.TeachOpportunity(ST_ConceptDefOf.SurvivalToolDegradation, OpportunityType.GoodToKnow);
                 tool.workTicksDone++;
@@ -231,6 +239,39 @@ namespace SurvivalTools
                 if (pawn.GetStatValue(stat) <= 0f)
                     return false;
             return true;
+        }
+
+        public static IEnumerable<WorkGiver> AssignedToolRelevantWorkGivers(this Pawn pawn)
+        {
+            Pawn_WorkSettings workSettings = pawn.workSettings;
+            if (workSettings == null)
+            {
+                Log.ErrorOnce($"Tried to get tool-relevant work givers for {pawn} but has null workSettings", 11227);
+                yield break;
+            }
+
+
+            foreach (WorkGiver giver in pawn.workSettings.WorkGiversInOrderNormal)
+            {
+                WorkGiverExtension extension = giver.def.GetModExtension<WorkGiverExtension>();
+                if (extension != null)
+                    foreach (StatDef stat in extension.requiredStats)
+                        if (stat.RequiresSurvivalTool())
+                        {
+                            yield return giver;
+                            break;
+                        }
+            }
+        }
+
+        public static List<StatDef> AssignedToolRelevantWorkGiversStatDefs(this Pawn pawn)
+        {
+            List<StatDef> resultList = new List<StatDef>();
+            foreach (WorkGiver giver in pawn.AssignedToolRelevantWorkGivers())
+                foreach (StatDef stat in giver.def.GetModExtension<WorkGiverExtension>().requiredStats)
+                    if (!resultList.Contains(stat))
+                        resultList.Add(stat);
+            return resultList;
         }
 
     }

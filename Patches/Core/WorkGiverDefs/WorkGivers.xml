@@ -7,6 +7,7 @@
             <li Class="SurvivalTools.WorkGiverExtension">
                 <requiredStats>
                     <li>DiggingSpeed</li>
+                    <li>MiningYieldDigging</li>
                 </requiredStats>
             </li>
         </value>
