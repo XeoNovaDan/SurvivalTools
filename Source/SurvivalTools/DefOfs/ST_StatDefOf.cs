@@ -13,6 +13,7 @@ namespace SurvivalTools
     {
 
         // Pawn
+        public static StatDef SurvivalToolCarryCapacity;
         public static StatDef DiggingSpeed;
         public static StatDef MiningYieldDigging;
         public static StatDef PlantHarvestingSpeed;

@@ -58,7 +58,6 @@ namespace SurvivalTools
 
         public static readonly FloatRange MapGenToolHitPointsRange = new FloatRange(0.3f, 0.7f);
         public const float MapGenToolMaxStuffMarketValue = 3f;
-        public const int SurvivalToolCarryLimit = 3;
 
         public static List<StatDef> SurvivalToolStats { get; } =
             DefDatabase<StatDef>.AllDefsListForReading.Where(s => s.RequiresSurvivalTool()).ToList();
@@ -95,8 +94,8 @@ namespace SurvivalTools
             pawn.RaceProps.intelligence >= Intelligence.ToolUser && pawn.Faction == Faction.OfPlayer &&
             (pawn.equipment != null || pawn.inventory != null) && pawn.TraderKind == null;
 
-        public static bool IsUnderSurvivalToolCarryLimit(this int count) =>
-            !SurvivalToolsSettings.toolLimit || count < SurvivalToolCarryLimit;
+        public static bool IsUnderSurvivalToolCarryLimitFor(this int count, Pawn pawn) =>
+            !SurvivalToolsSettings.toolLimit || count < pawn.GetStatValue(ST_StatDefOf.SurvivalToolCarryCapacity);
 
         public static IEnumerable<Thing> GetHeldSurvivalTools(this Pawn pawn) =>
             pawn.inventory?.innerContainer.Where(t => t.def.IsSurvivalTool());
@@ -108,7 +107,7 @@ namespace SurvivalTools
                 yield break;
 
             int i = 0;
-            while (i.IsUnderSurvivalToolCarryLimit() && i < heldSurvivalTools.Count)
+            while (i.IsUnderSurvivalToolCarryLimitFor(pawn) && i < heldSurvivalTools.Count)
             {
                 yield return heldSurvivalTools[i];
                 i++;
@@ -231,7 +230,7 @@ namespace SurvivalTools
             pawn.inventory?.innerContainer?.GetHeldSurvivalTools()?.Count() ?? 0;
 
         public static bool CanCarryAnyMoreSurvivalTools(this Pawn pawn) =>
-            (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount().IsUnderSurvivalToolCarryLimit()) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
+            (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount().IsUnderSurvivalToolCarryLimitFor(pawn)) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
 
         public static bool MeetsWorkGiverStatRequirements(this Pawn pawn, List<StatDef> requiredStats)
         {
