@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 using RimWorld;
 using RimWorld.Planet;
 
@@ -271,6 +272,25 @@ namespace SurvivalTools
                     if (!resultList.Contains(stat))
                         resultList.Add(stat);
             return resultList;
+        }
+
+        public static Job DequipAndTryStoreSurvivalTool(this Pawn pawn, Thing tool, bool enqueueCurrent = true)
+        {
+            if (pawn.CurJob != null && enqueueCurrent)
+                pawn.jobs.jobQueue.EnqueueFirst(pawn.CurJob);
+
+            Zone_Stockpile pawnPosStockpile = Find.CurrentMap.zoneManager.ZoneAt(pawn.PositionHeld) as Zone_Stockpile;
+            if ((pawnPosStockpile == null || !pawnPosStockpile.settings.filter.Allows(tool)) &&
+                StoreUtility.TryFindBestBetterStoreCellFor(tool, pawn, pawn.Map, StoreUtility.CurrentStoragePriorityOf(tool), pawn.Faction, out IntVec3 c))
+            {
+                Job haulJob = new Job(JobDefOf.HaulToCell, tool, c)
+                {
+                    count = 1
+                };
+                pawn.jobs.jobQueue.EnqueueFirst(haulJob);
+            }
+
+            return new Job(ST_JobDefOf.DropSurvivalTool, tool);
         }
 
     }

@@ -29,19 +29,7 @@ namespace SurvivalTools
             List<Thing> heldTools = pawn.GetHeldSurvivalTools().ToList();
             foreach (Thing tool in heldTools)
                 if (!curAssignment.filter.Allows(tool))
-                {
-                    Zone_Stockpile pawnPosStockpile = Find.CurrentMap.zoneManager.ZoneAt(pawn.PositionHeld) as Zone_Stockpile;
-                    if ((pawnPosStockpile == null || !pawnPosStockpile.settings.filter.Allows(tool)) &&
-                        StoreUtility.TryFindBestBetterStoreCellFor(tool, pawn, pawn.Map, StoreUtility.CurrentStoragePriorityOf(tool), pawn.Faction, out IntVec3 c))
-                    {
-                        Job haulJob = new Job(JobDefOf.HaulToCell, tool, c)
-                        {
-                            count = 1
-                        };
-                        pawn.jobs.jobQueue.EnqueueFirst(haulJob);
-                    }
-                    return new Job(ST_JobDefOf.DropSurvivalTool, tool);
-                }
+                    return pawn.DequipAndTryStoreSurvivalTool(tool);
 
             List<Thing> mapTools = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon).Where(t => t is SurvivalTool).ToList();
             if (mapTools.Count == 0)

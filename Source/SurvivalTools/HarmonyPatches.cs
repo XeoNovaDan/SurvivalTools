@@ -9,6 +9,7 @@ using Verse;
 using Verse.AI;
 using RimWorld;
 using RimWorld.BaseGen;
+using RimWorld.Planet;
 using Harmony;
 
 namespace SurvivalTools
@@ -37,6 +38,9 @@ namespace SurvivalTools
 
             h.Patch(AccessTools.Method(typeof(MassUtility), nameof(MassUtility.CountToPickUpUntilOverEncumbered)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_CountToPickUpUntilOverEncumbered)));
+
+            h.Patch(AccessTools.Method(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.InventoryTrackerTickRare)),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_InventoryTrackerTickRare)));
 
             h.Patch(AccessTools.Property(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.FirstUnloadableThing)).GetGetMethod(),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_FirstUnloadableThing)));
@@ -177,6 +181,23 @@ namespace SurvivalTools
         {
             if (__result > 0 && pawn.RaceProps.Humanlike && thing as SurvivalTool != null && !pawn.CanCarryAnyMoreSurvivalTools())
                 __result = 0;
+        }
+        #endregion
+
+        #region Postfix_InventoryTrackerTickRare
+        public static void Postfix_InventoryTrackerTickRare(Pawn_InventoryTracker __instance)
+        {
+            if (SurvivalToolsSettings.toolLimit)
+            {
+                Pawn pawn = __instance.pawn;
+                if (pawn.CanUseSurvivalTools() && pawn.GetHeldSurvivalTools().Count() > pawn.GetStatValue(ST_StatDefOf.SurvivalToolCarryCapacity) && !pawn.Drafted &&
+                    !pawn.IsFormingCaravan() && !pawn.IsCaravanMember() && pawn.CurJobDef?.casualInterruptible != false && !pawn.IsBurning())
+                {
+                    Thing tool = pawn.GetHeldSurvivalTools().Last();
+                    Job job = pawn.DequipAndTryStoreSurvivalTool(tool);
+                    pawn.jobs.StartJob(job, JobCondition.InterruptForced, cancelBusyStances: false);
+                }
+            }
         }
         #endregion
 
