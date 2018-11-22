@@ -212,7 +212,7 @@ namespace SurvivalTools
         {
             SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
 
-            if (tool != null && tool.def.useHitPoints && SurvivalToolsSettings.toolDegradation)
+            if (tool != null && tool.def.useHitPoints && SurvivalToolsSettings.ToolDegradation)
             {
                 LessonAutoActivator.TeachOpportunity(ST_ConceptDefOf.SurvivalToolDegradation, OpportunityType.GoodToKnow);
                 tool.workTicksDone++;

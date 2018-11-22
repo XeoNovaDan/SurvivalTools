@@ -52,6 +52,6 @@ namespace SurvivalTools
             "SurvivalToolsNeedReplacing".Translate();
 
         public override AlertReport GetReport() =>
-            (SurvivalToolsSettings.toolDegradation) ? AlertReport.CulpritsAre(WorkersDamagedTools) : false;
+            (SurvivalToolsSettings.ToolDegradation) ? AlertReport.CulpritsAre(WorkersDamagedTools) : false;
     }
 }

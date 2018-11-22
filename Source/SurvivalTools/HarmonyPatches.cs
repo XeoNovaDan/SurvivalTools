@@ -191,7 +191,7 @@ namespace SurvivalTools
             {
                 Pawn pawn = __instance.pawn;
                 if (pawn.CanUseSurvivalTools() && pawn.GetHeldSurvivalTools().Count() > pawn.GetStatValue(ST_StatDefOf.SurvivalToolCarryCapacity) && !pawn.Drafted &&
-                    !pawn.IsFormingCaravan() && !pawn.IsCaravanMember() && pawn.CurJobDef?.casualInterruptible != false && !pawn.IsBurning())
+                    !pawn.IsFormingCaravan() && !pawn.IsCaravanMember() && pawn.CurJobDef?.casualInterruptible != false && !pawn.IsBurning() && !(pawn.carryTracker?.CarriedThing is SurvivalTool))
                 {
                     Thing tool = pawn.GetHeldSurvivalTools().Last();
                     Job job = pawn.DequipAndTryStoreSurvivalTool(tool);

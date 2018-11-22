@@ -15,8 +15,7 @@
     <Settings_ToolLimit>Tool limit</Settings_ToolLimit>
     <Settings_ToolLimit_Tooltip>Whether or not colonists are limited to only being able to carry 3 tools at a time in their inventories (other than when caravanning).</Settings_ToolLimit_Tooltip>
 
-    <Settings_ToolDegradation>Tool degradation</Settings_ToolDegradation>
-    <Settings_ToolDegradation_Tooltip>Whether or not tools degrade over use.</Settings_ToolDegradation_Tooltip>
+    <Settings_ToolDegradationRate>Tool degradation rate</Settings_ToolDegradationRate>
 
     <!-- Alerts -->
     <ColonistNeedsSurvivalTool>Colonist lacks tools</ColonistNeedsSurvivalTool>

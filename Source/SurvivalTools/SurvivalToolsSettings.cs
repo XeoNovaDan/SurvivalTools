@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using RimWorld;
+using SettingsHelper;
 
 namespace SurvivalTools
 {
@@ -14,7 +15,9 @@ namespace SurvivalTools
         public static bool hardcoreMode = false;
         public static bool toolMapGen = true;
         public static bool toolLimit = true;
-        public static bool toolDegradation = true;
+        public static float toolDegradationFactor = 1f;
+        public static bool ToolDegradation => toolDegradationFactor > 0f;
+        //public static bool toolDegradation = true;
 
         public void DoWindowContents(Rect wrect)
         {
@@ -35,7 +38,9 @@ namespace SurvivalTools
             options.Gap();
             options.CheckboxLabeled("Settings_ToolLimit".Translate(), ref toolLimit, "Settings_ToolLimit_Tooltip".Translate());
             options.Gap();
-            options.CheckboxLabeled("Settings_ToolDegradation".Translate(), ref toolDegradation, "Settings_ToolDegradation_Tooltip".Translate());
+            options.AddLabeledSlider("Settings_ToolDegradationRate".Translate(), ref toolDegradationFactor, 0f, 2f,
+                rightAlignedLabel: toolDegradationFactor.ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor), roundTo: 0.01f);
+            //options.CheckboxLabeled("Settings_ToolDegradation".Translate(), ref toolDegradation, "Settings_ToolDegradation_Tooltip".Translate());
 
             options.End();
 
@@ -48,7 +53,7 @@ namespace SurvivalTools
             Scribe_Values.Look(ref hardcoreMode, "hardcoreMode", false);
             Scribe_Values.Look(ref toolMapGen, "toolMapGen", true);
             Scribe_Values.Look(ref toolLimit, "toolLimit", true);
-            Scribe_Values.Look(ref toolDegradation, "toolDegradation", true);
+            Scribe_Values.Look(ref toolDegradationFactor, "toolDegradationFactor", 1f);
         }
 
     }

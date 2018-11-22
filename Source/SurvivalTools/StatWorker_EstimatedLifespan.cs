@@ -15,7 +15,7 @@ namespace SurvivalTools
             Mathf.RoundToInt(GenDate.TicksPerHour * ((SurvivalToolsSettings.hardcoreMode) ? 0.5f : 0.75f)); // Once per 45 mins of continuous work, or 30 mins with hardcore
 
         public override bool ShouldShowFor(StatRequest req) =>
-            req.Def.IsSurvivalTool() && SurvivalToolsSettings.toolDegradation;
+            req.Def.IsSurvivalTool() && SurvivalToolsSettings.ToolDegradation;
 
         public override float GetValueUnfinalized(StatRequest req, bool applyPostProcess = true)
         {
@@ -44,6 +44,22 @@ namespace SurvivalTools
             StuffPropsTool stuffProps = tool.Stuff?.stuffPropsTool() ?? StuffPropsTool.defaultValues;
             float wearFactor = tool.def.survivalTool().toolWearFactor * (stuffProps.wearFactorMultiplier);
             return GenDate.TicksToDays(Mathf.RoundToInt((BaseWearInterval * tool.MaxHitPoints) / wearFactor));
+        }
+
+        public override void FinalizeValue(StatRequest req, ref float val, bool applyPostProcess)
+        {
+            val /= SurvivalToolsSettings.toolDegradationFactor;
+            base.FinalizeValue(req, ref val, applyPostProcess);
+        }
+
+        public override string GetExplanationFinalizePart(StatRequest req, ToStringNumberSense numberSense, float finalVal)
+        {
+            StringBuilder finalBuilder = new StringBuilder();
+            finalBuilder.AppendLine($"{"Settings_ToolDegradationRate".Translate()}: " +
+                $"{(1 / SurvivalToolsSettings.toolDegradationFactor).ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor)}");
+            finalBuilder.AppendLine();
+            finalBuilder.AppendLine(base.GetExplanationFinalizePart(req, numberSense, finalVal));
+            return finalBuilder.ToString();
         }
 
     }
