@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NoTool>没有工具</NoTool>
+  <ToolInUse>在使用中</ToolInUse>
+
+  <!-- Settings -->
+  <SurvivalToolsSettingsCategory>基础工具</SurvivalToolsSettingsCategory>
+  <Settings_HardcoreMode>极限模式</Settings_HardcoreMode>
+  <Settings_HardcoreMode_Tooltip>工具磨损更快50%,并且大多数需要工具才能完成的任务在没有工具的情况下不再是可执行的.</Settings_HardcoreMode_Tooltip>
+  <Settings_ToolMapGen>废墟模式</Settings_ToolMapGen>
+  <Settings_ToolMapGen_Tooltip>不管工具是否劣质，都有可能在进行任务中毁坏结构.</Settings_ToolMapGen_Tooltip>
+  <Settings_ToolLimit>工具极限</Settings_ToolLimit>
+  <Settings_ToolLimit_Tooltip>无论殖民者是否被限制都只能在库存中同时携带2个工具(除了商队任务中).</Settings_ToolLimit_Tooltip>
+  <Settings_ToolDegradationRate>工具老化</Settings_ToolDegradationRate>
+
+  <!-- Alerts -->
+  <ColonistNeedsSurvivalTool>殖民者缺乏工具</ColonistNeedsSurvivalTool>
+  <ColonistsNeedSurvivalTool>殖民者缺乏工具</ColonistsNeedSurvivalTool>
+  <ColonistNeedsSurvivalToolDesc>下面的殖民者被分配到工作任务中，这些任务需要工具才能有效地执行，但是缺少工具来完成这些任务.</ColonistNeedsSurvivalToolDesc>
+  <SurvivalToolsNeedReplacing>工具需要更换</SurvivalToolsNeedReplacing>
+  <SurvivalToolNeedsReplacingDesc>以下殖民者使用的工具将在半日内损毁</SurvivalToolNeedsReplacingDesc>
+  
+</LanguageData>

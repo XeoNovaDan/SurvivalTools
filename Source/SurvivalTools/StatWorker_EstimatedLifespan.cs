@@ -48,7 +48,7 @@ namespace SurvivalTools
 
         public override void FinalizeValue(StatRequest req, ref float val, bool applyPostProcess)
         {
-            val /= SurvivalToolsSettings.toolDegradationFactor;
+            val /= SurvivalToolsSettings.ToolDegradationFactor;
             base.FinalizeValue(req, ref val, applyPostProcess);
         }
 
@@ -56,7 +56,7 @@ namespace SurvivalTools
         {
             StringBuilder finalBuilder = new StringBuilder();
             finalBuilder.AppendLine($"{"Settings_ToolDegradationRate".Translate()}: " +
-                $"{(1 / SurvivalToolsSettings.toolDegradationFactor).ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor)}");
+                $"{(1 / SurvivalToolsSettings.ToolDegradationFactor).ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor)}");
             finalBuilder.AppendLine();
             finalBuilder.AppendLine(base.GetExplanationFinalizePart(req, numberSense, finalVal));
             return finalBuilder.ToString();

@@ -15,7 +15,8 @@ namespace SurvivalTools
         public static bool hardcoreMode = false;
         public static bool toolMapGen = true;
         public static bool toolLimit = true;
-        public static float toolDegradationFactor = 1f;
+        private static float toolDegradationFactor = 1f;
+        public static float ToolDegradationFactor => Mathf.Pow(toolDegradationFactor, (toolDegradationFactor < 1f) ? 1 : 2);
         public static bool ToolDegradation => toolDegradationFactor > 0f;
         //public static bool toolDegradation = true;
 
@@ -39,7 +40,7 @@ namespace SurvivalTools
             options.CheckboxLabeled("Settings_ToolLimit".Translate(), ref toolLimit, "Settings_ToolLimit_Tooltip".Translate());
             options.Gap();
             options.AddLabeledSlider("Settings_ToolDegradationRate".Translate(), ref toolDegradationFactor, 0f, 2f,
-                rightAlignedLabel: toolDegradationFactor.ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor), roundTo: 0.01f);
+                rightAlignedLabel: ToolDegradationFactor.ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor), roundTo: 0.01f);
             //options.CheckboxLabeled("Settings_ToolDegradation".Translate(), ref toolDegradation, "Settings_ToolDegradation_Tooltip".Translate());
 
             options.End();

@@ -13,7 +13,7 @@
     <Settings_ToolMapGen_Tooltip>Whether or not low-quality basic tools will generate along with ruined structures upon map generation.</Settings_ToolMapGen_Tooltip>
 
     <Settings_ToolLimit>Tool limit</Settings_ToolLimit>
-    <Settings_ToolLimit_Tooltip>Whether or not colonists are limited to only being able to carry 3 tools at a time in their inventories (other than when caravanning).</Settings_ToolLimit_Tooltip>
+    <Settings_ToolLimit_Tooltip>Whether or not colonists are limited to only being able to carry 2 tools at a time in their inventories (other than when caravanning).</Settings_ToolLimit_Tooltip>
 
     <Settings_ToolDegradationRate>Tool degradation rate</Settings_ToolDegradationRate>
 
