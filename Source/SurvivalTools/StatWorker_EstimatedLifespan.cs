@@ -12,7 +12,7 @@ namespace SurvivalTools
     {
 
         public static int BaseWearInterval =>
-            Mathf.RoundToInt(GenDate.TicksPerHour * ((SurvivalToolsSettings.hardcoreMode) ? 0.75f : 1f)); // Once per hour of continuous work, or 45 mins with hardcore
+            Mathf.RoundToInt(GenDate.TicksPerHour * ((SurvivalToolsSettings.hardcoreMode) ? 0.67f : 1f)); // Once per hour of continuous work, or ~40 mins with hardcore
 
         public override bool ShouldShowFor(StatRequest req) =>
             req.Def.IsSurvivalTool() && SurvivalToolsSettings.ToolDegradation;
