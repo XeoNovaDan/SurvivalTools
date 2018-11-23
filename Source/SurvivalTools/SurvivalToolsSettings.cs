@@ -41,7 +41,6 @@ namespace SurvivalTools
             options.Gap();
             options.AddLabeledSlider("Settings_ToolDegradationRate".Translate(), ref toolDegradationFactor, 0f, 2f,
                 rightAlignedLabel: ToolDegradationFactor.ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor), roundTo: 0.01f);
-            //options.CheckboxLabeled("Settings_ToolDegradation".Translate(), ref toolDegradation, "Settings_ToolDegradation_Tooltip".Translate());
 
             options.End();
 

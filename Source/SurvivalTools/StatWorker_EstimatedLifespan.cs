@@ -12,7 +12,7 @@ namespace SurvivalTools
     {
 
         public static int BaseWearInterval =>
-            Mathf.RoundToInt(GenDate.TicksPerHour * ((SurvivalToolsSettings.hardcoreMode) ? 0.5f : 0.75f)); // Once per 45 mins of continuous work, or 30 mins with hardcore
+            Mathf.RoundToInt(GenDate.TicksPerHour * ((SurvivalToolsSettings.hardcoreMode) ? 0.75f : 1f)); // Once per hour of continuous work, or 45 mins with hardcore
 
         public override bool ShouldShowFor(StatRequest req) =>
             req.Def.IsSurvivalTool() && SurvivalToolsSettings.ToolDegradation;
@@ -41,8 +41,8 @@ namespace SurvivalTools
                 return GenDate.TicksToDays(Mathf.RoundToInt((BaseWearInterval * def.GetStatValueAbstract(StatDefOf.MaxHitPoints)) / props.toolWearFactor));
 
             // For thing
-            StuffPropsTool stuffProps = tool.Stuff?.stuffPropsTool() ?? StuffPropsTool.defaultValues;
-            float wearFactor = tool.def.survivalTool().toolWearFactor * (stuffProps.wearFactorMultiplier);
+            StuffPropsTool stuffProps = tool.Stuff?.GetModExtension<StuffPropsTool>() ?? StuffPropsTool.defaultValues;
+            float wearFactor = tool.def.GetModExtension<SurvivalToolProperties>().toolWearFactor * (stuffProps.wearFactorMultiplier);
             return GenDate.TicksToDays(Mathf.RoundToInt((BaseWearInterval * tool.MaxHitPoints) / wearFactor));
         }
 

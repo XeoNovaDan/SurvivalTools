@@ -1,0 +1,40 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Rimefeller</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[@Name="SynthyleneBase"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.9</DiggingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <ConstructionSpeed>0.9</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[@Name="FiberCompositeBase"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>1.2</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>1.2</PlantHarvestingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

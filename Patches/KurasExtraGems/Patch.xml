@@ -1,0 +1,46 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Kura's Extra Gems</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef
+                    [defName="Amber" or defName="Amethyst" or defName="Aquamarine" or defName="Benitoite" or defName="Bixbite" or defName="Dioptase"
+                    or defName="Ekanite" or defName="Emerald" or defName="Garnet" or defName="Heliodor" or defName="Kunzite"
+                    or defName="Larimar" or defName="Iolite" or defName="Malachite" or defName="Morganite" or defName="Padparadscha"
+                    or defName="Peridot" or defName="Prasiolite" or defName="Quartz" or defName="Ruby" or defName="Sapphire"
+                    or defName="Scapolite" or defName="Tanzanite" or defName="Tsavorite" or defName="Sunstone"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.9</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.9</PlantHarvestingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <DiggingSpeed>1.1</DiggingSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <!-- Appears to be the same as all other stones from this particular mod -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Diamond"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.9</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.9</PlantHarvestingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <DiggingSpeed>1.1</DiggingSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

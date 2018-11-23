@@ -20,32 +20,10 @@ namespace SurvivalTools
             ST_ThingSetMakerDefOf.MapGen_AncientRuinsSurvivalTools.root.fixedParams.validator = (ThingDef t) =>
             t.IsWithinCategory(ST_ThingCategoryDefOf.SurvivalToolsNeolithic);
 
-            // Remove any unnecessary RecipeDefs when Mending is active
             if (ModCompatibilityCheck.MendAndRecycle)
-            {
-                Log.Message("Culling redundant MendAndRecycle recipes for Survival Tools...");
-                int cullCount = 0;
-                bool categoryMatch = false;
-                foreach (RecipeDef recipe in DefDatabase<RecipeDef>.AllDefs.Where(r => r.defName.Contains("SurvivalTool") && r.workerClass != typeof(RecipeWorker)))
-                {
-                    categoryMatch = false;
-                    foreach (ThingDef thing in DefDatabase<ThingDef>.AllDefsListForReading.Where(t => t.thingClass == typeof(SurvivalTool)))
-                        if (recipe.IsIngredient(thing))
-                        {
-                            categoryMatch = true;
-                            break;
-                        }
-                    if (!categoryMatch)
-                    {
-                        recipe.recipeUsers.Clear();
-                        cullCount++;
-                        Log.Message($"Culled recipe: {recipe.defName}");
-                    }
-                        
-                }
-                Log.Message($"Recipe culling complete. Total recipes culled: {cullCount}");
-            }
-            
+                ResolveMendAndRecycleRecipes();
+            CheckStuffForStuffPropsTool();
+
             // Add SurvivalToolAssignmentTracker to all appropriate pawns
             foreach (ThingDef tDef in DefDatabase<ThingDef>.AllDefs.Where(t => t.race?.Humanlike == true))
             {
@@ -57,6 +35,61 @@ namespace SurvivalTools
                 
         }
 
+        private static void ResolveMendAndRecycleRecipes()
+        {
+            Log.Message("Culling redundant MendAndRecycle recipes for Survival Tools...");
+            int cullCount = 0;
+            bool categoryMatch = false;
+            foreach (RecipeDef recipe in DefDatabase<RecipeDef>.AllDefs.Where(r => r.defName.Contains("SurvivalTool") && r.workerClass != typeof(RecipeWorker)))
+            {
+                categoryMatch = false;
+                foreach (ThingDef thing in DefDatabase<ThingDef>.AllDefsListForReading.Where(t => t.thingClass == typeof(SurvivalTool)))
+                    if (recipe.IsIngredient(thing))
+                    {
+                        categoryMatch = true;
+                        break;
+                    }
+                if (!categoryMatch)
+                {
+                    recipe.recipeUsers.Clear();
+                    cullCount++;
+                    Log.Message($"Culled recipe: {recipe.defName}");
+                }
+
+            }
+            Log.Message($"Recipe culling complete. Total recipes culled: {cullCount}");
+        }
+
+        private static void CheckStuffForStuffPropsTool()
+        {
+            StringBuilder stuffBuilder = new StringBuilder();
+            stuffBuilder.AppendLine("Checking all stuff for StuffPropsTool modExtension...");
+            stuffBuilder.AppendLine();
+            StringBuilder hasPropsBuilder = new StringBuilder("Has props:\n");
+            StringBuilder noPropsBuilder = new StringBuilder("Doesn't have props:\n");
+            foreach (ThingDef stuff in DefDatabase<ThingDef>.AllDefsListForReading.Where(
+                (ThingDef t) =>
+                {
+                    if (!t.IsStuff)
+                        return false;
+                    List<StuffCategoryDef> categories = t.stuffProps?.categories;
+                    return !categories.Contains(StuffCategoryDefOf.Fabric) &&
+                           !categories.Contains(StuffCategoryDefOf.Leathery);
+                }))
+            {
+
+                string newLine = $"{stuff} ({stuff.modContentPack.Name})";
+                if (stuff.HasModExtension<StuffPropsTool>())
+                    hasPropsBuilder.AppendLine(newLine);
+                else
+                    noPropsBuilder.AppendLine(newLine);
+            }
+            stuffBuilder.Append(hasPropsBuilder);
+            stuffBuilder.AppendLine();
+            stuffBuilder.Append(noPropsBuilder);
+            Log.Message(stuffBuilder.ToString());
+        }
+
         public static readonly FloatRange MapGenToolHitPointsRange = new FloatRange(0.3f, 0.7f);
         public const float MapGenToolMaxStuffMarketValue = 3f;
 
@@ -65,13 +98,6 @@ namespace SurvivalTools
 
         public static List<WorkGiverDef> SurvivalToolWorkGivers { get; } =
             DefDatabase<WorkGiverDef>.AllDefsListForReading.Where(w => w.HasModExtension<WorkGiverExtension>()).ToList();
-
-        // Fields that aren't fields :P
-        public static SurvivalToolProperties survivalTool(this ThingDef def) =>
-            def.GetModExtension<SurvivalToolProperties>();
-
-        public static StuffPropsTool stuffPropsTool(this ThingDef def) =>
-            def.GetModExtension<StuffPropsTool>();
 
         public static bool RequiresSurvivalTool(this StatDef stat)
         {
@@ -184,13 +210,13 @@ namespace SurvivalTools
         public static string GetSurvivalToolOverrideReportText(SurvivalTool tool, StatDef stat)
         {
             List<StatModifier> statFactorList = tool.WorkStatFactors.ToList();
-            StuffPropsTool stuffPropsTool = tool.Stuff?.stuffPropsTool();
+            StuffPropsTool stuffPropsTool = tool.Stuff?.GetModExtension<StuffPropsTool>();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine(stat.description);
 
             builder.AppendLine();
-            builder.AppendLine(tool.def.LabelCap + ": " + tool.def.survivalTool().baseWorkStatFactors.GetStatFactorFromList(stat).ToStringByStyle(ToStringStyle.Integer, ToStringNumberSense.Factor));
+            builder.AppendLine(tool.def.LabelCap + ": " + tool.def.GetModExtension<SurvivalToolProperties>().baseWorkStatFactors.GetStatFactorFromList(stat).ToStringByStyle(ToStringStyle.Integer, ToStringNumberSense.Factor));
 
             builder.AppendLine();
             builder.AppendLine(ST_StatDefOf.ToolEffectivenessFactor.LabelCap + ": " +

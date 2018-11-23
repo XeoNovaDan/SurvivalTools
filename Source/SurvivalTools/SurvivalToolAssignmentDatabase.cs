@@ -79,7 +79,7 @@ namespace SurvivalTools
 
             foreach (ThingDef tDef in DefDatabase<ThingDef>.AllDefs)
             {
-                SurvivalToolProperties toolProps = tDef.survivalTool();
+                SurvivalToolProperties toolProps = tDef.GetModExtension<SurvivalToolProperties>();
                 if (toolProps == null)
                     continue;
                 else

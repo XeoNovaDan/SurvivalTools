@@ -38,12 +38,12 @@ namespace SurvivalTools
         {
             get
             {
-                foreach (StatModifier modifier in def.survivalTool().baseWorkStatFactors)
+                foreach (StatModifier modifier in def.GetModExtension<SurvivalToolProperties>().baseWorkStatFactors)
                 {
                     float newFactor = modifier.value * this.GetStatValue(ST_StatDefOf.ToolEffectivenessFactor);
 
-                    if (Stuff?.stuffPropsTool()?.toolStatFactors.NullOrEmpty() == false)
-                        foreach (StatModifier modifier2 in Stuff?.stuffPropsTool()?.toolStatFactors)
+                    if (Stuff?.GetModExtension<StuffPropsTool>()?.toolStatFactors.NullOrEmpty() == false)
+                        foreach (StatModifier modifier2 in Stuff?.GetModExtension<StuffPropsTool>()?.toolStatFactors)
                             if (modifier2.stat == modifier.stat)
                                 newFactor *= modifier2.value;
 

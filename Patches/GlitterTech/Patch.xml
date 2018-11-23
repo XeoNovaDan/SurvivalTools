@@ -7,19 +7,22 @@
         <match Class="PatchOperationSequence">
             <success>Always</success>
             <operations>
-                <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Titanium"]</xpath>
-                    <value>
-                        <li Class="SurvivalTools.StuffPropsTool">
-                            <toolStatFactors>
-                                <TreeFellingSpeed>2.0</TreeFellingSpeed>
-                                <PlantHarvestingSpeed>2.0</PlantHarvestingSpeed>
-                                <DiggingSpeed>1.6</DiggingSpeed>
-                                <MiningYieldDigging>1.1</MiningYieldDigging>
-                                <ConstructionSpeed>1.6</ConstructionSpeed>
-                            </toolStatFactors>
-                        </li>
-                    </value>    
+                <li Class="PatchOperationConditional">
+                    <xpath>*/ThingDef[defName="Titanium"]/modExtensions</xpath>
+                    <nomatch Class="PatchOperationAddModExtension">
+                        <xpath>*/ThingDef[defName="Titanium"]</xpath>
+                        <value>
+                            <li Class="SurvivalTools.StuffPropsTool">
+                                <toolStatFactors>
+                                    <TreeFellingSpeed>2.0</TreeFellingSpeed>
+                                    <PlantHarvestingSpeed>2.0</PlantHarvestingSpeed>
+                                    <DiggingSpeed>1.6</DiggingSpeed>
+                                    <MiningYieldDigging>1.1</MiningYieldDigging>
+                                    <ConstructionSpeed>1.6</ConstructionSpeed>
+                                </toolStatFactors>
+                            </li>
+                        </value>
+                    </nomatch>
                 </li>
                 <li Class="PatchOperationAddModExtension">
                     <xpath>*/ThingDef[defName="AlphaPoly"]</xpath>

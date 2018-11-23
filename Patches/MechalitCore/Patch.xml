@@ -1,0 +1,121 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Mechalit Core 1.0</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Tisnit"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <DiggingSpeed>1.2</DiggingSpeed>
+                                <MiningYieldDigging>1.1</MiningYieldDigging>
+                                <ConstructionSpeed>1.2</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Simerium"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>1.4</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>1.4</PlantHarvestingSpeed>
+                                <DiggingSpeed>1.1</DiggingSpeed>
+                                <ConstructionSpeed>1.1</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Phasarium"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.8</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.8</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.8</DiggingSpeed>
+                                <ConstructionSpeed>0.8</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Eftam"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.65</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.65</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.75</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.75</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Myrithium"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>1.1</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>1.1</PlantHarvestingSpeed>
+                                <DiggingSpeed>1.3</DiggingSpeed>
+                                <MiningYieldDigging>1.1</MiningYieldDigging>
+                                <ConstructionSpeed>1.3</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Vilanit"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.93</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.93</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.93</DiggingSpeed>
+                                <ConstructionSpeed>0.93</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Elementx"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>2.5</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>2.5</PlantHarvestingSpeed>
+                                <DiggingSpeed>2.67</DiggingSpeed>
+                                <MiningYieldDigging>1.3</MiningYieldDigging>
+                                <ConstructionSpeed>2.67</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Teachmat"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.08</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.08</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.08</DiggingSpeed>
+                                <MiningYieldDigging>0.3</MiningYieldDigging>
+                                <ConstructionSpeed>0.08</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>
