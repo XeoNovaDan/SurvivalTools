@@ -8,9 +8,9 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationConditional">
-                    <xpath>*/ThingDef[defName="Titanium"]/modExtensions</xpath>
+                    <xpath>Defs/ThingDef[defName="Titanium"]/modExtensions</xpath>
                     <nomatch Class="PatchOperationAddModExtension">
-                        <xpath>*/ThingDef[defName="Titanium"]</xpath>
+                        <xpath>Defs/ThingDef[defName="Titanium"]</xpath>
                         <value>
                             <li Class="SurvivalTools.StuffPropsTool">
                                 <toolStatFactors>
@@ -25,7 +25,7 @@
                     </nomatch>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="AlphaPoly"]</xpath>
+                    <xpath>Defs/ThingDef[defName="AlphaPoly"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -39,7 +39,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BetaPoly"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BetaPoly"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

@@ -1,7 +1,7 @@
 <Patch>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>*/ThingSetMakerDef[defName="MapGen_AncientTempleContents"]/root[@Class="ThingSetMaker_Sum"]/options</xpath>
+        <xpath>Defs/ThingSetMakerDef[defName="MapGen_AncientTempleContents"]/root[@Class="ThingSetMaker_Sum"]/options</xpath>
         <value>
 
             <li>

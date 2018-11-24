@@ -8,7 +8,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[@Name="SynthyleneBase"]</xpath>
+                    <xpath>Defs/ThingDef[@Name="SynthyleneBase"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -22,7 +22,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[@Name="FiberCompositeBase"]</xpath>
+                    <xpath>Defs/ThingDef[@Name="FiberCompositeBase"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

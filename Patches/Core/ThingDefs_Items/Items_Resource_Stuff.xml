@@ -1,7 +1,7 @@
 <Patch>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="Silver"]</xpath>
+        <xpath>Defs/ThingDef[defName="Silver"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -13,7 +13,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="Gold"]</xpath>
+        <xpath>Defs/ThingDef[defName="Gold"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -28,7 +28,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="Plasteel"]</xpath>
+        <xpath>Defs/ThingDef[defName="Plasteel"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -40,7 +40,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="WoodLog"]</xpath>
+        <xpath>Defs/ThingDef[defName="WoodLog"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -55,7 +55,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="Uranium"]</xpath>
+        <xpath>Defs/ThingDef[defName="Uranium"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -68,7 +68,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="Jade"]</xpath>
+        <xpath>Defs/ThingDef[defName="Jade"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>

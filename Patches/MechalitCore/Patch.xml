@@ -8,7 +8,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Tisnit"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Tisnit"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -20,7 +20,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Simerium"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Simerium"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -33,7 +33,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Phasarium"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Phasarium"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -46,7 +46,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Eftam"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Eftam"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -60,7 +60,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Myrithium"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Myrithium"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -74,7 +74,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Vilanit"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Vilanit"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -87,7 +87,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Elementx"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Elementx"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -101,7 +101,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Teachmat"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Teachmat"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

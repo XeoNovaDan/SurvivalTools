@@ -9,7 +9,7 @@
             <operations>
                 <!-- Axe (cd = 2.4s) -->
                 <li Class="PatchOperationReplace">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Axe"]/tools</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Axe"]/tools</xpath>
                     <value>
                         <tools>
                             <li Class="CombatExtended.ToolCE">
@@ -37,7 +37,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Axe"]</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Axe"]</xpath>
                     <value>
                         <equippedStatOffsets>
                             <MeleeCritChance>0.375</MeleeCritChance>
@@ -46,7 +46,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Axe"]/statBases</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Axe"]/statBases</xpath>
                     <value>
                         <Bulk>4.5</Bulk>
                         <MeleeCounterParryBonus>1.25</MeleeCounterParryBonus>
@@ -55,7 +55,7 @@
 
                 <!-- Pickaxe (cd = 2.4s) -->
                 <li Class="PatchOperationReplace">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Pickaxe"]/tools</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Pickaxe"]/tools</xpath>
                     <value>
                         <tools>
                             <li Class="CombatExtended.ToolCE">
@@ -83,7 +83,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Pickaxe"]</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Pickaxe"]</xpath>
                     <value>
                         <equippedStatOffsets>
                             <MeleeCritChance>0.375</MeleeCritChance>
@@ -92,7 +92,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Pickaxe"]/statBases</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Pickaxe"]/statBases</xpath>
                     <value>
                         <Bulk>4.5</Bulk>
                         <MeleeCounterParryBonus>1.25</MeleeCounterParryBonus>
@@ -101,7 +101,7 @@
 
                 <!-- Hammer (cd = 1.85s) -->
                 <li Class="PatchOperationReplace">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Hammer"]/tools</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Hammer"]/tools</xpath>
                     <value>
                         <tools>
                             <li Class="CombatExtended.ToolCE">
@@ -129,7 +129,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Hammer"]</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Hammer"]</xpath>
                     <value>
                         <equippedStatOffsets>
                             <MeleeCritChance>0.25</MeleeCritChance>
@@ -138,7 +138,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Hammer"]/statBases</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Hammer"]/statBases</xpath>
                     <value>
                         <Bulk>1.5</Bulk>
                     </value>
@@ -146,7 +146,7 @@
 
                 <!-- Sickle (cd = 1.85s) -->
                 <li Class="PatchOperationReplace">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Sickle"]/tools</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Sickle"]/tools</xpath>
                     <value>
                         <tools>
                             <li Class="CombatExtended.ToolCE">
@@ -174,7 +174,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Sickle"]</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Sickle"]</xpath>
                     <value>
                         <equippedStatOffsets>
                             <MeleeCritChance>0.25</MeleeCritChance>
@@ -183,7 +183,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/ThingDef[defName="SurvivalTools_Sickle"]/statBases</xpath>
+                    <xpath>Defs/ThingDef[defName="SurvivalTools_Sickle"]/statBases</xpath>
                     <value>
                         <Bulk>1.5</Bulk>
                     </value>

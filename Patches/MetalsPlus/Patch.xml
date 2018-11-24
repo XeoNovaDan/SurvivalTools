@@ -8,7 +8,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Copper"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Copper"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -22,7 +22,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Tin"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Tin"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -34,7 +34,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Iron"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Iron"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -47,9 +47,9 @@
                     </value>
                 </li>
                 <li Class="PatchOperationConditional">
-                    <xpath>*/ThingDef[defName="Titanium"]/modExtensions</xpath>
+                    <xpath>Defs/ThingDef[defName="Titanium"]/modExtensions</xpath>
                     <nomatch Class="PatchOperationAddModExtension">
-                        <xpath>*/ThingDef[defName="Titanium"]</xpath>
+                        <xpath>Defs/ThingDef[defName="Titanium"]</xpath>
                         <value>
                             <li Class="SurvivalTools.StuffPropsTool">
                                 <toolStatFactors>
@@ -63,7 +63,7 @@
                     </nomatch>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Bronze"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Bronze"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

@@ -1,7 +1,7 @@
 <Patch>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>*/TraderKindDef[defName="Orbital_Exotic"]/stockGenerators</xpath>
+        <xpath>Defs/TraderKindDef[defName="Orbital_Exotic"]/stockGenerators</xpath>
         <value>
             <li Class="StockGenerator_Category">
                 <categoryDef>SurvivalToolsSpacer</categoryDef>

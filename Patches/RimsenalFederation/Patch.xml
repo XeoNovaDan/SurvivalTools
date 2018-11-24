@@ -8,7 +8,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Foerum"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Foerum"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

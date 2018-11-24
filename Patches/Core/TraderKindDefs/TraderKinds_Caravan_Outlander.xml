@@ -1,7 +1,7 @@
 <Patch>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>*/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators</xpath>
+        <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators</xpath>
         <value>
             <li Class="StockGenerator_Category">
                 <categoryDef>SurvivalToolsNeolithic</categoryDef>
@@ -14,7 +14,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>*/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
+        <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
         <value>
             <li Class="StockGenerator_Category">
                 <categoryDef>SurvivalToolsSpacer</categoryDef>

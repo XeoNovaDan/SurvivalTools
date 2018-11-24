@@ -8,7 +8,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Blocks_BrickAM"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Blocks_BrickAM"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -23,7 +23,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Blocks_MudAM"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Blocks_MudAM"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -38,7 +38,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Stuff_ConcreteAM"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Stuff_ConcreteAM"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -50,7 +50,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Stuff_RefConcreteAM"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Stuff_RefConcreteAM"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -65,7 +65,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Stuff_PlasterAM"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Stuff_PlasterAM"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -80,7 +80,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="AM_MixedPlastic"]</xpath>
+                    <xpath>Defs/ThingDef[defName="AM_MixedPlastic"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -94,7 +94,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="AM_UHMWPlastic"]</xpath>
+                    <xpath>Defs/ThingDef[defName="AM_UHMWPlastic"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -106,7 +106,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="AM_Acrylic"]</xpath>
+                    <xpath>Defs/ThingDef[defName="AM_Acrylic"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -120,7 +120,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="AM_LWood"]</xpath>
+                    <xpath>Defs/ThingDef[defName="AM_LWood"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

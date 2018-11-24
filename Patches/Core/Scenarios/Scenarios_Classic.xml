@@ -2,7 +2,7 @@
 
     <!-- Crashlanded -->
     <Operation Class="PatchOperationAdd">
-        <xpath>*/ScenarioDef[defName="Crashlanded"]/scenario/parts</xpath>
+        <xpath>Defs/ScenarioDef[defName="Crashlanded"]/scenario/parts</xpath>
         <value>
 
             <li Class="ScenPart_StartingThing_Defined">
@@ -26,7 +26,7 @@
 
     <!-- Lost Tribe -->
     <Operation Class="PatchOperationAdd">
-        <xpath>*/ScenarioDef[defName="LostTribe"]/scenario/parts</xpath>
+        <xpath>Defs/ScenarioDef[defName="LostTribe"]/scenario/parts</xpath>
         <value>
 
             <li Class="ScenPart_StartingThing_Defined">
@@ -58,7 +58,7 @@
 
     <!-- Rich Explorer -->
     <Operation Class="PatchOperationAdd">
-        <xpath>*/ScenarioDef[defName="TheRichExplorer"]/scenario/parts</xpath>
+        <xpath>Defs/ScenarioDef[defName="TheRichExplorer"]/scenario/parts</xpath>
         <value>
 
             <li Class="ScenPart_StartingThing_Defined">

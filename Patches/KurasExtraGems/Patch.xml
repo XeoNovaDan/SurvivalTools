@@ -8,7 +8,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef
+                    <xpath>Defs/ThingDef
                     [defName="Amber" or defName="Amethyst" or defName="Aquamarine" or defName="Benitoite" or defName="Bixbite" or defName="Dioptase"
                     or defName="Ekanite" or defName="Emerald" or defName="Garnet" or defName="Heliodor" or defName="Kunzite"
                     or defName="Larimar" or defName="Iolite" or defName="Malachite" or defName="Morganite" or defName="Padparadscha"
@@ -27,7 +27,7 @@
                 </li>
                 <!-- Appears to be the same as all other stones from this particular mod -->
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="Diamond"]</xpath>
+                    <xpath>Defs/ThingDef[defName="Diamond"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

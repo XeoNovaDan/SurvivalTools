@@ -1,7 +1,7 @@
 <Patch>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>*/TraderKindDef[defName="Caravan_Neolithic_BulkGoods"]/stockGenerators</xpath>
+        <xpath>Defs/TraderKindDef[defName="Caravan_Neolithic_BulkGoods"]/stockGenerators</xpath>
         <value>
             <li Class="StockGenerator_Category">
                 <categoryDef>SurvivalToolsNeolithic</categoryDef>

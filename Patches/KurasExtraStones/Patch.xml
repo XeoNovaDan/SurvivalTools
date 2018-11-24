@@ -8,7 +8,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksDunite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksDunite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -23,7 +23,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksEmperadordark"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksEmperadordark"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -38,7 +38,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksAndesite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksAndesite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -53,7 +53,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksBlueschist"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksBlueschist"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -68,7 +68,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksSerpentinite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksSerpentinite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -83,7 +83,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksObsidian"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksObsidian"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -98,7 +98,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksAnorthosite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksAnorthosite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -113,7 +113,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksBasalt"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksBasalt"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -128,7 +128,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksCharnockite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksCharnockite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -143,7 +143,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksDacite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksDacite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -158,7 +158,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksGabbro"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksGabbro"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -173,7 +173,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksLherzolite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksLherzolite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -188,7 +188,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksMonzonite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksMonzonite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -203,7 +203,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksRhyolite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksRhyolite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -218,7 +218,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksScoria"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksScoria"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -233,7 +233,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksSovite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksSovite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -248,7 +248,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksChalk"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksChalk"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -263,7 +263,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksJaspillite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksJaspillite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -278,7 +278,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksLignite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksLignite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -293,7 +293,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksSiltstone"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksSiltstone"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -308,7 +308,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksGreenSchist"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksGreenSchist"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>
@@ -323,7 +323,7 @@
                     </value>
                 </li>
                 <li Class="PatchOperationAddModExtension">
-                    <xpath>*/ThingDef[defName="BlocksMigmatite"]</xpath>
+                    <xpath>Defs/ThingDef[defName="BlocksMigmatite"]</xpath>
                     <value>
                         <li Class="SurvivalTools.StuffPropsTool">
                             <toolStatFactors>

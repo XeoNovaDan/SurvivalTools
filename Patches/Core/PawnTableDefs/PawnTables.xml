@@ -1,7 +1,7 @@
 <Patch>
 
     <Operation Class="PatchOperationInsert">
-        <xpath>*/PawnTableDef[defName="Assign"]/columns/li[text()="Outfit"]</xpath>
+        <xpath>Defs/PawnTableDef[defName="Assign"]/columns/li[text()="Outfit"]</xpath>
         <order>Append</order>
         <value>
             <li>GapTiny</li>

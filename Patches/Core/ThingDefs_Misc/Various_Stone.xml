@@ -1,7 +1,7 @@
 <Patch>
 
     <!-- <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[@Name="StoneBlocksBase"]</xpath>
+        <xpath>Defs/ThingDef[@Name="StoneBlocksBase"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -17,7 +17,7 @@
     </Operation> -->
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="BlocksSandstone"]</xpath>
+        <xpath>Defs/ThingDef[defName="BlocksSandstone"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -33,7 +33,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="BlocksGranite"]</xpath>
+        <xpath>Defs/ThingDef[defName="BlocksGranite"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -49,7 +49,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="BlocksLimestone"]</xpath>
+        <xpath>Defs/ThingDef[defName="BlocksLimestone"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -65,7 +65,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="BlocksSlate"]</xpath>
+        <xpath>Defs/ThingDef[defName="BlocksSlate"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
@@ -81,7 +81,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>*/ThingDef[defName="BlocksMarble"]</xpath>
+        <xpath>Defs/ThingDef[defName="BlocksMarble"]</xpath>
         <value>
             <li Class="SurvivalTools.StuffPropsTool">
                 <toolStatFactors>
