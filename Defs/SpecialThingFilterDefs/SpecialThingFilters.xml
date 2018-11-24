@@ -15,7 +15,8 @@
         <parentCategory>SurvivalTools</parentCategory>
         <allowedByDefault>true</allowedByDefault>
         <saveKey>survivalTools_AllowNonSmeltable</saveKey>
-        <workerClass>SpecialThingFilterWorker_NonSmeltableWeapons</workerClass>
+        <!-- Vanila worker's limited to just weapons for some reason ¯\_(ツ)_/¯ -->
+        <workerClass>SurvivalTools.SpecialThingFilterWorker_NonSmeltable</workerClass>
     </SpecialThingFilterDef>
 
 </Defs>

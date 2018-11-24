@@ -22,6 +22,7 @@ namespace SurvivalTools
 
             if (ModCompatibilityCheck.MendAndRecycle)
                 ResolveMendAndRecycleRecipes();
+            ResolveSmeltingRecipeUsers();
             CheckStuffForStuffPropsTool();
 
             // Add SurvivalToolAssignmentTracker to all appropriate pawns
@@ -58,6 +59,18 @@ namespace SurvivalTools
 
             }
             Log.Message($"Recipe culling complete. Total recipes culled: {cullCount}");
+        }
+
+        private static void ResolveSmeltingRecipeUsers()
+        {
+            foreach (ThingDef benchDef in DefDatabase<ThingDef>.AllDefs.Where(t => t.IsWorkTable))
+                if (benchDef.recipes != null)
+                {
+                    if (benchDef.recipes.Contains(ST_RecipeDefOf.SmeltWeapon))
+                        benchDef.recipes.Add(ST_RecipeDefOf.SmeltSurvivalTool);
+                    if (benchDef.recipes.Contains(ST_RecipeDefOf.DestroyWeapon))
+                        benchDef.recipes.Add(ST_RecipeDefOf.DestroySurvivalTool);
+                }
         }
 
         private static void CheckStuffForStuffPropsTool()

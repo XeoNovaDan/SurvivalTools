@@ -10,6 +10,7 @@
             <li>Stony</li>
             <li>Metallic</li>
         </stuffCategories>
+        <smeltable>true</smeltable>
         <recipeMaker>
             <workSpeedStat>SmithingSpeed</workSpeedStat>
             <workSkill>Crafting</workSkill>
@@ -230,7 +231,6 @@
             <!-- Equivalent to excellent quality -->
             <ToolEffectivenessFactor>1.2</ToolEffectivenessFactor>
         </statBases>
-        <smeltable>false</smeltable>
         <equippedAngleOffset>-20</equippedAngleOffset>
         <techLevel>Ultra</techLevel>
         <thingCategories>
