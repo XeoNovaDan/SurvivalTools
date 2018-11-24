@@ -67,14 +67,27 @@ namespace SurvivalTools
             stuffBuilder.AppendLine();
             StringBuilder hasPropsBuilder = new StringBuilder("Has props:\n");
             StringBuilder noPropsBuilder = new StringBuilder("Doesn't have props:\n");
+
+            List<StuffCategoryDef> toolCats = new List<StuffCategoryDef>();
+            foreach (ThingDef tool in DefDatabase<ThingDef>.AllDefsListForReading.Where(t => t.IsSurvivalTool()))
+                if (!tool.stuffCategories.NullOrEmpty())
+                    foreach (StuffCategoryDef category in tool.stuffCategories)
+                        if (!toolCats.Contains(category))
+                            toolCats.Add(category);
+
             foreach (ThingDef stuff in DefDatabase<ThingDef>.AllDefsListForReading.Where(
                 (ThingDef t) =>
                 {
                     if (!t.IsStuff)
                         return false;
-                    List<StuffCategoryDef> categories = t.stuffProps?.categories;
-                    return !categories.Contains(StuffCategoryDefOf.Fabric) &&
-                           !categories.Contains(StuffCategoryDefOf.Leathery);
+                    bool retVal = false;
+                    foreach (StuffCategoryDef stuffCat in t.stuffProps.categories)
+                        if (toolCats.Contains(stuffCat))
+                        {
+                            retVal = true;
+                            break;
+                        }
+                    return retVal;
                 }))
             {
 
@@ -84,6 +97,7 @@ namespace SurvivalTools
                 else
                     noPropsBuilder.AppendLine(newLine);
             }
+
             stuffBuilder.Append(hasPropsBuilder);
             stuffBuilder.AppendLine();
             stuffBuilder.Append(noPropsBuilder);

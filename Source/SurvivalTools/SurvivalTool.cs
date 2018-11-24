@@ -27,9 +27,8 @@ namespace SurvivalTools
         }
 
         public bool InUse =>
-            HoldingPawn != null && HoldingPawn.CanUseSurvivalTools() &&
-            SurvivalToolUtility.BestSurvivalToolsFor(HoldingPawn).Contains(this) &&
-            HoldingPawn.CanUseSurvivalTool(def);
+            HoldingPawn != null && HoldingPawn.CanUseSurvivalTools() && HoldingPawn.CanUseSurvivalTool(def) &&
+            SurvivalToolUtility.BestSurvivalToolsFor(HoldingPawn).Contains(this);
 
         public int WorkTicksToDegrade =>
             Mathf.FloorToInt((this.GetStatValue(ST_StatDefOf.ToolEstimatedLifespan) * GenDate.TicksPerDay) / MaxHitPoints);

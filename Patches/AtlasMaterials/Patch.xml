@@ -1,0 +1,140 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>[1.0] Atlas' Materials</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Blocks_BrickAM"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.8</DiggingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <ConstructionSpeed>0.8</ConstructionSpeed>
+                            </toolStatFactors>
+                            <wearFactorMultiplier>1.3</wearFactorMultiplier>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Blocks_MudAM"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.2</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.2</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.65</DiggingSpeed>
+                                <MiningYieldDigging>0.83</MiningYieldDigging>
+                                <ConstructionSpeed>0.65</ConstructionSpeed>
+                            </toolStatFactors>
+                            <wearFactorMultiplier>1.3</wearFactorMultiplier>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Stuff_ConcreteAM"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                            </toolStatFactors>
+                            <wearFactorMultiplier>1.3</wearFactorMultiplier>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Stuff_RefConcreteAM"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.65</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.65</PlantHarvestingSpeed>
+                                <DiggingSpeed>1.1</DiggingSpeed>
+                                <MiningYieldDigging>1.1</MiningYieldDigging>
+                                <ConstructionSpeed>1.1</ConstructionSpeed>
+                            </toolStatFactors>
+                            <wearFactorMultiplier>1.3</wearFactorMultiplier>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="Stuff_PlasterAM"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.2</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.2</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.5</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.5</ConstructionSpeed>
+                            </toolStatFactors>
+                            <wearFactorMultiplier>1.3</wearFactorMultiplier>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="AM_MixedPlastic"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.5</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.5</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.9</DiggingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <ConstructionSpeed>0.9</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="AM_UHMWPlastic"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <DiggingSpeed>0.9</DiggingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <ConstructionSpeed>0.9</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="AM_Acrylic"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.7</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.7</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.9</DiggingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <ConstructionSpeed>0.9</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>*/ThingDef[defName="AM_LWood"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.45</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.45</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

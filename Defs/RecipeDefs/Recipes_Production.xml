@@ -1,0 +1,73 @@
+<Defs>
+
+    <!-- Added to workbenches via C# patching rather than XML to maximise compatibility -->
+    <RecipeDef>
+        <defName>SmeltSurvivalTool</defName>
+        <label>smelt tool</label>
+        <description>Use heat and strong electromagnets to break down tools into useful resources.</description>
+        <jobString>Smelting tool.</jobString>
+        <workAmount>1600</workAmount>
+        <workSpeedStat>SmeltingSpeed</workSpeedStat>
+        <effectWorking>Smelt</effectWorking>
+        <soundWorking>Recipe_Smelt</soundWorking>
+        <specialProducts>
+            <li>Smelted</li>
+        </specialProducts>
+        <ingredients>
+            <li>
+                <filter>
+                    <categories>
+                        <li>SurvivalTools</li>
+                    </categories>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <categories>
+                <li>SurvivalTools</li>
+            </categories>
+            <specialFiltersToDisallow>
+                <li>SurvivalTools_AllowNonSmeltable</li>
+            </specialFiltersToDisallow>
+        </fixedIngredientFilter>
+        <forceHiddenSpecialFilters>
+            <li>AllowSmeltable</li>
+        </forceHiddenSpecialFilters>
+    </RecipeDef>
+
+    <RecipeDef>
+        <defName>DestroySurvivalTool</defName>
+        <label>destroy tool</label>
+        <description>Use heat to destroy unwanted tools. This process is faster than smelting, and works on non-smeltable items, but yields no resources.</description>
+        <jobString>Destroying tool.</jobString>
+        <workAmount>400</workAmount>
+        <workSpeedStat>SmeltingSpeed</workSpeedStat>
+        <effectWorking>Smelt</effectWorking>
+        <soundWorking>Recipe_Smelt</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <categories>
+                        <li>SurvivalTools</li>
+                    </categories>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <categories>
+                <li>SurvivalTools</li>
+            </categories>
+        </fixedIngredientFilter>
+        <defaultIngredientFilter>
+            <categories>
+                <li>SurvivalTools</li>
+            </categories>
+            <disallowedThingDefs>
+                <li>SurvivalTools_Multitool</li>
+            </disallowedThingDefs>
+        </defaultIngredientFilter>
+    </RecipeDef>
+
+</Defs>
