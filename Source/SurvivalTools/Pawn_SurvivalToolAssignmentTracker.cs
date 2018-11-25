@@ -28,17 +28,17 @@ namespace SurvivalTools
             }
         }
 
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            forcedHandler = new SurvivalToolForcedHandler();
+        }
+
         public override void PostExposeData()
         {
             base.PostExposeData();
             Scribe_Values.Look(ref nextSurvivalToolOptimizeTick, "nextSurvivalToolOptimizeTick", -99999);
             Scribe_Deep.Look(ref forcedHandler, "forcedHandler");
             Scribe_References.Look(ref curSurvivalToolAssignment, "curSurvivalToolAssignment");
-            if (Scribe.mode == LoadSaveMode.PostLoadInit)
-            {
-                if (forcedHandler == null)
-                    forcedHandler = new SurvivalToolForcedHandler();
-            }
         }
 
         public int nextSurvivalToolOptimizeTick = -99999;

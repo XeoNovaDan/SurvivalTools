@@ -32,11 +32,11 @@ namespace SurvivalTools
 
         public void SetForced(Thing tool, bool forced)
         {
-            if (forced)
-                if (!forcedTools.Contains(tool))
-                    forcedTools.Add(tool);
-            else if (forcedTools.Contains(tool))
+            if (forced && !forcedTools.Contains(tool))
+                forcedTools.Add(tool);
+            else if (!forced && forcedTools.Contains(tool))
                 forcedTools.Remove(tool);
+                
         }
 
         public bool AllowedToAutomaticallyDrop(Thing tool) => !IsForced(tool);

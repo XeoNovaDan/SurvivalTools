@@ -19,7 +19,6 @@ namespace SurvivalTools
             int num = Mathf.FloorToInt((rect.width - 4f) * 0.714285731f);
             int num2 = Mathf.FloorToInt((rect.width - 4f) * 0.2857143f);
             float num3 = rect.x;
-            Log.Message(toolAssignmentTracker.forcedHandler.ToStringSafe());
             bool somethingIsForced = toolAssignmentTracker.forcedHandler.SomethingForced;
             Rect rect2 = new Rect(num3, rect.y + 2f, (float)num, rect.height - 4f);
             if (somethingIsForced)
@@ -45,9 +44,9 @@ namespace SurvivalTools
                 TooltipHandler.TipRegion(rect4, new TipSignal(delegate ()
                 {
                     string text = "ForcedSurvivalTools".Translate() + ":\n";
-                    foreach (Apparel apparel in toolAssignmentTracker.forcedHandler.ForcedTools)
+                    foreach (Thing tool in toolAssignmentTracker.forcedHandler.ForcedTools)
                     {
-                        text = text + "\n   " + apparel.LabelCap;
+                        text = text + "\n   " + tool.LabelCap;
                     }
                     return text;
                 }, pawn.GetHashCode() * 128));

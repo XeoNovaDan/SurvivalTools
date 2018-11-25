@@ -39,6 +39,9 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(MassUtility), nameof(MassUtility.CountToPickUpUntilOverEncumbered)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_CountToPickUpUntilOverEncumbered)));
 
+            h.Patch(AccessTools.Method(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.Notify_ItemRemoved)),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_Notify_ItemRemoved)));
+
             h.Patch(AccessTools.Method(typeof(Pawn_InventoryTracker), nameof(Pawn_InventoryTracker.InventoryTrackerTickRare)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_InventoryTrackerTickRare)));
 
@@ -66,6 +69,9 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(ThingFilter), nameof(ThingFilter.SetFromPreset)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_SetFromPreset)));
 
+            h.Patch(AccessTools.Method(typeof(Toils_Haul), nameof(Toils_Haul.TakeToInventory), new[] { typeof(TargetIndex), typeof(Func<int>) }),
+                postfix: new HarmonyMethod(patchType, nameof(Postfix_TakeToInventory)));
+
             h.Patch(AccessTools.Method(typeof(JobDriver_Mine), "ResetTicksToPickHit"),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_ResetTicksToPickHit)));
 
@@ -76,6 +82,9 @@ namespace SurvivalTools
             // Thanks Mehni!
             h.Patch(AccessTools.Method(typeof(FloatMenuMakerMap), "AddHumanlikeOrders"),
                 transpiler: new HarmonyMethod(typeof(HarmonyPatches), nameof(Transpile_FloatMenuMakerMad_AddHumanlikeOrders)));
+
+            h.Patch(AccessTools.Method(typeof(ITab_Pawn_Gear), "DrawThingRow"),
+                transpiler: new HarmonyMethod(typeof(HarmonyPatches), nameof(Transpile_DrawThingRow)));
 
             // erdelf never fails to impress :)
             #region JobDriver Boilerplate
@@ -224,6 +233,17 @@ namespace SurvivalTools
         }
         #endregion
 
+        #region Postfix_Notify_ItemRemoved
+        public static void Postfix_Notify_ItemRemoved(Pawn_InventoryTracker __instance, Thing item)
+        {
+            if (item is SurvivalTool && __instance.pawn.TryGetComp<Pawn_SurvivalToolAssignmentTracker>() is Pawn_SurvivalToolAssignmentTracker assignmentTracker)
+            {
+                assignmentTracker.forcedHandler.SetForced(item, false);
+            }
+
+        }
+        #endregion
+
         #region Postfix_SpecialDisplayStats
         public static void Postfix_SpecialDisplayStats(ThingDef __instance, ref IEnumerable<StatDrawEntry> __result, StatRequest req)
         {
@@ -299,6 +319,23 @@ namespace SurvivalTools
         }
         #endregion
 
+
+        #region Postfix_TakeToInventory
+        public static void Postfix_TakeToInventory(Toil __result, TargetIndex ind)
+        {
+            Action initAction = __result.initAction;
+            __result.initAction = () =>
+            {
+                initAction();
+                Pawn actor = __result.actor;
+                Thing thing = actor.CurJob.GetTarget(ind).Thing;
+                if (thing is SurvivalTool && actor.CanUseSurvivalTools() && actor.inventory.Contains(thing))
+                    if (actor.CurJob.playerForced)
+                        actor.GetComp<Pawn_SurvivalToolAssignmentTracker>().forcedHandler.SetForced(thing, true);
+            };
+        }
+        #endregion
+
         #region Transpile_ResetTicksToPickHit
         public static IEnumerable<CodeInstruction> Transpile_ResetTicksToPickHit(IEnumerable<CodeInstruction> instructions)
         {
@@ -349,6 +386,39 @@ namespace SurvivalTools
                     //    patched = true;
                 }
                 yield return instruction;
+            }
+        }
+        #endregion
+
+        #region Transpile_DrawThingRow
+        public static IEnumerable<CodeInstruction> Transpile_DrawThingRow(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+
+                if (instruction.opcode == OpCodes.Stloc_S && ((LocalBuilder)instruction.operand).LocalIndex == 5)
+                {
+                    yield return instruction;
+                    yield return new CodeInstruction(OpCodes.Ldarg_3);
+                    yield return new CodeInstruction(OpCodes.Ldloca_S, 5);
+                    instruction = new CodeInstruction(OpCodes.Call, AccessTools.Method(patchType, nameof(AdjustLabelCapSurvivalTool)));
+                }
+
+                yield return instruction;
+            }
+        }
+
+        private static void AdjustLabelCapSurvivalTool(Thing thing, ref string labelCap)
+        {
+            if (thing is SurvivalTool tool && tool.HoldingPawn is Pawn pawn)
+            {
+                if (pawn.CanUseSurvivalTools() && pawn.GetComp<Pawn_SurvivalToolAssignmentTracker>().forcedHandler.IsForced(tool))
+                    labelCap += $", {"ApparelForcedLower".Translate()}";
+                if (tool.InUse)
+                    labelCap += $", {"ToolInUse".Translate()}";
             }
         }
         #endregion

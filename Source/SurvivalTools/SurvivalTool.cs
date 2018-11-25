@@ -14,7 +14,7 @@ namespace SurvivalTools
         public int workTicksDone = 0;
 
         #region Properties
-        private Pawn HoldingPawn
+        public Pawn HoldingPawn
         {
             get
             {
@@ -55,19 +55,19 @@ namespace SurvivalTools
             }
         }
 
-        public override string LabelNoCount
-        {
-            get
-            {
-                string label = base.LabelNoCount;
-                if (HoldingPawn != null && HoldingPawn.TryGetComp<Pawn_SurvivalToolAssignmentTracker>() is Pawn_SurvivalToolAssignmentTracker tracker &&
-                    tracker.forcedHandler.IsForced(this))
-                    label += $", {"ApparelForcedLower".Translate()}";
-                if (InUse)
-                    label += $", {"ToolInUse".Translate()}";
-                return label;
-            }
-        }
+        //public override string LabelNoCount
+        //{
+        //    get
+        //    {
+        //        string label = base.LabelNoCount;
+        //        if (HoldingPawn != null && HoldingPawn.TryGetComp<Pawn_SurvivalToolAssignmentTracker>() is Pawn_SurvivalToolAssignmentTracker tracker &&
+        //            tracker.forcedHandler.IsForced(this))
+        //            label += $", {"ApparelForcedLower".Translate()}";
+        //        if (InUse)
+        //            label += $", {"ToolInUse".Translate()}";
+        //        return label;
+        //    }
+        //}
         #endregion
 
         #region Methods
