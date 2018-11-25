@@ -35,5 +35,6 @@
     <DeleteSurvivalToolAssignment>Delete tool assignment...</DeleteSurvivalToolAssignment>
     <SurvivalToolAssignmentInUse>Tool assignment is in use by {0}</SurvivalToolAssignmentInUse>
     <NoSurvivalToolAssignmentSelected>No tool assignment selected</NoSurvivalToolAssignmentSelected>
+    <ForcedSurvivalTools>Forced tools</ForcedSurvivalTools>
 
 </LanguageData>

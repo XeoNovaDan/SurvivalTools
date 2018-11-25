@@ -19,7 +19,13 @@ namespace SurvivalTools
             int num = Mathf.FloorToInt((rect.width - 4f) * 0.714285731f);
             int num2 = Mathf.FloorToInt((rect.width - 4f) * 0.2857143f);
             float num3 = rect.x;
+            Log.Message(toolAssignmentTracker.forcedHandler.ToStringSafe());
+            bool somethingIsForced = toolAssignmentTracker.forcedHandler.SomethingForced;
             Rect rect2 = new Rect(num3, rect.y + 2f, (float)num, rect.height - 4f);
+            if (somethingIsForced)
+            {
+                rect2.width -= 4f + (float)num2;
+            }
             Rect rect3 = rect2;
             Pawn pawn2 = pawn;
             Func<Pawn, SurvivalToolAssignment> getPayload = (Pawn p) => p.TryGetComp<Pawn_SurvivalToolAssignmentTracker>().CurrentSurvivalToolAssignment;
@@ -29,6 +35,25 @@ namespace SurvivalTools
             Widgets.Dropdown(rect3, pawn2, getPayload, menuGenerator, buttonLabel, null, label, null, null, true);
             num3 += rect2.width;
             num3 += 4f;
+            Rect rect4 = new Rect(num3, rect.y + 2f, (float)num2, rect.height - 4f);
+            if (somethingIsForced)
+            {
+                if (Widgets.ButtonText(rect4, "ClearForcedApparel".Translate(), true, false, true))
+                {
+                    toolAssignmentTracker.forcedHandler.Reset();
+                }
+                TooltipHandler.TipRegion(rect4, new TipSignal(delegate ()
+                {
+                    string text = "ForcedSurvivalTools".Translate() + ":\n";
+                    foreach (Apparel apparel in toolAssignmentTracker.forcedHandler.ForcedTools)
+                    {
+                        text = text + "\n   " + apparel.LabelCap;
+                    }
+                    return text;
+                }, pawn.GetHashCode() * 128));
+                num3 += (float)num2;
+                num3 += 4f;
+            }
             Rect rect5 = new Rect(num3, rect.y + 2f, (float)num2, rect.height - 4f);
             if (Widgets.ButtonText(rect5, "AssignTabEdit".Translate(), true, false, true))
             {

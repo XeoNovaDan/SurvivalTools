@@ -87,6 +87,7 @@
     <Compile Include="SurvivalToolAssignment.cs" />
     <Compile Include="SurvivalToolAssignmentDatabase.cs" />
     <Compile Include="Pawn_SurvivalToolAssignmentTracker.cs" />
+    <Compile Include="SurvivalToolForcedHandler.cs" />
     <Compile Include="SurvivalToolsSettings.cs" />
     <Compile Include="SurvivalToolUtility.cs" />
     <Compile Include="ModExtensions\WorkGiverExtension.cs" />

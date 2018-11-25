@@ -28,7 +28,7 @@ namespace SurvivalTools
             SurvivalToolAssignment curAssignment = toolAssignmentTracker.CurrentSurvivalToolAssignment;
             List<Thing> heldTools = pawn.GetHeldSurvivalTools().ToList();
             foreach (Thing tool in heldTools)
-                if (!curAssignment.filter.Allows(tool))
+                if (!curAssignment.filter.Allows(tool) && toolAssignmentTracker.forcedHandler.AllowedToAutomaticallyDrop(tool))
                     return pawn.DequipAndTryStoreSurvivalTool(tool);
 
             List<Thing> mapTools = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon).Where(t => t is SurvivalTool).ToList();
@@ -41,7 +41,7 @@ namespace SurvivalTools
             Thing newTool = null;
             float delta = 0f;
             List<StatDef> workRelevantStats = pawn.AssignedToolRelevantWorkGiversStatDefs();
-
+            
             foreach (Thing potentialTool in mapTools)
                 if (curAssignment.filter.Allows(potentialTool))
                     if (pawn.CanUseSurvivalTool(potentialTool.def))
