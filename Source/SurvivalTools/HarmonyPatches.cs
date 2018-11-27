@@ -165,6 +165,27 @@ namespace SurvivalTools
             }
             #endregion
 
+            #region Turret Extensions
+            try
+            {
+                ((Action)(() =>
+                {
+                    if (ModCompatibilityCheck.TurretExtensions)
+                    {
+                        Log.Message("Survival Tools :: Turret Extensions detected as active in load order. Patching...");
+
+                        h.Patch(AccessTools.Method(typeof(TurretExtensions.JobDriver_UpgradeTurret), "Upgrade"),
+                            postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_UpgradeTurret_Upgrade)));
+
+                    }
+                }))();
+            }
+            catch (TypeLoadException)
+            {
+                Log.Message("Survival Tools :: Turret Extensions not detected as active in load order.");
+            }
+            #endregion
+
             #endregion
             #endregion
 
@@ -445,17 +466,19 @@ namespace SurvivalTools
         public static IEnumerable<CodeInstruction> Transpile_DrawThingRow(IEnumerable<CodeInstruction> instructions)
         {
             List<CodeInstruction> instructionList = instructions.ToList();
+            bool done = false;
 
             for (int i = 0; i < instructionList.Count; i++)
             {
                 CodeInstruction instruction = instructionList[i];
 
-                if (instruction.opcode == OpCodes.Stloc_S && ((LocalBuilder)instruction.operand).LocalIndex == 5)
+                if (!done && instruction.opcode == OpCodes.Stloc_S && ((LocalBuilder)instruction.operand).LocalIndex == 5)
                 {
                     yield return instruction;
                     yield return new CodeInstruction(OpCodes.Ldarg_3);
                     yield return new CodeInstruction(OpCodes.Ldloca_S, 5);
                     instruction = new CodeInstruction(OpCodes.Call, AccessTools.Method(patchType, nameof(AdjustLabelCapSurvivalTool)));
+                    done = true;
                 }
 
                 yield return instruction;
@@ -664,6 +687,19 @@ namespace SurvivalTools
                 tickAction();
             };
             __result.defaultDuration = (int)Mathf.Clamp(3000f / pawn.GetStatValue(ST_StatDefOf.DiggingSpeed), 500f, 10000f);
+        }
+        #endregion
+
+        #region Postfix_JobDriver_UpgradeTurret_Upgrade
+        public static void Postfix_JobDriver_UpgradeTurret_Upgrade(TurretExtensions.JobDriver_UpgradeTurret __instance, Toil __result)
+        {
+            Action tickAction = __result.tickAction;
+            Pawn pawn = __instance.pawn;
+            __result.tickAction = () =>
+            {
+                SurvivalToolUtility.TryDegradeTool(pawn, StatDefOf.ConstructionSpeed);
+                tickAction();
+            };
         }
         #endregion
 

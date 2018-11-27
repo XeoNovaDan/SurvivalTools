@@ -18,6 +18,7 @@ namespace SurvivalTools
 
         public static bool FluffyBreakdowns => ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Fluffy Breakdowns");
         public static bool Quarry => ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Quarry");
+        public static bool TurretExtensions => ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "[XND] Turret Extensions");
 
     }
 }
