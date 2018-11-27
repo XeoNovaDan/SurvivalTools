@@ -16,5 +16,8 @@ namespace SurvivalTools
         public static bool MendAndRecycle => ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "MendAndRecycle");
         public static bool OtherInventoryModsActive => CombatExtended || PickUpAndHaul;
 
+        public static bool FluffyBreakdowns => ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Fluffy Breakdowns");
+        public static bool Quarry => ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Quarry");
+
     }
 }

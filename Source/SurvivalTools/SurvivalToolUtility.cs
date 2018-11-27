@@ -157,15 +157,7 @@ namespace SurvivalTools
         public static IEnumerable<Thing> GetUsableHeldSurvivalTools(this Pawn pawn)
         {
             List<Thing> heldSurvivalTools = pawn.GetHeldSurvivalTools().ToList();
-            if (heldSurvivalTools == null)
-                yield break;
-
-            int i = 0;
-            while (i.IsUnderSurvivalToolCarryLimitFor(pawn) && i < heldSurvivalTools.Count)
-            {
-                yield return heldSurvivalTools[i];
-                i++;
-            }
+            return heldSurvivalTools.Where(t => heldSurvivalTools.IndexOf(t).IsUnderSurvivalToolCarryLimitFor(pawn));
         }
 
         public static IEnumerable<Thing> GetAllUsableSurvivalTools(this Pawn pawn) =>
@@ -283,8 +275,8 @@ namespace SurvivalTools
         public static int HeldSurvivalToolCount(this Pawn pawn) =>
             pawn.inventory?.innerContainer?.GetHeldSurvivalTools()?.Count() ?? 0;
 
-        public static bool CanCarryAnyMoreSurvivalTools(this Pawn pawn) =>
-            (pawn.RaceProps.Humanlike && pawn.HeldSurvivalToolCount().IsUnderSurvivalToolCarryLimitFor(pawn)) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
+        public static bool CanCarryAnyMoreSurvivalTools(this Pawn pawn, int heldToolOffset = 0) =>
+            (pawn.RaceProps.Humanlike && (pawn.HeldSurvivalToolCount() + heldToolOffset).IsUnderSurvivalToolCarryLimitFor(pawn)) || pawn.IsFormingCaravan() || pawn.IsCaravanMember();
 
         public static bool MeetsWorkGiverStatRequirements(this Pawn pawn, List<StatDef> requiredStats)
         {
@@ -325,6 +317,25 @@ namespace SurvivalTools
                     if (!resultList.Contains(stat))
                         resultList.Add(stat);
             return resultList;
+        }
+
+        public static bool NeedsSurvivalTool(this Pawn pawn, SurvivalTool tool)
+        {
+            foreach (StatDef stat in pawn.AssignedToolRelevantWorkGiversStatDefs())
+                if (StatUtility.StatListContains(tool.WorkStatFactors.ToList(), stat))
+                    return true;
+            return false;
+        }
+
+        public static bool BetterThanWorkingToollessFor(this SurvivalTool tool, StatDef stat)
+        {
+            StatPart_SurvivalTool statPart = stat.GetStatPart<StatPart_SurvivalTool>();
+            if (statPart == null)
+            {
+                Log.ErrorOnce($"Tried to check if {tool} is better than working toolless for {stat} which has no StatPart_SurvivalTool", 8120196);
+                return false;
+            }
+            return StatUtility.GetStatValueFromList(tool.WorkStatFactors.ToList(), stat, 0f) > statPart.NoToolStatFactor;
         }
 
         public static Job DequipAndTryStoreSurvivalTool(this Pawn pawn, Thing tool, bool enqueueCurrent = true)

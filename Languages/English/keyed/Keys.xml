@@ -13,9 +13,12 @@
     <Settings_ToolMapGen_Tooltip>Whether or not low-quality basic tools will generate along with ruined structures upon map generation.</Settings_ToolMapGen_Tooltip>
 
     <Settings_ToolLimit>Tool limit</Settings_ToolLimit>
-    <Settings_ToolLimit_Tooltip>Whether or not colonists are limited to only being able to carry 2 tools at a time in their inventories (other than when caravanning).</Settings_ToolLimit_Tooltip>
+    <Settings_ToolLimit_Tooltip>Whether or not colonists are limited to only being able to carry a certain amount of tools at once in their inventory (other than when caravanning).</Settings_ToolLimit_Tooltip>
 
     <Settings_ToolDegradationRate>Tool degradation rate</Settings_ToolDegradationRate>
+
+    <Settings_ToolOptimization>Tool optimization</Settings_ToolOptimization>
+    <Settings_ToolOptimization_Tooltip>Whether or not colonists will attempt to automatically optimize their inventory tools. Disabling may improve performance and fix any oddities with some modded materials.</Settings_ToolOptimization_Tooltip>
 
     <!-- Alerts -->
     <ColonistNeedsSurvivalTool>Colonist lacks tools</ColonistNeedsSurvivalTool>
@@ -26,6 +29,7 @@
     <SurvivalToolNeedsReplacingDesc>The following colonists are using tools that will break within half a day of use</SurvivalToolNeedsReplacingDesc>
 
     <!-- Tool assignment management -->
+    <ManageSurvivalToolAssignments>Manage tool assignments</ManageSurvivalToolAssignments>
     <SurvivalToolAssignment>Tool assignment</SurvivalToolAssignment>
     <SurvivalToolAssignmentConstructor>Constructor</SurvivalToolAssignmentConstructor>
     <SurvivalToolAssignmentMiner>Miner</SurvivalToolAssignmentMiner>

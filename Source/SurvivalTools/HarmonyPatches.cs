@@ -25,7 +25,7 @@ namespace SurvivalTools
 
             HarmonyInstance h = HarmonyInstance.Create("XeoNovaDan.SurvivalTools");
 
-            //HarmonyInstance.DEBUG = true;
+            HarmonyInstance.DEBUG = true;
 
             h.Patch(AccessTools.Method(typeof(SymbolResolver_AncientRuins), nameof(SymbolResolver_AncientRuins.Resolve)),
                 new HarmonyMethod(patchType, nameof(Prefix_Resolve)));
@@ -115,6 +115,57 @@ namespace SurvivalTools
                 GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).
                 MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_AffectRoof_MakeNewToils)));
+
+            #region Modded JobDrivers
+
+            #region Fluffy Breakdowns
+            try
+            {
+                ((Action)(() =>
+                {
+                    if (ModCompatibilityCheck.FluffyBreakdowns)
+                    {
+                        Log.Message("Survival Tools :: Fluffy Breakdowns detected as active in load order. Patching...");
+                            
+                        h.Patch(typeof(Fluffy_Breakdowns.JobDriver_Maintenance).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).
+                            MinBy(x => x.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Count()).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                            .MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
+                            transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Maintenance_MakeNewToils)));
+
+                    }
+                }))();
+            }
+            catch (TypeLoadException)
+            {
+                Log.Message("Survival Tools :: Fluffy Breakdowns not detected as active in load order.");
+            }
+            #endregion
+
+            #region Quarry
+            try
+            {
+                ((Action)(() =>
+                {
+                    if (ModCompatibilityCheck.Quarry)
+                    {
+                        Log.Message("Survival Tools :: Quarry detected as active in load order. Patching...");
+
+                        h.Patch(AccessTools.Method(typeof(Quarry.JobDriver_MineQuarry), "Mine"),
+                            postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_MineQuarry_Mine)));
+
+                        h.Patch(AccessTools.Method(typeof(Quarry.JobDriver_MineQuarry), "ResetTicksToPickHit"),
+                            transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_MineQuarry_ResetTicksToPickHit)));
+
+                    }
+                }))();
+            }
+            catch (TypeLoadException)
+            {
+                Log.Message("Survival Tools :: Quarry not detected as active in load order.");
+            }
+            #endregion
+
+            #endregion
             #endregion
 
         }
@@ -556,6 +607,63 @@ namespace SurvivalTools
 
                 yield return instruction;
             }
+        }
+        #endregion
+
+        #endregion
+
+        #region Modded JobDrivers
+
+        #region Transpile_JobDriver_Maintenance_MakeNewToils
+        public static IEnumerable<CodeInstruction> Transpile_JobDriver_Maintenance_MakeNewToils(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+
+                if (instruction.opcode == OpCodes.Stloc_0)
+                {
+                    yield return instruction;
+                    yield return new CodeInstruction(OpCodes.Ldloc_0);
+                    yield return new CodeInstruction(OpCodes.Ldsfld, ConstructionSpeed);
+                    instruction = new CodeInstruction(OpCodes.Call, TryDegradeTool);
+                }
+
+                yield return instruction;
+            }
+        }
+        #endregion
+
+        #region Patch JobDriver_MineQuarry
+        public static IEnumerable<CodeInstruction> Transpile_JobDriver_MineQuarry_ResetTicksToPickHit(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+
+                if (instruction.opcode == OpCodes.Ldsfld && instruction.operand == AccessTools.Field(typeof(StatDefOf), nameof(StatDefOf.MiningSpeed)))
+                {
+                    instruction.operand = AccessTools.Field(typeof(ST_StatDefOf), nameof(ST_StatDefOf.DiggingSpeed));
+                }
+
+                yield return instruction;
+            }
+        }
+
+        public static void Postfix_JobDriver_MineQuarry_Mine(Quarry.JobDriver_MineQuarry __instance, Toil __result)
+        {
+            Action tickAction = __result.tickAction;
+            Pawn pawn = __instance.pawn;
+            __result.tickAction = () =>
+            {
+                SurvivalToolUtility.TryDegradeTool(pawn, ST_StatDefOf.DiggingSpeed);
+                tickAction();
+            };
+            __result.defaultDuration = (int)Mathf.Clamp(3000f / pawn.GetStatValue(ST_StatDefOf.DiggingSpeed), 500f, 10000f);
         }
         #endregion
 

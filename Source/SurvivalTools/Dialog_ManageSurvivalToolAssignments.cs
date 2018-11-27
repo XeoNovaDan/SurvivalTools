@@ -31,6 +31,7 @@ namespace SurvivalTools
                 survivalToolGlobalFilter = new ThingFilter();
                 survivalToolGlobalFilter.SetAllow(ST_ThingCategoryDefOf.SurvivalTools, true);
             }
+            SelectedSurvivalToolAssignment = selectedToolAssignment;
         }
 
         private SurvivalToolAssignment SelectedSurvivalToolAssignment

@@ -11,6 +11,16 @@ namespace SurvivalTools
     public sealed class PawnColumnWorker_SurvivalToolAssignment : PawnColumnWorker
     {
 
+        public override void DoHeader(Rect rect, PawnTable table)
+        {
+            base.DoHeader(rect, table);
+            Rect rect2 = new Rect(rect.x, rect.y + (rect.height - 65f), Mathf.Min(rect.width, 360f), 32f);
+            if (Widgets.ButtonText(rect2, "ManageSurvivalToolAssignments".Translate(), true, false, true))
+            {
+                Find.WindowStack.Add(new Dialog_ManageSurvivalToolAssignments(null));
+            }
+        }
+
         public override void DoCell(Rect rect, Pawn pawn, PawnTable table)
         {
             Pawn_SurvivalToolAssignmentTracker toolAssignmentTracker = pawn.TryGetComp<Pawn_SurvivalToolAssignmentTracker>();

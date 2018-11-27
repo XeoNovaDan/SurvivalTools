@@ -1,0 +1,20 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Quarry</li>
+        </mods>
+        <match Class="PatchOperationAddModExtension">
+            <xpath>/Defs/WorkGiverDef[defName="QRY_MineQuarry"]</xpath>
+            <value>
+                <li Class="SurvivalTools.WorkGiverExtension">
+                    <requiredStats>
+                        <li>DiggingSpeed</li>
+                        <li>MiningYieldDigging</li>
+                    </requiredStats>
+                </li>
+            </value>
+        </match>
+    </Operation>
+
+</Patch>

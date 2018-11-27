@@ -18,7 +18,7 @@ namespace SurvivalTools
         private static float toolDegradationFactor = 1f;
         public static float ToolDegradationFactor => Mathf.Pow(toolDegradationFactor, (toolDegradationFactor < 1f) ? 1 : 2);
         public static bool ToolDegradation => toolDegradationFactor > 0f;
-        //public static bool toolDegradation = true;
+        public static bool toolOptimization = true;
 
         public void DoWindowContents(Rect wrect)
         {
@@ -41,7 +41,8 @@ namespace SurvivalTools
             options.Gap();
             options.AddLabeledSlider("Settings_ToolDegradationRate".Translate(), ref toolDegradationFactor, 0f, 2f,
                 rightAlignedLabel: ToolDegradationFactor.ToStringByStyle(ToStringStyle.FloatTwo, ToStringNumberSense.Factor), roundTo: 0.01f);
-
+            options.Gap();
+            options.CheckboxLabeled("Settings_ToolOptimization".Translate(), ref toolOptimization, "Settings_ToolOptimization_Tooltip".Translate());
             options.End();
 
             Mod.GetSettings<SurvivalToolsSettings>().Write();
@@ -54,6 +55,7 @@ namespace SurvivalTools
             Scribe_Values.Look(ref toolMapGen, "toolMapGen", true);
             Scribe_Values.Look(ref toolLimit, "toolLimit", true);
             Scribe_Values.Look(ref toolDegradationFactor, "toolDegradationFactor", 1f);
+            Scribe_Values.Look(ref toolOptimization, "toolOptimization", true);
         }
 
     }

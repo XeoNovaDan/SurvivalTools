@@ -10,19 +10,14 @@
                 <li Class="PatchOperationAdd">
                     <xpath>Defs</xpath>
                     <value>
-                        <RecipeDef>
-                            <workerClass>MendAndRecycle.Worker</workerClass>
+                        <RecipeDef ParentName="MendBase">
                             <defName>MendNeolithicSurvivalTool</defName>
                             <label>repair basic tool</label>
                             <description>Repair tool.</description>
                             <jobString>Repairing.</jobString>
                             <workAmount>50</workAmount>
-                            <workSkill>Crafting</workSkill>
                             <effectWorking>Smith</effectWorking>
                             <soundWorking>Recipe_Smith</soundWorking>
-                            <recipeUsers>
-                                <li>TableMending</li>
-                            </recipeUsers>
                             <ingredients>
                                 <li>
                                     <filter>
@@ -34,6 +29,10 @@
                                 </li>
                             </ingredients>
                             <fixedIngredientFilter>
+                                <allowedHitPointsPercents>
+                                    <min>0</min>
+                                    <max>0.99</max>
+                                </allowedHitPointsPercents>
                                 <categories>
                                     <li>SurvivalToolsNeolithic</li>
                                 </categories>
@@ -47,19 +46,14 @@
                 <li Class="PatchOperationAdd">
                     <xpath>Defs</xpath>
                     <value>
-                        <RecipeDef>
-                            <workerClass>MendAndRecycle.Worker</workerClass>
+                        <RecipeDef ParentName="MendBase">
                             <defName>MendIndustrialSurvivalTool</defName>
                             <label>repair modern tool</label>
                             <description>Repair tool.</description>
                             <jobString>Repairing.</jobString>
                             <workAmount>100</workAmount>
-                            <workSkill>Crafting</workSkill>
                             <effectWorking>Smith</effectWorking>
                             <soundWorking>Recipe_Smith</soundWorking>
-                            <recipeUsers>
-                                <li>TableMending</li>
-                            </recipeUsers>
                             <ingredients>
                                 <li>
                                     <filter>
@@ -71,6 +65,10 @@
                                 </li>
                             </ingredients>
                             <fixedIngredientFilter>
+                                <allowedHitPointsPercents>
+                                    <min>0</min>
+                                    <max>0.99</max>
+                                </allowedHitPointsPercents>
                                 <categories>
                                     <li>SurvivalToolsIndustrial</li>
                                 </categories>
@@ -84,19 +82,14 @@
                 <li Class="PatchOperationAdd">
                     <xpath>Defs</xpath>
                     <value>
-                        <RecipeDef>
-                            <workerClass>MendAndRecycle.Worker</workerClass>
+                        <RecipeDef ParentName="MendBase">
                             <defName>MendSpacerSurvivalTool</defName>
                             <label>repair advanced tool</label>
                             <description>Repair tool.</description>
                             <jobString>Repairing.</jobString>
                             <workAmount>200</workAmount>
-                            <workSkill>Crafting</workSkill>
                             <effectWorking>Smith</effectWorking>
                             <soundWorking>Recipe_Smith</soundWorking>
-                            <recipeUsers>
-                                <li>TableMending</li>
-                            </recipeUsers>
                             <ingredients>
                                 <li>
                                     <filter>
@@ -108,6 +101,10 @@
                                 </li>
                             </ingredients>
                             <fixedIngredientFilter>
+                                <allowedHitPointsPercents>
+                                    <min>0</min>
+                                    <max>0.99</max>
+                                </allowedHitPointsPercents>
                                 <categories>
                                     <li>SurvivalToolsSpacer</li>
                                 </categories>
