@@ -25,7 +25,7 @@ namespace SurvivalTools
 
             HarmonyInstance h = HarmonyInstance.Create("XeoNovaDan.SurvivalTools");
 
-            HarmonyInstance.DEBUG = true;
+            //HarmonyInstance.DEBUG = true;
 
             h.Patch(AccessTools.Method(typeof(SymbolResolver_AncientRuins), nameof(SymbolResolver_AncientRuins.Resolve)),
                 new HarmonyMethod(patchType, nameof(Prefix_Resolve)));
