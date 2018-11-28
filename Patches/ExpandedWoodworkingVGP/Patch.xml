@@ -8,6 +8,99 @@
             <success>Always</success>
             <operations>
 
+                <!-- Nested PatchOpFindMod. lovely. -->
+                <li Class="PatchOperationFindMod">
+                    <mods>
+                        <li>VGP Xtra Trees and Flowers</li>
+                    </mods>
+                    <match Class="PatchOperationSequence">
+                        <success>Always</success>
+                        <operations>
+
+                            <!-- Processed acacia lumber. Mostly useful for building long-lasting, simple structures and furniture. Acacia is a very durable hardwood. -->
+                            <li Class="PatchOperationAddModExtension">
+                                <xpath>Defs/ThingDef[defName="LumberAcacia"]</xpath>
+                                <value>
+                                    <li Class="SurvivalTools.StuffPropsTool">
+                                        <toolStatFactors>
+                                            <TreeFellingSpeed>0.65</TreeFellingSpeed>
+                                            <PlantHarvestingSpeed>0.65</PlantHarvestingSpeed>
+                                            <DiggingSpeed>0.65</DiggingSpeed>
+                                            <MiningYieldDigging>0.85</MiningYieldDigging>
+                                            <ConstructionSpeed>0.65</ConstructionSpeed>
+                                        </toolStatFactors>
+                                    </li>
+                                </value>
+                            </li>
+
+                            <!-- Processed camellia lumber. Mostly useful for building long-lasting, simple structures and furniture. Camellia is a perishable hardwood. -->
+                            <li Class="PatchOperationAddModExtension">
+                                <xpath>Defs/ThingDef[defName="LumberCamellia"]</xpath>
+                                <value>
+                                    <li Class="SurvivalTools.StuffPropsTool">
+                                        <toolStatFactors>
+                                            <TreeFellingSpeed>0.55</TreeFellingSpeed>
+                                            <PlantHarvestingSpeed>0.55</PlantHarvestingSpeed>
+                                            <DiggingSpeed>0.55</DiggingSpeed>
+                                            <MiningYieldDigging>0.75</MiningYieldDigging>
+                                            <ConstructionSpeed>0.55</ConstructionSpeed>
+                                        </toolStatFactors>
+                                    </li>
+                                </value>
+                            </li>
+
+                            <!-- Processed cherry blossom lumber. Mostly useful for building long-lasting, simple structures and furniture. Cherry blossom is a moderate to nondurable hardwood. -->
+                            <li Class="PatchOperationAddModExtension">
+                                <xpath>Defs/ThingDef[defName="LumberCherryBlossom"]</xpath>
+                                <value>
+                                    <li Class="SurvivalTools.StuffPropsTool">
+                                        <toolStatFactors>
+                                            <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                            <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                            <DiggingSpeed>0.6</DiggingSpeed>
+                                            <MiningYieldDigging>0.8</MiningYieldDigging>
+                                            <ConstructionSpeed>0.6</ConstructionSpeed>
+                                        </toolStatFactors>
+                                    </li>
+                                </value>
+                            </li>
+
+                            <!-- Processed japanese maple lumber. Mostly useful for building long-lasting, simple structures and furniture. Japanese maple is a nondurable to perishable hardwood. -->
+                            <li Class="PatchOperationAddModExtension">
+                                <xpath>Defs/ThingDef[defName="LumberJapaneseMaple"]</xpath>
+                                <value>
+                                    <li Class="SurvivalTools.StuffPropsTool">
+                                        <toolStatFactors>
+                                            <TreeFellingSpeed>0.55</TreeFellingSpeed>
+                                            <PlantHarvestingSpeed>0.55</PlantHarvestingSpeed>
+                                            <DiggingSpeed>0.55</DiggingSpeed>
+                                            <MiningYieldDigging>0.8</MiningYieldDigging>
+                                            <ConstructionSpeed>0.55</ConstructionSpeed>
+                                        </toolStatFactors>
+                                    </li>
+                                </value>
+                            </li>
+
+                            <!-- Processed red maple lumber. Mostly useful for building long-lasting, simple structures and furniture. Red maple is a nondurable to perishable hardwood. -->
+                            <li Class="PatchOperationAddModExtension">
+                                <xpath>Defs/ThingDef[defName="LumberRedMaple"]</xpath>
+                                <value>
+                                    <li Class="SurvivalTools.StuffPropsTool">
+                                        <toolStatFactors>
+                                            <TreeFellingSpeed>0.55</TreeFellingSpeed>
+                                            <PlantHarvestingSpeed>0.55</PlantHarvestingSpeed>
+                                            <DiggingSpeed>0.55</DiggingSpeed>
+                                            <MiningYieldDigging>0.8</MiningYieldDigging>
+                                            <ConstructionSpeed>0.55</ConstructionSpeed>
+                                        </toolStatFactors>
+                                    </li>
+                                </value>
+                            </li>
+
+                        </operations>
+                    </match>
+                </li>
+
                 <!-- Processed ironwood lumber. Mostly useful for building long-lasting, simple structures and furniture. Ironwood is a very durable hardwood. -->
                 <li Class="PatchOperationAddModExtension">
                     <xpath>Defs/ThingDef[defName="LumberIronwood"]</xpath>
