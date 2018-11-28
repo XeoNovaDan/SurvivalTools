@@ -1,0 +1,223 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Expanded Woodworking</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+
+                <!-- Processed birch lumber. Mostly useful for building long-lasting, simple structures and furniture. Birch is a perishable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberBirch"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.55</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.55</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.55</DiggingSpeed>
+                                <MiningYieldDigging>0.75</MiningYieldDigging>
+                                <ConstructionSpeed>0.55</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed black palm lumber. Mostly useful for building long-lasting, simple structures and furniture. Black palm is a durable wood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberPalm"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed cecropia lumber. Mostly useful for building simple structures, tools, and simple prosthetics. Cecropia is a nondurable to perishable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberCecropia"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.55</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.55</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.55</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.55</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed cocoawood lumber. Mostly useful for building simple structures and furniture. Cocoawood is a nondurable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberCocoa"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed cypress lumber. Mostly useful for building long-lasting, simple structures and furniture. Cypress is a durable softwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberCypress"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed drago lumber. Mostly useful for building makeshift structures, handicrafts and furniture. Drago is a low durability hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberDrago"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed maple lumber. Mostly useful for building long-lasting, simple structures and furniture. Maple is a nondurable to perishable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberMaple"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.55</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.55</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.55</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.55</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed oak lumber. Mostly useful for building long-lasting, simple structures and furniture. Oak is a very durable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberOak"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.65</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.65</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.65</DiggingSpeed>
+                                <MiningYieldDigging>0.85</MiningYieldDigging>
+                                <ConstructionSpeed>0.65</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed pine lumber. Mostly useful for building long-lasting, simple structures and furniture. Pine is a moderate to low durability softwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberPine"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed poplar lumber. Mostly useful for building long-lasting, simple structures and furniture. Poplar is a nondurable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberPoplar"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed teak lumber. Mostly useful for building long-lasting, simple structures and furniture. Teak is the most durable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberTeak"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.65</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.65</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.65</DiggingSpeed>
+                                <MiningYieldDigging>0.85</MiningYieldDigging>
+                                <ConstructionSpeed>0.65</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed willow lumber. Mostly useful for building long-lasting, simple structures and furniture. Willow is a nondurable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberWillow"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed bamboo lumber. Mostly useful for building long-lasting, simple structures and furniture. Bamboo is a perishable, fast growing grass. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberBamboo"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.5</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.5</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.5</DiggingSpeed>
+                                <MiningYieldDigging>0.7</MiningYieldDigging>
+                                <ConstructionSpeed>0.5</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

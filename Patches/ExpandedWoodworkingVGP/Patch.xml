@@ -1,0 +1,143 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Expanded Woodworking for Vegetable Garden Project</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+
+                <!-- Processed ironwood lumber. Mostly useful for building long-lasting, simple structures and furniture. Ironwood is a very durable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberIronwood"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.7</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.7</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.7</DiggingSpeed>
+                                <MiningYieldDigging>0.85</MiningYieldDigging>
+                                <ConstructionSpeed>0.7</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed applewood lumber. Mostly useful for building long-lasting, simple structures and furniture. Applewood is a nondurable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberApple"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed cherrywood lumber. Mostly useful for building long-lasting, simple structures and furniture. Cherrywood is a moderate to nondurable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberCherry"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed date palm lumber. Mostly useful for building long-lasting, simple structures and furniture. Date palm is a durable wood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberDatePalm"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.65</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.65</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.65</DiggingSpeed>
+                                <MiningYieldDigging>0.85</MiningYieldDigging>
+                                <ConstructionSpeed>0.65</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed figwood lumber. Mostly useful for building long-lasting, simple structures and furniture. Figwood is a low to nondurable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberFig"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed orangewood lumber. Mostly useful for building long-lasting, simple structures and furniture. Orangewood is a perishable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberOrange"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.55</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.55</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.55</DiggingSpeed>
+                                <MiningYieldDigging>0.75</MiningYieldDigging>
+                                <ConstructionSpeed>0.55</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed peachwood lumber. Mostly useful for building long-lasting, simple structures and furniture. Peachwood is a low to nondurable hardwood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberPeach"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.6</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.6</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.6</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.6</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Processed red palm lumber. Mostly useful for building long-lasting, simple structures and furniture. Red palm is a durable wood. -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="LumberCoconut"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.65</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.65</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.65</DiggingSpeed>
+                                <MiningYieldDigging>0.85</MiningYieldDigging>
+                                <ConstructionSpeed>0.65</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>
