@@ -1,0 +1,29 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Crystalloid (Rewrite)</li>
+            <li>Crystalloid</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="Crysteel"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>1.4</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>1.4</PlantHarvestingSpeed>
+                                <DiggingSpeed>1.1</DiggingSpeed>
+                                <MiningYieldDigging>0.9</MiningYieldDigging>
+                                <ConstructionSpeed>1.1</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

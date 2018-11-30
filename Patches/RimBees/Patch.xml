@@ -1,0 +1,91 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>RimBees</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+
+                <!-- While stat-wise for tool relevant stuff, beeswax is identical to steel, I'm making it more on par with wood since that's more logical -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="RB_Beeswax"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.3</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.3</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.4</DiggingSpeed>
+                                <MiningYieldDigging>0.7</MiningYieldDigging>
+                                <ConstructionSpeed>0.4</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="RB_Brittlewax"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.25</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.25</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.3</DiggingSpeed>
+                                <MiningYieldDigging>0.6</MiningYieldDigging>
+                                <ConstructionSpeed>0.3</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="RB_RedBeeswax"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.4</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.4</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.5</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.5</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="RB_WhiteBeeswax"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.35</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.35</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.45</DiggingSpeed>
+                                <MiningYieldDigging>0.75</MiningYieldDigging>
+                                <ConstructionSpeed>0.45</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="RB_BlackBeeswax"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.3</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.3</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.4</DiggingSpeed>
+                                <MiningYieldDigging>0.7</MiningYieldDigging>
+                                <ConstructionSpeed>0.4</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

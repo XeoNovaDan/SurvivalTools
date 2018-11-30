@@ -357,5 +357,17 @@ namespace SurvivalTools
             return new Job(ST_JobDefOf.DropSurvivalTool, tool);
         }
 
+        public static bool CanRemoveExcessSurvivalTools(this Pawn pawn) =>
+            !pawn.Drafted && !pawn.IsWashing() && !pawn.IsFormingCaravan() && !pawn.IsCaravanMember() && pawn.CurJobDef?.casualInterruptible != false
+            && !pawn.IsBurning() && !(pawn.carryTracker?.CarriedThing is SurvivalTool);
+
+        private static bool IsWashing(this Pawn pawn)
+        {
+            if (!ModCompatibilityCheck.DubsBadHygiene)
+                return false;
+            Log.Message(pawn.CurJobDef.ToStringSafe());
+            return pawn.health.hediffSet.HasHediff(DefDatabase<HediffDef>.GetNamed("Washing"));
+        }
+
     }
 }

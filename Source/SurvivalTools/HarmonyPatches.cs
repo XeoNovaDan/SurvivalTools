@@ -119,70 +119,32 @@ namespace SurvivalTools
             #region Modded JobDrivers
 
             #region Fluffy Breakdowns
-            try
+            Type maintenanceDriver = GenTypes.GetTypeInAnyAssembly("Fluffy_Breakdowns.JobDriver_Maintenance");
+            if (maintenanceDriver != null && typeof(JobDriver).IsAssignableFrom(maintenanceDriver))
             {
-                ((Action)(() =>
-                {
-                    if (ModCompatibilityCheck.FluffyBreakdowns)
-                    {
-                        Log.Message("Survival Tools :: Fluffy Breakdowns detected as active in load order. Patching...");
-                            
-                        h.Patch(typeof(Fluffy_Breakdowns.JobDriver_Maintenance).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).
-                            MinBy(x => x.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Count()).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-                            .MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
-                            transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Maintenance_MakeNewToils)));
-
-                    }
-                }))();
-            }
-            catch (TypeLoadException)
-            {
-                Log.Message("Survival Tools :: Fluffy Breakdowns not detected as active in load order.");
+                Log.Message("Survival Tools :: Fluffy Breakdowns detected as active in load order. Patching...");
+                h.Patch(maintenanceDriver.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).MinBy(x => x.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Count())
+                        .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
+                        transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Maintenance_MakeNewToils)));
             }
             #endregion
 
             #region Quarry
-            try
+            Type quarryDriver = GenTypes.GetTypeInAnyAssembly("Quarry.JobDriver_MineQuarry");
+            if (quarryDriver != null && typeof(JobDriver).IsAssignableFrom(quarryDriver))
             {
-                ((Action)(() =>
-                {
-                    if (ModCompatibilityCheck.Quarry)
-                    {
-                        Log.Message("Survival Tools :: Quarry detected as active in load order. Patching...");
-
-                        h.Patch(AccessTools.Method(typeof(Quarry.JobDriver_MineQuarry), "Mine"),
-                            postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_MineQuarry_Mine)));
-
-                        h.Patch(AccessTools.Method(typeof(Quarry.JobDriver_MineQuarry), "ResetTicksToPickHit"),
-                            transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_MineQuarry_ResetTicksToPickHit)));
-
-                    }
-                }))();
-            }
-            catch (TypeLoadException)
-            {
-                Log.Message("Survival Tools :: Quarry not detected as active in load order.");
+                Log.Message("Survival Tools :: Quarry detected as active in load order. Patching...");
+                h.Patch(AccessTools.Method(quarryDriver, "Mine"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_MineQuarry_Mine)));
+                h.Patch(AccessTools.Method(quarryDriver, "ResetTicksToPickHit"), transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_MineQuarry_ResetTicksToPickHit)));
             }
             #endregion
 
             #region Turret Extensions
-            try
+            Type turretExtensionsDriver = GenTypes.GetTypeInAnyAssembly("TurretExtensions.JobDriver_UpgradeTurret");
+            if (turretExtensionsDriver != null && typeof(JobDriver).IsAssignableFrom(turretExtensionsDriver))
             {
-                ((Action)(() =>
-                {
-                    if (ModCompatibilityCheck.TurretExtensions)
-                    {
-                        Log.Message("Survival Tools :: Turret Extensions detected as active in load order. Patching...");
-
-                        h.Patch(AccessTools.Method(typeof(TurretExtensions.JobDriver_UpgradeTurret), "Upgrade"),
-                            postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_UpgradeTurret_Upgrade)));
-
-                    }
-                }))();
-            }
-            catch (TypeLoadException)
-            {
-                Log.Message("Survival Tools :: Turret Extensions not detected as active in load order.");
+                Log.Message("Survival Tools :: Turret Extensions detected as active in load order. Patching...");
+                h.Patch(AccessTools.Method(turretExtensionsDriver, "Upgrade"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_UpgradeTurret_Upgrade)));
             }
             #endregion
 
@@ -271,8 +233,7 @@ namespace SurvivalTools
             if (SurvivalToolsSettings.toolLimit)
             {
                 Pawn pawn = __instance.pawn;
-                if (pawn.CanUseSurvivalTools() && pawn.GetHeldSurvivalTools().Count() > pawn.GetStatValue(ST_StatDefOf.SurvivalToolCarryCapacity) && !pawn.Drafted &&
-                    !pawn.IsFormingCaravan() && !pawn.IsCaravanMember() && pawn.CurJobDef?.casualInterruptible != false && !pawn.IsBurning() && !(pawn.carryTracker?.CarriedThing is SurvivalTool))
+                if (pawn.CanUseSurvivalTools() && pawn.GetHeldSurvivalTools().Count() > pawn.GetStatValue(ST_StatDefOf.SurvivalToolCarryCapacity) && pawn.CanRemoveExcessSurvivalTools())
                 {
                     Thing tool = pawn.GetHeldSurvivalTools().Last();
                     Job job = pawn.DequipAndTryStoreSurvivalTool(tool);
@@ -390,7 +351,6 @@ namespace SurvivalTools
                 __instance.SetAllow(ST_ThingCategoryDefOf.SurvivalTools, true);
         }
         #endregion
-
 
         #region Postfix_TakeToInventory
         public static void Postfix_TakeToInventory(Toil __result, TargetIndex ind)
@@ -677,7 +637,7 @@ namespace SurvivalTools
             }
         }
 
-        public static void Postfix_JobDriver_MineQuarry_Mine(Quarry.JobDriver_MineQuarry __instance, Toil __result)
+        public static void Postfix_JobDriver_MineQuarry_Mine(JobDriver __instance, Toil __result)
         {
             Action tickAction = __result.tickAction;
             Pawn pawn = __instance.pawn;
@@ -691,7 +651,7 @@ namespace SurvivalTools
         #endregion
 
         #region Postfix_JobDriver_UpgradeTurret_Upgrade
-        public static void Postfix_JobDriver_UpgradeTurret_Upgrade(TurretExtensions.JobDriver_UpgradeTurret __instance, Toil __result)
+        public static void Postfix_JobDriver_UpgradeTurret_Upgrade(JobDriver __instance, Toil __result)
         {
             Action tickAction = __result.tickAction;
             Pawn pawn = __instance.pawn;
