@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Added to workbenches via C# patching rather than XML to maximise compatibility -->
+  <SmeltSurvivalTool.label>熔炼工具</SmeltSurvivalTool.label>
+  <SmeltSurvivalTool.description>用强热和电磁把工具分解成有用的金属。</SmeltSurvivalTool.description>
+  <SmeltSurvivalTool.jobString>正在熔炼工具。</SmeltSurvivalTool.jobString>
+  <DestroySurvivalTool.label>销毁工具</DestroySurvivalTool.label>
+  <DestroySurvivalTool.description>用超高温度销毁不需要的工具。比熔炼快，用于不可熔炼的物品，但不产出资源。</DestroySurvivalTool.description>
+  <DestroySurvivalTool.jobString>正在销毁工具。</DestroySurvivalTool.jobString>
+</LanguageData>

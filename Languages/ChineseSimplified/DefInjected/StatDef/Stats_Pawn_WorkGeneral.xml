@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+  <!-- Tool Carrying Capacity -->
+  <SurvivalToolCarryCapacity.label>工具载量</SurvivalToolCarryCapacity.label>
+  <SurvivalToolCarryCapacity.description>殖民者被允许携带工具的数量。如果他们携带的工具超过允许的数量，多余的工具将不被允许装备或拾起。</SurvivalToolCarryCapacity.description>
   <!-- Mining-related -->
   <DiggingSpeed.label>挖掘速度</DiggingSpeed.label>
-  <DiggingSpeed.description>殖民者在矿产上挖掘的速度.</DiggingSpeed.description>
+  <DiggingSpeed.description>殖民者在矿石上挖掘的速度.</DiggingSpeed.description>
   <MiningYieldDigging.label>开采量（挖掘）</MiningYieldDigging.label>
   <MiningYieldDigging.description>矿工开采矿石的百分比.这只适用于矿石的开采,并不影响岩石块的生产速率.</MiningYieldDigging.description>
   <!-- Plant-related -->

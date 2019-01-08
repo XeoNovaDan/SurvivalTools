@@ -1,24 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <NoTool>没有工具</NoTool>
-  <ToolInUse>在使用中</ToolInUse>
-
+  <ToolInUse>（使用中）</ToolInUse>
   <!-- Settings -->
   <SurvivalToolsSettingsCategory>基础工具</SurvivalToolsSettingsCategory>
   <Settings_HardcoreMode>极限模式</Settings_HardcoreMode>
-  <Settings_HardcoreMode_Tooltip>工具磨损更快50%,并且大多数需要工具才能完成的任务在没有工具的情况下不再是可执行的.</Settings_HardcoreMode_Tooltip>
+  <Settings_HardcoreMode_Tooltip>工具磨损更快50%，并且大多数需要工具才能完成的任务在没有工具的情况下不再是可执行的。</Settings_HardcoreMode_Tooltip>
   <Settings_ToolMapGen>废墟模式</Settings_ToolMapGen>
-  <Settings_ToolMapGen_Tooltip>不管工具是否劣质，都有可能在进行任务中毁坏结构.</Settings_ToolMapGen_Tooltip>
+  <Settings_ToolMapGen_Tooltip>无论工具是否劣质，都有可能产生于废墟中。</Settings_ToolMapGen_Tooltip>
   <Settings_ToolLimit>工具极限</Settings_ToolLimit>
-  <Settings_ToolLimit_Tooltip>无论殖民者是否被限制都只能在库存中同时携带2个工具(除了商队任务中).</Settings_ToolLimit_Tooltip>
-  <Settings_ToolDegradationRate>工具老化</Settings_ToolDegradationRate>
-
+  <Settings_ToolLimit_Tooltip>无论殖民者是否被限制都只能在背包中同时携带3个工具（除了商队任务）。</Settings_ToolLimit_Tooltip>
+  <Settings_ToolDegradation>工具老化</Settings_ToolDegradation>
+  <Settings_ToolDegradation_Tooltip>无论工具是否被使用都会老化。</Settings_ToolDegradation_Tooltip>
+  <Settings_ToolDegradationRate>工具老化速度</Settings_ToolDegradationRate>
+  <Settings_ToolOptimization>工具优化</Settings_ToolOptimization>
+  <Settings_ToolOptimization_Tooltip>殖民者可能会优化他们背包中的工具，也可能不优化。禁用此项可以提高性能，并修复一些由其它材料mod制作基础工具带来的问题。</Settings_ToolOptimization_Tooltip>
   <!-- Alerts -->
   <ColonistNeedsSurvivalTool>殖民者缺乏工具</ColonistNeedsSurvivalTool>
-  <ColonistsNeedSurvivalTool>殖民者缺乏工具</ColonistsNeedSurvivalTool>
-  <ColonistNeedsSurvivalToolDesc>下面的殖民者被分配到工作任务中，这些任务需要工具才能有效地执行，但是缺少工具来完成这些任务.</ColonistNeedsSurvivalToolDesc>
+  <ColonistsNeedSurvivalTool>殖民者们缺乏工具</ColonistsNeedSurvivalTool>
+  <ColonistNeedsSurvivalToolDesc>以下殖民者被分配的工作任务需要工具才能有效地执行，但是缺少工具来完成这些任务。</ColonistNeedsSurvivalToolDesc>
   <SurvivalToolsNeedReplacing>工具需要更换</SurvivalToolsNeedReplacing>
-  <SurvivalToolNeedsReplacingDesc>以下殖民者使用的工具将在半日内损毁</SurvivalToolNeedsReplacingDesc>
-  
+  <SurvivalToolNeedsReplacingDesc>以下殖民者使用的工具将在半日内损毁。</SurvivalToolNeedsReplacingDesc>
+  <!-- Tool assignment management -->
+  <ManageSurvivalToolAssignments>管理工具配置</ManageSurvivalToolAssignments>
+  <SurvivalToolAssignment>工具分配</SurvivalToolAssignment>
+  <SurvivalToolAssignmentConstructor>建造</SurvivalToolAssignmentConstructor>
+  <SurvivalToolAssignmentMiner>采矿</SurvivalToolAssignmentMiner>
+  <SurvivalToolAssignmentPlantWorker>种植</SurvivalToolAssignmentPlantWorker>
+  <SelectSurvivalToolAssignment>选择工具配置…</SelectSurvivalToolAssignment>
+  <NewSurvivalToolAssignment>新工具配置</NewSurvivalToolAssignment>
+  <DeleteSurvivalToolAssignment>删除工具配置…</DeleteSurvivalToolAssignment>
+  <SurvivalToolAssignmentInUse>{0}正在使用工具配置</SurvivalToolAssignmentInUse>
+  <NoSurvivalToolAssignmentSelected>没有选择工具配置</NoSurvivalToolAssignmentSelected>
+  <ForcedSurvivalTools>强制工具</ForcedSurvivalTools>
 </LanguageData>

@@ -2,24 +2,24 @@
 <LanguageData>
   <!-- Tools -->
   <SurvivalTools_Axe.label>斧头</SurvivalTools_Axe.label>
-  <SurvivalTools_Axe.description>手柄的设计使其更易于伐木.但是紧要关头它也能当近战武器使用.</SurvivalTools_Axe.description>
+  <SurvivalTools_Axe.description>手柄的设计使其更易于伐木。但是紧要关头它也能当近战武器使用。</SurvivalTools_Axe.description>
   <SurvivalTools_Axe.tools.0.label>手柄</SurvivalTools_Axe.tools.0.label>
   <SurvivalTools_Axe.tools.1.label>前端</SurvivalTools_Axe.tools.1.label>
   <SurvivalTools_Pickaxe.label>十字镐</SurvivalTools_Pickaxe.label>
-  <SurvivalTools_Pickaxe.description>十字镐的前端附有一个坚硬的十字头.它能够有效地挖掘坚硬的矿石.</SurvivalTools_Pickaxe.description>
+  <SurvivalTools_Pickaxe.description>十字镐的前端附有一个坚硬的十字头。它能够有效地挖掘坚硬的矿石。</SurvivalTools_Pickaxe.description>
   <SurvivalTools_Pickaxe.tools.0.label>手柄</SurvivalTools_Pickaxe.tools.0.label>
   <SurvivalTools_Pickaxe.tools.1.label>前端</SurvivalTools_Pickaxe.tools.1.label>
   <SurvivalTools_Hammer.label>锤子</SurvivalTools_Hammer.label>
-  <SurvivalTools_Hammer.description>一柄简单的锤子,是任何施工工具的重要组成部分.紧要关头它也能当近战武器使用.</SurvivalTools_Hammer.description>
+  <SurvivalTools_Hammer.description>一柄简单的锤子，是任何施工工具的重要组成部分。紧要关头它也能当近战武器使用。</SurvivalTools_Hammer.description>
   <SurvivalTools_Hammer.tools.0.label>手柄</SurvivalTools_Hammer.tools.0.label>
   <SurvivalTools_Hammer.tools.1.label>前端</SurvivalTools_Hammer.tools.1.label>
   <SurvivalTools_Sickle.label>镰刀</SurvivalTools_Sickle.label>
-  <SurvivalTools_Sickle.description>一把弯曲的刀刃,连接在一个小刀柄上,它通常用来切割植物.紧要关头它也能当近战武器使用.</SurvivalTools_Sickle.description>
+  <SurvivalTools_Sickle.description>一把弯曲的刀刃，连接在一个小刀柄上，它通常用来切割植物。紧要关头它也能当近战武器使用。</SurvivalTools_Sickle.description>
   <SurvivalTools_Sickle.tools.0.label>手柄</SurvivalTools_Sickle.tools.0.label>
   <SurvivalTools_Sickle.tools.1.label>前端</SurvivalTools_Sickle.tools.1.label>
   <!-- Glitterworld Multitool -->
   <SurvivalTools_Multitool.label>闪耀世界的工具</SurvivalTools_Multitool.label>
-  <SurvivalTools_Multitool.description>一种超高科技的工具,常用于闪耀世界中的家用机械人,由于它们的结构相似也可用于其他类人机器.</SurvivalTools_Multitool.description>
+  <SurvivalTools_Multitool.description>一种超高科技的工具，常用于闪耀世界中的家用机器人，又由于它们的结构相似也可用于其他人形机器。</SurvivalTools_Multitool.description>
   <SurvivalTools_Multitool.tools.0.label>手柄</SurvivalTools_Multitool.tools.0.label>
   <SurvivalTools_Multitool.tools.1.label>前端</SurvivalTools_Multitool.tools.1.label>
 </LanguageData>
