@@ -2,3 +2,4 @@ E:\Documents\GitHub\SurvivalTools\Assemblies\SurvivalTools.dll
 E:\Documents\GitHub\SurvivalTools\Source\SurvivalTools\obj\Debug\SurvivalTools.csprojAssemblyReference.cache
 E:\Documents\GitHub\SurvivalTools\Source\SurvivalTools\obj\Debug\SurvivalTools.csproj.CoreCompileInputs.cache
 E:\Documents\GitHub\SurvivalTools\Source\SurvivalTools\obj\Debug\SurvivalTools.dll
+E:\Documents\GitHub\SurvivalTools\1.0\Assemblies\SurvivalTools.dll

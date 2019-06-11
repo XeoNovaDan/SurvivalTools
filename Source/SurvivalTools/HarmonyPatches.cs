@@ -119,7 +119,7 @@ namespace SurvivalTools
             #region Modded JobDrivers
 
             #region Fluffy Breakdowns
-            Type maintenanceDriver = GenTypes.GetTypeInAnyAssembly("Fluffy_Breakdowns.JobDriver_Maintenance");
+            var maintenanceDriver = GenTypes.GetTypeInAnyAssemblyNew("Fluffy_Breakdowns.JobDriver_Maintenance", null);
             if (maintenanceDriver != null && typeof(JobDriver).IsAssignableFrom(maintenanceDriver))
             {
                 Log.Message("Survival Tools :: Fluffy Breakdowns detected as active in load order. Patching...");
@@ -130,7 +130,7 @@ namespace SurvivalTools
             #endregion
 
             #region Quarry
-            Type quarryDriver = GenTypes.GetTypeInAnyAssembly("Quarry.JobDriver_MineQuarry");
+            var quarryDriver = GenTypes.GetTypeInAnyAssemblyNew("Quarry.JobDriver_MineQuarry", null);
             if (quarryDriver != null && typeof(JobDriver).IsAssignableFrom(quarryDriver))
             {
                 Log.Message("Survival Tools :: Quarry detected as active in load order. Patching...");
@@ -140,7 +140,7 @@ namespace SurvivalTools
             #endregion
 
             #region Turret Extensions
-            Type turretExtensionsDriver = GenTypes.GetTypeInAnyAssembly("TurretExtensions.JobDriver_UpgradeTurret");
+            var turretExtensionsDriver = GenTypes.GetTypeInAnyAssemblyNew("TurretExtensions.JobDriver_UpgradeTurret", null);
             if (turretExtensionsDriver != null && typeof(JobDriver).IsAssignableFrom(turretExtensionsDriver))
             {
                 Log.Message("Survival Tools :: Turret Extensions detected as active in load order. Patching...");
@@ -149,6 +149,20 @@ namespace SurvivalTools
             #endregion
 
             #endregion
+
+            #region Modded JobGivers
+
+            #region Combat Extended
+            var combatExtendedHoldTrackerExcessThingMethod = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.Utility_HoldTracker", null);
+            if (combatExtendedHoldTrackerExcessThingMethod != null)
+            {
+                Log.Message("Survival Tools :: Combat Extended detected as active in load order. Patching...");
+                h.Patch(AccessTools.Method(combatExtendedHoldTrackerExcessThingMethod, "GetExcessThing"), postfix: new HarmonyMethod(patchType, nameof(Postfix_CombatExtended_Utility_HoldTracker_GetExcessThing)));
+            }
+            #endregion
+
+            #endregion
+
             #endregion
 
         }
@@ -663,6 +677,19 @@ namespace SurvivalTools
         }
         #endregion
 
+        #endregion
+
+        #endregion
+
+        #region Other Mod Patches
+
+        #region Combat Extended
+        public static void Postfix_CombatExtended_Utility_HoldTracker_GetExcessThing(ref bool __result, Thing dropThing)
+        {
+            // If there's an excess thing to be dropped for automatic loadout fixing and that thing is a tool, don't treat it as an excess thing
+            if (__result && dropThing as SurvivalTool != null)
+                __result = false;
+        }
         #endregion
 
         #endregion
