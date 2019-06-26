@@ -1,0 +1,46 @@
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Alpha Animals</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+
+                <!-- Red Wood -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="GU_RedWood"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>0.7</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>0.7</PlantHarvestingSpeed>
+                                <DiggingSpeed>0.55</DiggingSpeed>
+                                <MiningYieldDigging>0.8</MiningYieldDigging>
+                                <ConstructionSpeed>0.55</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+                <!-- Sky Steel -->
+                <li Class="PatchOperationAddModExtension">
+                    <xpath>Defs/ThingDef[defName="AA_SkySteel"]</xpath>
+                    <value>
+                        <li Class="SurvivalTools.StuffPropsTool">
+                            <toolStatFactors>
+                                <TreeFellingSpeed>1.1</TreeFellingSpeed>
+                                <PlantHarvestingSpeed>1.1</PlantHarvestingSpeed>
+                                <DiggingSpeed>1.1</DiggingSpeed>
+                                <ConstructionSpeed>1.1</ConstructionSpeed>
+                            </toolStatFactors>
+                        </li>
+                    </value>
+                </li>
+
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>
