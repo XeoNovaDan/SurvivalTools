@@ -60,20 +60,4 @@ namespace SurvivalTools
 
     }
 
-    public class SurvivalTools : Mod
-    {
-        public SurvivalToolsSettings settings;
-
-        public SurvivalTools(ModContentPack content) : base(content)
-        {
-            GetSettings<SurvivalToolsSettings>();
-        }
-
-        public override string SettingsCategory() => "SurvivalToolsSettingsCategory".Translate();
-
-        public override void DoSettingsWindowContents(Rect inRect)
-        {
-            GetSettings<SurvivalToolsSettings>().DoWindowContents(inRect);
-        }
-    }
 }
