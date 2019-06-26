@@ -28,11 +28,6 @@ namespace SurvivalTools
             }
         }
 
-        public override void PostSpawnSetup(bool respawningAfterLoad)
-        {
-            forcedHandler = new SurvivalToolForcedHandler();
-        }
-
         public override void PostExposeData()
         {
             base.PostExposeData();
@@ -42,7 +37,7 @@ namespace SurvivalTools
         }
 
         public int nextSurvivalToolOptimizeTick = -99999;
-        public SurvivalToolForcedHandler forcedHandler;
+        public SurvivalToolForcedHandler forcedHandler = new SurvivalToolForcedHandler();
         private SurvivalToolAssignment curSurvivalToolAssignment;
 
     }

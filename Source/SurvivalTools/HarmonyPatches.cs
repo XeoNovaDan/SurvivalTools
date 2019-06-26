@@ -115,8 +115,7 @@ namespace SurvivalTools
                 GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).
                 MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_AffectRoof_MakeNewToils)));
-
-            #region Modded JobDrivers
+            #endregion
 
             #region Fluffy Breakdowns
             var maintenanceDriver = GenTypes.GetTypeInAnyAssemblyNew("Fluffy_Breakdowns.JobDriver_Maintenance", null);
@@ -148,21 +147,21 @@ namespace SurvivalTools
             }
             #endregion
 
-            #endregion
-
-            #region Modded JobGivers
 
             #region Combat Extended
-            var combatExtendedHoldTrackerExcessThingMethod = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.Utility_HoldTracker", null);
-            if (combatExtendedHoldTrackerExcessThingMethod != null)
+            if (ModCompatibilityCheck.CombatExtended)
             {
                 Log.Message("Survival Tools :: Combat Extended detected as active in load order. Patching...");
-                h.Patch(AccessTools.Method(combatExtendedHoldTrackerExcessThingMethod, "GetExcessThing"), postfix: new HarmonyMethod(patchType, nameof(Postfix_CombatExtended_Utility_HoldTracker_GetExcessThing)));
+
+                // Prevent tools from incorrectly being removed based on loadout
+                var combatExtendedHoldTrackerExcessThingClass = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.Utility_HoldTracker", null);
+                h.Patch(AccessTools.Method(combatExtendedHoldTrackerExcessThingClass, "GetExcessThing"), postfix: new HarmonyMethod(patchType, nameof(Postfix_CombatExtended_Utility_HoldTracker_GetExcessThing)));
+
+                // Edit PawnColumnWorker_SurvivalToolAssignment
+                //var combatExtendedColumnWorkerTranspilerClass = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.PawnColumnWorkers_SwapButtons", null);
+                //h.Patch(AccessTools.Method(typeof(PawnColumnWorker_SurvivalToolAssignment), nameof(PawnColumnWorker_SurvivalToolAssignment.DoCell)),
+                //    transpiler: new HarmonyMethod(AccessTools.Method(combatExtendedColumnWorkerTranspilerClass, "Transpiler")));
             }
-            #endregion
-
-            #endregion
-
             #endregion
 
         }

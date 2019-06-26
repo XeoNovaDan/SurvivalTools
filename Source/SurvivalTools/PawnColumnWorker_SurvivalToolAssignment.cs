@@ -45,6 +45,7 @@ namespace SurvivalTools
             num3 += rect2.width;
             num3 += 4f;
             Rect rect4 = new Rect(num3, rect.y + 2f, (float)num2, rect.height - 4f);
+
             if (somethingIsForced)
             {
                 if (Widgets.ButtonText(rect4, "ClearForcedApparel".Translate(), true, false, true))
