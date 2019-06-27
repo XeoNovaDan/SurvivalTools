@@ -24,10 +24,9 @@ namespace SurvivalTools
         {
 
             HarmonyInstance h = HarmonyInstance.Create("XeoNovaDan.SurvivalTools");
+            //HarmonyInstance.DEBUG = true;
 
             h.PatchAll();
-
-            //HarmonyInstance.DEBUG = true;
 
             h.Patch(AccessTools.Method(typeof(SymbolResolver_AncientRuins), nameof(SymbolResolver_AncientRuins.Resolve)),
                 new HarmonyMethod(patchType, nameof(Prefix_Resolve)));
@@ -191,7 +190,7 @@ namespace SurvivalTools
                         yield return new CodeInstruction(OpCodes.Ldloca_S, 5);
                         yield return new CodeInstruction(OpCodes.Ldarg_3);
                         yield return new CodeInstruction(OpCodes.Ldarg_0);
-                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Property(typeof(ITab_Pawn_Gear), "SelPawnForGear").GetGetMethod());
+                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Property(typeof(ITab_Pawn_Gear), "SelPawnForGear").GetGetMethod(true));
                         yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Patch_ITab_Pawn_Gear), "AdjustDisplayedLabel"));
                         done = true;
                     }
@@ -211,7 +210,6 @@ namespace SurvivalTools
                         originalLabel += $", {"ToolInUse".Translate()}";
                 }
             }
-
         }
 
         #region Prefix_Resolve
