@@ -8,13 +8,16 @@ using RimWorld;
 
 namespace SurvivalTools
 {
-    public class SurvivalTools : Mod
-    {
-        public SurvivalToolsSettings settings;
 
-        public SurvivalTools(ModContentPack content) : base(content)
+    [StaticConstructorOnStartup]
+    public static class StaticConstructorClass
+    {
+
+        static StaticConstructorClass()
         {
-            GetSettings<SurvivalToolsSettings>();
+            // Add validator to ThingSetMakerDef
+            ST_ThingSetMakerDefOf.MapGen_AncientRuinsSurvivalTools.root.fixedParams.validator = (ThingDef t) =>
+            t.IsWithinCategory(ST_ThingCategoryDefOf.SurvivalToolsNeolithic);
 
             if (ModCompatibilityCheck.MendAndRecycle)
                 ResolveMendAndRecycleRecipes();
@@ -29,14 +32,6 @@ namespace SurvivalTools
                     tDef.comps = new List<CompProperties>();
                 tDef.comps.Add(new CompProperties(typeof(Pawn_SurvivalToolAssignmentTracker)));
             }
-
-        }
-
-        public override string SettingsCategory() => "SurvivalToolsSettingsCategory".Translate();
-
-        public override void DoSettingsWindowContents(Rect inRect)
-        {
-            GetSettings<SurvivalToolsSettings>().DoWindowContents(inRect);
         }
 
         private static void ResolveMendAndRecycleRecipes()
@@ -121,5 +116,6 @@ namespace SurvivalTools
         }
 
     }
+
 
 }

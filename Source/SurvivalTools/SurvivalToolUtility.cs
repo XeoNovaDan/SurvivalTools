@@ -10,16 +10,9 @@ using RimWorld.Planet;
 
 namespace SurvivalTools
 {
-    [StaticConstructorOnStartup]
+
     public static class SurvivalToolUtility
     {
-
-        static SurvivalToolUtility()
-        {
-            // Add validator to ThingSetMakerDef
-            ST_ThingSetMakerDefOf.MapGen_AncientRuinsSurvivalTools.root.fixedParams.validator = (ThingDef t) =>
-            t.IsWithinCategory(ST_ThingCategoryDefOf.SurvivalToolsNeolithic);
-        }
 
         public static readonly FloatRange MapGenToolHitPointsRange = new FloatRange(0.3f, 0.7f);
         public const float MapGenToolMaxStuffMarketValue = 3f;

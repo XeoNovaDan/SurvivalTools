@@ -28,6 +28,19 @@ namespace SurvivalTools
             }
         }
 
+        public override void CompTick()
+        {
+            // If forced handler is somehow null, fix that
+            if (forcedHandler == null)
+                forcedHandler = new SurvivalToolForcedHandler();
+        }
+
+        public override void Initialize(CompProperties props)
+        {
+            base.Initialize(props);
+            forcedHandler = new SurvivalToolForcedHandler();
+        }
+
         public override void PostExposeData()
         {
             base.PostExposeData();
@@ -37,7 +50,7 @@ namespace SurvivalTools
         }
 
         public int nextSurvivalToolOptimizeTick = -99999;
-        public SurvivalToolForcedHandler forcedHandler = new SurvivalToolForcedHandler();
+        public SurvivalToolForcedHandler forcedHandler;
         private SurvivalToolAssignment curSurvivalToolAssignment;
 
     }
