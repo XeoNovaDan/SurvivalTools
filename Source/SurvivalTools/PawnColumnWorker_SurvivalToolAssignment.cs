@@ -24,8 +24,6 @@ namespace SurvivalTools
         public override void DoCell(Rect rect, Pawn pawn, PawnTable table)
         {
             Pawn_SurvivalToolAssignmentTracker toolAssignmentTracker = pawn.TryGetComp<Pawn_SurvivalToolAssignmentTracker>();
-            Log.Message(toolAssignmentTracker.ToStringSafe());
-            Log.Message(toolAssignmentTracker?.forcedHandler.ToStringSafe());
             if (toolAssignmentTracker == null)
                 return;
             int num = Mathf.FloorToInt((rect.width - 4f) * 0.714285731f);

@@ -25,6 +25,8 @@ namespace SurvivalTools
 
             HarmonyInstance h = HarmonyInstance.Create("XeoNovaDan.SurvivalTools");
 
+            h.PatchAll();
+
             //HarmonyInstance.DEBUG = true;
 
             h.Patch(AccessTools.Method(typeof(SymbolResolver_AncientRuins), nameof(SymbolResolver_AncientRuins.Resolve)),
@@ -163,6 +165,52 @@ namespace SurvivalTools
                 //    transpiler: new HarmonyMethod(AccessTools.Method(combatExtendedColumnWorkerTranspilerClass, "Transpiler")));
             }
             #endregion
+
+        }
+
+        [HarmonyPatch(typeof(ITab_Pawn_Gear))]
+        [HarmonyPatch("DrawThingRow")]
+        static class Patch_ITab_Pawn_Gear
+        {
+
+            static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            {
+                var instructionList = instructions.ToList();
+
+                bool done = false;
+
+                for (int i = 0; i < instructionList.Count; i++)
+                {
+                    var instruction = instructionList[i];
+
+                    yield return instruction;
+
+                    // If equipment is a tool, adjust its label in a similar fashion to how apparel labels are adjusted (though using a helper method)
+                    if (!done && instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "5")
+                    {
+                        yield return new CodeInstruction(OpCodes.Ldloca_S, 5);
+                        yield return new CodeInstruction(OpCodes.Ldarg_3);
+                        yield return new CodeInstruction(OpCodes.Ldarg_0);
+                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Property(typeof(ITab_Pawn_Gear), "SelPawnForGear").GetGetMethod());
+                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Patch_ITab_Pawn_Gear), "AdjustDisplayedLabel"));
+                        done = true;
+                    }
+                }
+            }
+
+            static void AdjustDisplayedLabel(ref string originalLabel, Thing thing, Pawn pawn)
+            {
+                if (thing is SurvivalTool tool)
+                {
+                    // Forced
+                    if (pawn.GetComp<Pawn_SurvivalToolAssignmentTracker>() is Pawn_SurvivalToolAssignmentTracker toolAssignmentTracker && toolAssignmentTracker.forcedHandler.IsForced(tool))
+                        originalLabel += $", {"ApparelForcedLower".Translate()}";
+
+                    // In use
+                    if (tool.InUse)
+                        originalLabel += $", {"ToolInUse".Translate()}";
+                }
+            }
 
         }
 

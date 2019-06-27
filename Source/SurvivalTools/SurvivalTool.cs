@@ -60,11 +60,14 @@ namespace SurvivalTools
         //    get
         //    {
         //        string label = base.LabelNoCount;
+
         //        if (HoldingPawn != null && HoldingPawn.TryGetComp<Pawn_SurvivalToolAssignmentTracker>() is Pawn_SurvivalToolAssignmentTracker tracker &&
         //            tracker.forcedHandler.IsForced(this))
         //            label += $", {"ApparelForcedLower".Translate()}";
+
         //        if (InUse)
         //            label += $", {"ToolInUse".Translate()}";
+
         //        return label;
         //    }
         //}
