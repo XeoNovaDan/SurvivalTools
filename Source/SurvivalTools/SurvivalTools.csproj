@@ -60,7 +60,8 @@
     <Compile Include="DefOfs\ST_RecipeDefOf.cs" />
     <Compile Include="DefOfs\ST_ThingCategoryDefOf.cs" />
     <Compile Include="Dialog_ManageSurvivalToolAssignments.cs" />
-    <Compile Include="HarmonyPatches.cs" />
+    <Compile Include="Harmony\Patch_ITab_Pawn_Gear.cs" />
+    <Compile Include="Harmony\HarmonyPatches.cs" />
     <Compile Include="AI\JobDriver_HarvestTree_Designated.cs" />
     <Compile Include="AI\JobDriver_HarvestTree.cs" />
     <Compile Include="AI\JobDriver_FellTree_Designated.cs" />

@@ -262,7 +262,6 @@ namespace SurvivalTools
         {
             if (!ModCompatibilityCheck.DubsBadHygiene)
                 return false;
-            Log.Message(pawn.CurJobDef.ToStringSafe());
             return pawn.health.hediffSet.HasHediff(DefDatabase<HediffDef>.GetNamed("Washing"));
         }
 

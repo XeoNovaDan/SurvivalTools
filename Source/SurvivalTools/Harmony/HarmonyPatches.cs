@@ -12,7 +12,7 @@ using RimWorld.BaseGen;
 using RimWorld.Planet;
 using Harmony;
 
-namespace SurvivalTools
+namespace SurvivalTools.Harmony
 {
     [StaticConstructorOnStartup]
     static class HarmonyPatches
@@ -26,8 +26,10 @@ namespace SurvivalTools
             HarmonyInstance h = HarmonyInstance.Create("XeoNovaDan.SurvivalTools");
             //HarmonyInstance.DEBUG = true;
 
+            // Automatic patches
             h.PatchAll();
 
+            // Manual patches
             h.Patch(AccessTools.Method(typeof(SymbolResolver_AncientRuins), nameof(SymbolResolver_AncientRuins.Resolve)),
                 new HarmonyMethod(patchType, nameof(Prefix_Resolve)));
 
@@ -58,11 +60,9 @@ namespace SurvivalTools
             h.Patch(AccessTools.Method(typeof(WorkGiver_GrowerSow), nameof(WorkGiver_GrowerSow.JobOnCell)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_JobOnCell)));
 
-            h.Patch(AccessTools.Method(typeof(GenConstruct), nameof(GenConstruct.HandleBlockingThingJob)),
-                postfix: new HarmonyMethod(patchType, nameof(Postfix_HandleBlockingThingJob)));
-
-            h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.HandleBlockingThingJob)),
-                postfix: new HarmonyMethod(patchType, nameof(Postfix_HandleBlockingThingJob)));
+            var postfixHandleBlockingThingJob = new HarmonyMethod(patchType, nameof(Postfix_HandleBlockingThingJob));
+            h.Patch(AccessTools.Method(typeof(GenConstruct), nameof(GenConstruct.HandleBlockingThingJob)), postfix: postfixHandleBlockingThingJob);
+            h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.HandleBlockingThingJob)), postfix: postfixHandleBlockingThingJob);
 
             h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.CanHandleBlockingThing)),
                 postfix: new HarmonyMethod(patchType, nameof(Postfix_CanHandleBlockingThing)));
@@ -118,98 +118,47 @@ namespace SurvivalTools
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_AffectRoof_MakeNewToils)));
             #endregion
 
-            #region Fluffy Breakdowns
-            var maintenanceDriver = GenTypes.GetTypeInAnyAssemblyNew("Fluffy_Breakdowns.JobDriver_Maintenance", null);
-            if (maintenanceDriver != null && typeof(JobDriver).IsAssignableFrom(maintenanceDriver))
+            // Fluffy Breakdowns
+            if (ModCompatibilityCheck.FluffyBreakdowns)
             {
-                Log.Message("Survival Tools :: Fluffy Breakdowns detected as active in load order. Patching...");
-                h.Patch(maintenanceDriver.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).MinBy(x => x.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Count())
-                        .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
-                        transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Maintenance_MakeNewToils)));
+                var maintenanceDriver = GenTypes.GetTypeInAnyAssemblyNew("Fluffy_Breakdowns.JobDriver_Maintenance", null);
+                if (maintenanceDriver != null && typeof(JobDriver).IsAssignableFrom(maintenanceDriver))
+                {
+                    Log.Message("Survival Tools :: Fluffy Breakdowns detected as active in load order. Patching...");
+                    h.Patch(maintenanceDriver.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).MinBy(x => x.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Count())
+                            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
+                            transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Maintenance_MakeNewToils)));
+                }
             }
-            #endregion
 
-            #region Quarry
-            var quarryDriver = GenTypes.GetTypeInAnyAssemblyNew("Quarry.JobDriver_MineQuarry", null);
-            if (quarryDriver != null && typeof(JobDriver).IsAssignableFrom(quarryDriver))
+            // Quarry
+            if (ModCompatibilityCheck.Quarry)
             {
-                Log.Message("Survival Tools :: Quarry detected as active in load order. Patching...");
-                h.Patch(AccessTools.Method(quarryDriver, "Mine"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_MineQuarry_Mine)));
-                h.Patch(AccessTools.Method(quarryDriver, "ResetTicksToPickHit"), transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_MineQuarry_ResetTicksToPickHit)));
+                var quarryDriver = GenTypes.GetTypeInAnyAssemblyNew("Quarry.JobDriver_MineQuarry", null);
+                if (quarryDriver != null && typeof(JobDriver).IsAssignableFrom(quarryDriver))
+                {
+                    h.Patch(AccessTools.Method(quarryDriver, "Mine"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_MineQuarry_Mine)));
+                    h.Patch(AccessTools.Method(quarryDriver, "ResetTicksToPickHit"), transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_MineQuarry_ResetTicksToPickHit)));
+                }
             }
-            #endregion
 
-            #region Turret Extensions
-            var turretExtensionsDriver = GenTypes.GetTypeInAnyAssemblyNew("TurretExtensions.JobDriver_UpgradeTurret", null);
-            if (turretExtensionsDriver != null && typeof(JobDriver).IsAssignableFrom(turretExtensionsDriver))
+            // Turret Extensions
+            if (ModCompatibilityCheck.TurretExtensions)
             {
-                Log.Message("Survival Tools :: Turret Extensions detected as active in load order. Patching...");
-                h.Patch(AccessTools.Method(turretExtensionsDriver, "Upgrade"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_UpgradeTurret_Upgrade)));
+                var turretExtensionsDriver = GenTypes.GetTypeInAnyAssemblyNew("TurretExtensions.JobDriver_UpgradeTurret", null);
+                if (turretExtensionsDriver != null && typeof(JobDriver).IsAssignableFrom(turretExtensionsDriver))
+                    h.Patch(AccessTools.Method(turretExtensionsDriver, "Upgrade"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_UpgradeTurret_Upgrade)));
             }
-            #endregion
 
-
-            #region Combat Extended
+            // Combat Extended
             if (ModCompatibilityCheck.CombatExtended)
             {
-                Log.Message("Survival Tools :: Combat Extended detected as active in load order. Patching...");
-
                 // Prevent tools from incorrectly being removed based on loadout
                 var combatExtendedHoldTrackerExcessThingClass = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.Utility_HoldTracker", null);
-                h.Patch(AccessTools.Method(combatExtendedHoldTrackerExcessThingClass, "GetExcessThing"), postfix: new HarmonyMethod(patchType, nameof(Postfix_CombatExtended_Utility_HoldTracker_GetExcessThing)));
-
-                // Edit PawnColumnWorker_SurvivalToolAssignment
-                //var combatExtendedColumnWorkerTranspilerClass = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.PawnColumnWorkers_SwapButtons", null);
-                //h.Patch(AccessTools.Method(typeof(PawnColumnWorker_SurvivalToolAssignment), nameof(PawnColumnWorker_SurvivalToolAssignment.DoCell)),
-                //    transpiler: new HarmonyMethod(AccessTools.Method(combatExtendedColumnWorkerTranspilerClass, "Transpiler")));
-            }
-            #endregion
-
-        }
-
-        [HarmonyPatch(typeof(ITab_Pawn_Gear))]
-        [HarmonyPatch("DrawThingRow")]
-        static class Patch_ITab_Pawn_Gear
-        {
-
-            static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-            {
-                var instructionList = instructions.ToList();
-
-                bool done = false;
-
-                for (int i = 0; i < instructionList.Count; i++)
-                {
-                    var instruction = instructionList[i];
-
-                    yield return instruction;
-
-                    // If equipment is a tool, adjust its label in a similar fashion to how apparel labels are adjusted (though using a helper method)
-                    if (!done && instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "5")
-                    {
-                        yield return new CodeInstruction(OpCodes.Ldloca_S, 5);
-                        yield return new CodeInstruction(OpCodes.Ldarg_3);
-                        yield return new CodeInstruction(OpCodes.Ldarg_0);
-                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Property(typeof(ITab_Pawn_Gear), "SelPawnForGear").GetGetMethod(true));
-                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Patch_ITab_Pawn_Gear), "AdjustDisplayedLabel"));
-                        done = true;
-                    }
-                }
+                if (combatExtendedHoldTrackerExcessThingClass != null)
+                    h.Patch(AccessTools.Method(combatExtendedHoldTrackerExcessThingClass, "GetExcessThing"), postfix: new HarmonyMethod(patchType, nameof(Postfix_CombatExtended_Utility_HoldTracker_GetExcessThing)));
             }
 
-            static void AdjustDisplayedLabel(ref string originalLabel, Thing thing, Pawn pawn)
-            {
-                if (thing is SurvivalTool tool)
-                {
-                    // Forced
-                    if (pawn.GetComp<Pawn_SurvivalToolAssignmentTracker>() is Pawn_SurvivalToolAssignmentTracker toolAssignmentTracker && toolAssignmentTracker.forcedHandler.IsForced(tool))
-                        originalLabel += $", {"ApparelForcedLower".Translate()}";
-
-                    // In use
-                    if (tool.InUse)
-                        originalLabel += $", {"ToolInUse".Translate()}";
-                }
-            }
         }
 
         #region Prefix_Resolve
