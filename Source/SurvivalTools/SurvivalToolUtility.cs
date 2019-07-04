@@ -154,10 +154,13 @@ namespace SurvivalTools
         {
             SurvivalTool tool = pawn.GetBestSurvivalTool(stat);
 
+            Log.Message($"Trying to degrade {tool}");
+
             if (tool != null && tool.def.useHitPoints && SurvivalToolsSettings.ToolDegradation)
             {
                 LessonAutoActivator.TeachOpportunity(ST_ConceptDefOf.SurvivalToolDegradation, OpportunityType.GoodToKnow);
                 tool.workTicksDone++;
+                Log.Message($"workTicksDone {tool.workTicksDone} / {tool.WorkTicksToDegrade}");
                 if (tool.workTicksDone >= tool.WorkTicksToDegrade)
                 {
                     tool.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, 1));

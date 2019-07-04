@@ -27,7 +27,6 @@ namespace SurvivalTools
             // Add SurvivalToolAssignmentTracker to all appropriate pawns
             foreach (ThingDef tDef in DefDatabase<ThingDef>.AllDefs.Where(t => t.race?.Humanlike == true))
             {
-                Log.Message($"Attaching Pawn_SurvivalToolAssignmentTracker to {tDef}");
                 if (tDef.comps == null)
                     tDef.comps = new List<CompProperties>();
                 tDef.comps.Add(new CompProperties(typeof(Pawn_SurvivalToolAssignmentTracker)));
@@ -36,8 +35,6 @@ namespace SurvivalTools
 
         private static void ResolveMendAndRecycleRecipes()
         {
-            Log.Message("Culling redundant MendAndRecycle recipes for Survival Tools...");
-            int cullCount = 0;
             bool categoryMatch = false;
             foreach (RecipeDef recipe in DefDatabase<RecipeDef>.AllDefs.Where(r => r.defName.Contains("SurvivalTool") && r.workerClass != typeof(RecipeWorker)))
             {
@@ -51,12 +48,9 @@ namespace SurvivalTools
                 if (!categoryMatch)
                 {
                     recipe.recipeUsers.Clear();
-                    cullCount++;
-                    Log.Message($"Culled recipe: {recipe.defName}");
                 }
 
             }
-            Log.Message($"Recipe culling complete. Total recipes culled: {cullCount}");
         }
 
         private static void ResolveSmeltingRecipeUsers()
