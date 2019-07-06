@@ -34,6 +34,10 @@ namespace SurvivalTools.Harmony
             h.Patch(AccessTools.Method(typeof(GenConstruct), nameof(GenConstruct.HandleBlockingThingJob)), postfix: postfixHandleBlockingThingJob);
             h.Patch(AccessTools.Method(typeof(RoofUtility), nameof(RoofUtility.HandleBlockingThingJob)), postfix: postfixHandleBlockingThingJob);
 
+            // Mining JobDriver - ResetTicksToPickHit
+            var transpileResetTicksToPickHit = new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Mine_ResetTicksToPickHit));
+            h.Patch(AccessTools.Method(typeof(JobDriver_Mine), "ResetTicksToPickHit"), transpiler: transpileResetTicksToPickHit);
+
             // Thanks Mehni!
             if (!ModCompatibilityCheck.OtherInventoryModsActive)
                 h.Patch(AccessTools.Method(typeof(FloatMenuMakerMap), "AddHumanlikeOrders"), transpiler: new HarmonyMethod(patchType, nameof(Transpile_FloatMenuMakerMad_AddHumanlikeOrders)));
@@ -45,10 +49,11 @@ namespace SurvivalTools.Harmony
                 MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
                 transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_PlantWork_MakeNewToils)));
 
+            var transpileMineMakeNewToils = new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Mine_MakeNewToils));
             h.Patch(typeof(JobDriver_Mine).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().
                 GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).
                 MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
-                transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Mine_MakeNewToils)));
+                transpiler: transpileMineMakeNewToils);
 
             h.Patch(typeof(JobDriver_ConstructFinishFrame).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().
                 GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).
@@ -79,6 +84,8 @@ namespace SurvivalTools.Harmony
                             .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
                             transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_Maintenance_MakeNewToils)));
                 }
+                else
+                    Log.Error("Survival Tools - Could not find Fluffy_Breakdowns.JobDriver_Maintenance type to patch");
             }
 
             // Quarry
@@ -90,6 +97,8 @@ namespace SurvivalTools.Harmony
                     h.Patch(AccessTools.Method(quarryDriver, "Mine"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_MineQuarry_Mine)));
                     h.Patch(AccessTools.Method(quarryDriver, "ResetTicksToPickHit"), transpiler: new HarmonyMethod(patchType, nameof(Transpile_JobDriver_MineQuarry_ResetTicksToPickHit)));
                 }
+                else
+                    Log.Error("Survival Tools - Could not find Quarry.JobDriver_MineQuarry type to patch");
             }
 
             // Turret Extensions
@@ -98,6 +107,8 @@ namespace SurvivalTools.Harmony
                 var turretExtensionsDriver = GenTypes.GetTypeInAnyAssemblyNew("TurretExtensions.JobDriver_UpgradeTurret", null);
                 if (turretExtensionsDriver != null && typeof(JobDriver).IsAssignableFrom(turretExtensionsDriver))
                     h.Patch(AccessTools.Method(turretExtensionsDriver, "Upgrade"), postfix: new HarmonyMethod(patchType, nameof(Postfix_JobDriver_UpgradeTurret_Upgrade)));
+                else
+                    Log.Error("Survival Tools - Could not find TurretExtensions.JobDriver_UpgradeTurret type to patch");
             }
 
             // Combat Extended
@@ -107,13 +118,31 @@ namespace SurvivalTools.Harmony
                 var combatExtendedHoldTrackerExcessThingClass = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.Utility_HoldTracker", null);
                 if (combatExtendedHoldTrackerExcessThingClass != null)
                     h.Patch(AccessTools.Method(combatExtendedHoldTrackerExcessThingClass, "GetExcessThing"), postfix: new HarmonyMethod(patchType, nameof(Postfix_CombatExtended_Utility_HoldTracker_GetExcessThing)));
+                else
+                    Log.Error("Survival Tools - Could not find CombatExtended.Utility_HoldTracker type to patch");
 
                 // Prevent pawns from picking up excess tools with Combat Extended's CompInventory
                 var combatExtendedCompInventory = GenTypes.GetTypeInAnyAssemblyNew("CombatExtended.CompInventory", null);
                 if (combatExtendedCompInventory != null)
                     h.Patch(AccessTools.Method(combatExtendedCompInventory, "CanFitInInventory"), postfix: new HarmonyMethod(patchType, nameof(Postfix_CombatExtended_CompInventory_CanFitInInventory)));
+                else
+                    Log.Error("Survival Tools - Could not find CombatExtended.CompInventory type to patch");
             }
 
+            // Prison Labor
+            if (ModCompatibilityCheck.PrisonLabor)
+            {
+                // Fix pickaxe degradation and use correct mining speed stat
+                var prisonLabourMineJobDriver = GenTypes.GetTypeInAnyAssemblyNew("PrisonLabor.JobDriver_Mine_Tweak", null);
+                if (prisonLabourMineJobDriver != null)
+                {
+                    h.Patch(AccessTools.Method(prisonLabourMineJobDriver, "ResetTicksToPickHit"), transpiler: transpileResetTicksToPickHit);
+                    h.Patch(prisonLabourMineJobDriver.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).Last()
+                        .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
+                        transpiler: transpileMineMakeNewToils);
+                }
+                    
+            }
         }
 
         public static void Postfix_HandleBlockingThingJob(ref Job __result, Pawn worker)
@@ -195,7 +224,7 @@ namespace SurvivalTools.Harmony
         }
         #endregion
 
-        #region Transpile_JobDriver_Mine_MakeNewToils
+        #region JobDriver_Mine
         public static IEnumerable<CodeInstruction> Transpile_JobDriver_Mine_MakeNewToils(IEnumerable<CodeInstruction> instructions)
         {
             List<CodeInstruction> instructionList = instructions.ToList();
@@ -210,6 +239,23 @@ namespace SurvivalTools.Harmony
                     yield return new CodeInstruction(OpCodes.Ldloc_0); // actor
                     yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(ST_StatDefOf), nameof(ST_StatDefOf.DiggingSpeed))); // ST_StatDefOf.DiggingSpeed
                     instruction = new CodeInstruction(OpCodes.Call, TryDegradeTool); // TryDegradeTool(actor, ST_StatDefOf.DiggingSpeed)
+                }
+
+                yield return instruction;
+            }
+        }
+
+        public static IEnumerable<CodeInstruction> Transpile_JobDriver_Mine_ResetTicksToPickHit(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+
+                if (instruction.opcode == OpCodes.Ldsfld && instruction.operand == AccessTools.Field(typeof(StatDefOf), nameof(StatDefOf.MiningSpeed)))
+                {
+                    instruction.operand = AccessTools.Field(typeof(ST_StatDefOf), nameof(ST_StatDefOf.DiggingSpeed));
                 }
 
                 yield return instruction;

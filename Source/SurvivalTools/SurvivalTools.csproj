@@ -60,14 +60,13 @@
     <Compile Include="DefOfs\ST_RecipeDefOf.cs" />
     <Compile Include="DefOfs\ST_ThingCategoryDefOf.cs" />
     <Compile Include="Dialog_ManageSurvivalToolAssignments.cs" />
-    <Compile Include="Harmony\Patch_JobDriver_Mine_ResetTicksToPickHit - Copy.cs" />
+    <Compile Include="Harmony\Patch_Mineable_Notify_TookMiningDamage.cs" />
     <Compile Include="Harmony\Patch_MassUtility_WillBeOverEncumberedAfterPickingUp.cs" />
     <Compile Include="Harmony\Patch_MassUtility_CountToPickUpUntilOverEncumbered.cs" />
     <Compile Include="Harmony\Patch_Pawn_InventoryTracker_Notify_ItemRemoved.cs" />
     <Compile Include="Harmony\Patch_Pawn_InventoryTracker_InventoryTrackerTickRare.cs" />
     <Compile Include="Harmony\Patch_Pawn_InventoryTracker_FirstUnloadableThing.cs" />
     <Compile Include="Harmony\Patch_RoofUtility_CanHandleBlockingThing.cs" />
-    <Compile Include="Harmony\Patch_JobDriver_Mine_ResetTicksToPickHit.cs" />
     <Compile Include="Harmony\Patch_Toils_Haul_TakeToInventory.cs" />
     <Compile Include="Harmony\Patch_ThingFilter_SetFromPreset.cs" />
     <Compile Include="Harmony\Patch_WorkGiver_GrowerSow_JobOnCell.cs" />

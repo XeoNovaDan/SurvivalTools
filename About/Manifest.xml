@@ -1,6 +1,6 @@
 <Manifest>
     <identifier>SurvivalTools</identifier>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
     <loadAfter>
         <li>TurretExtensions</li>
         <li>ExpandedWoodworkingVGP</li>
