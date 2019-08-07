@@ -13,7 +13,7 @@ namespace SurvivalTools
 
         public override bool Matches(Thing t)
         {
-            return !t.Smeltable;
+            return AlwaysMatches(t.def) || !t.Smeltable;
         }
 
         public override bool AlwaysMatches(ThingDef def)

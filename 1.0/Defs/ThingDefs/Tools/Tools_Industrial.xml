@@ -1,0 +1,180 @@
+<Defs>
+
+    <ThingDef ParentName="SurvivalToolIndustrial">
+        <defName>SurvivalTools_Chainsaw</defName>
+        <label>chainsaw</label>
+        <description>Placeholder description.</description>
+        <costStuffCount>40</costStuffCount>
+        <statBases>
+            <Mass>3</Mass>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Item/Equipment/Tool/Axe</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <modExtensions>
+            <li Class="SurvivalTools.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <TreeFellingSpeed>1.2</TreeFellingSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>PlantWorker</li>
+                </defaultSurvivalToolAssignmentTags>
+                <toolWearFactor>0.75</toolWearFactor>
+            </li>
+        </modExtensions>
+        <tools>
+            <li>
+                <label>handle</label>
+                <capacities>
+                    <li>Poke</li>
+                </capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <li>
+                <label>head</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Cut</li>
+                </capacities>
+                <power>18.2</power>
+                <cooldownTime>2.6</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <ThingDef ParentName="SurvivalToolIndustrial">
+        <defName>SurvivalTools_PneumaticPick</defName>
+        <label>pneumatic pick</label>
+        <description>Placeholder description.</description>
+        <costStuffCount>40</costStuffCount>
+        <statBases>
+            <Mass>3</Mass>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Item/Equipment/Tool/Pickaxe</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <modExtensions>
+            <li Class="SurvivalTools.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <DiggingSpeed>1.2</DiggingSpeed>
+                    <MiningYieldDigging>1</MiningYieldDigging>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Miner</li>
+                </defaultSurvivalToolAssignmentTags>
+                <toolWearFactor>0.75</toolWearFactor>
+            </li>
+        </modExtensions>
+        <tools>
+            <li>
+                <label>handle</label>
+                <capacities>
+                    <li>Poke</li>
+                </capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <li>
+                <label>head</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Stab</li>
+                </capacities>
+                <power>18.2</power>
+                <cooldownTime>2.6</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <ThingDef ParentName="SurvivalToolIndustrial">
+        <defName>SurvivalTools_PneumaticHammer</defName>
+        <label>hammer</label>
+        <description>Placeholder description.</description>
+        <costStuffCount>30</costStuffCount>
+        <statBases>
+            <Mass>1</Mass>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Item/Equipment/Tool/Hammer</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <modExtensions>
+            <li Class="SurvivalTools.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <ConstructionSpeed>1.2</ConstructionSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Constructor</li>
+                </defaultSurvivalToolAssignmentTags>
+                <toolWearFactor>0.75</toolWearFactor>
+            </li>
+        </modExtensions>
+        <tools>
+            <li>
+                <label>handle</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <li>
+                <label>head</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>14</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <ThingDef ParentName="SurvivalToolIndustrial">
+        <defName>SurvivalTools_PneumaticSickle</defName>
+        <label>pneumatic sickle</label>
+        <description>Placeholder description.</description>
+        <costStuffCount>30</costStuffCount>
+        <statBases>
+            <Mass>1</Mass>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Item/Equipment/Tool/Sickle</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <modExtensions>
+            <li Class="SurvivalTools.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <PlantHarvestingSpeed>1.2</PlantHarvestingSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>PlantWorker</li>
+                </defaultSurvivalToolAssignmentTags>
+                <toolWearFactor>0.75</toolWearFactor>
+            </li>
+        </modExtensions>
+        <tools>
+            <li>
+                <label>handle</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <li>
+                <label>head</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Cut</li>
+                </capacities>
+                <power>14</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+</Defs>
