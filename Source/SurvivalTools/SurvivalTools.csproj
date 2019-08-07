@@ -54,18 +54,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alert_SurvivalToolNeedsReplacing.cs" />
-    <Compile Include="Alert_ColonistNeedsSurvivalTool.cs" />
+    <Compile Include="Alerts\Alert_SurvivalToolNeedsReplacing.cs" />
+    <Compile Include="Alerts\Alert_ColonistNeedsSurvivalTool.cs" />
     <Compile Include="DefOfs\ST_ConceptDefOf.cs" />
     <Compile Include="DefOfs\ST_RecipeDefOf.cs" />
     <Compile Include="DefOfs\ST_ThingCategoryDefOf.cs" />
-    <Compile Include="Dialog_ManageSurvivalToolAssignments.cs" />
+    <Compile Include="ToolAssignments\Dialog_ManageSurvivalToolAssignments.cs" />
     <Compile Include="Harmony\Patch_Mineable_Notify_TookMiningDamage.cs" />
-    <Compile Include="Harmony\Patch_MassUtility_WillBeOverEncumberedAfterPickingUp.cs" />
-    <Compile Include="Harmony\Patch_MassUtility_CountToPickUpUntilOverEncumbered.cs" />
-    <Compile Include="Harmony\Patch_Pawn_InventoryTracker_Notify_ItemRemoved.cs" />
-    <Compile Include="Harmony\Patch_Pawn_InventoryTracker_InventoryTrackerTickRare.cs" />
-    <Compile Include="Harmony\Patch_Pawn_InventoryTracker_FirstUnloadableThing.cs" />
+    <Compile Include="Harmony\Patch_MassUtility.cs" />
+    <Compile Include="Harmony\Patch_Pawn_InventoryTracker.cs" />
     <Compile Include="Harmony\Patch_RoofUtility_CanHandleBlockingThing.cs" />
     <Compile Include="Harmony\Patch_Toils_Haul_TakeToInventory.cs" />
     <Compile Include="Harmony\Patch_ThingFilter_SetFromPreset.cs" />
@@ -84,11 +81,11 @@
     <Compile Include="AI\JobDriver_DropSurvivalTool.cs" />
     <Compile Include="AI\JobGiver_OptimizeSurvivalTools.cs" />
     <Compile Include="ModCompatibilityCheck.cs" />
-    <Compile Include="PawnColumnWorker_SurvivalToolAssignment.cs" />
+    <Compile Include="ToolAssignments\PawnColumnWorker_SurvivalToolAssignment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecialThingFilterWorker_NonSmeltable.cs" />
-    <Compile Include="StatPart_SurvivalTool.cs" />
-    <Compile Include="StatWorker_EstimatedLifespan.cs" />
+    <Compile Include="SpecialThingFilterWorker_NonSmeltableTools.cs" />
+    <Compile Include="Stats\StatPart_SurvivalTool.cs" />
+    <Compile Include="Stats\StatWorker_EstimatedLifespan.cs" />
     <Compile Include="ModExtensions\StuffPropsTool.cs" />
     <Compile Include="DefOfs\ST_JobDefOf.cs" />
     <Compile Include="DefOfs\ST_StatCategoryDefOf.cs" />
@@ -98,9 +95,9 @@
     <Compile Include="DefOfs\ST_WorkGiverDefOf.cs" />
     <Compile Include="SurvivalTool.cs" />
     <Compile Include="ModExtensions\SurvivalToolProperties.cs" />
-    <Compile Include="SurvivalToolAssignment.cs" />
-    <Compile Include="SurvivalToolAssignmentDatabase.cs" />
-    <Compile Include="Pawn_SurvivalToolAssignmentTracker.cs" />
+    <Compile Include="ToolAssignments\SurvivalToolAssignment.cs" />
+    <Compile Include="ToolAssignments\SurvivalToolAssignmentDatabase.cs" />
+    <Compile Include="ToolAssignments\Pawn_SurvivalToolAssignmentTracker.cs" />
     <Compile Include="SurvivalToolForcedHandler.cs" />
     <Compile Include="StaticConstructorClass.cs" />
     <Compile Include="SurvivalToolsSettings.cs" />
